@@ -94,5 +94,5 @@
   </body>
   <script src="./index.js"></script>
 
-  <link rel="stylesheet" href="./CreateProject.css" />
+  <link rel="stylesheet" href="./CSS/CreateProject.css" />
 </html>

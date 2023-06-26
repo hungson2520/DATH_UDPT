@@ -159,5 +159,5 @@
   </body>
   <script src="./index.js"></script>
   
-  <link rel="stylesheet" href="./Labeling.css" />
+  <link rel="stylesheet" href="./CSS/Labeling.css" />
 </html>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Login</title>
-    <link rel="stylesheet" href="./Login.css" />
+    <link rel="stylesheet" href="./CSS/Login.css" />
     <script
       src="https://kit.fontawesome.com/901acbd329.js"
       crossorigin="anonymous"
