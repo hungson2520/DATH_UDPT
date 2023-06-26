@@ -25,7 +25,7 @@
       </ul>
     </nav>
     <div class="container">
-      <form class="login-form">
+      <form class="login-form" method="post" action="../Controller/index.php" name="login" >
         <h2>Login</h2>
 
         <input type="text" placeholder="Username" name="username" required />
@@ -37,7 +37,7 @@
           required
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" name="login">Login</button>
       </form>
     </div>
   </body>

@@ -31,8 +31,7 @@
     <div class="NavContent_right" style="width: 100%">
       <div class="NavContent_right_btn">
         <button class="NavContent_Left_Btn" style="width: 100px">
-          Action
-          <i class="fa-sharp fa-solid fa-caret-down"></i>
+          Create
         </button>
         <button
           style="
@@ -42,7 +41,7 @@
             cursor: pointer;
           "
         >
-          Detail
+          Delete
         </button>
         <div class="NavContent_right_search">
           <div class="NavContent_right_search_top">
@@ -59,9 +58,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style="text-align: center">No data available</td>
-                </tr>
+              <?php foreach ($projects as $duAn) { ?>
+          <tr>
+            
+            <td><?php echo $duAn['tenDuAn']; ?></td>
+            <td><?php echo $duAn['moTa']; ?></td>
+            <td><?php echo $duAn['loaiDuAn']; ?></td>
+          </tr>
+        <?php } ?>
               </tbody>
             </table>
           </div>
