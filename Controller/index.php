@@ -6,7 +6,8 @@ require_once '../Model/User.php';
 
 
 // Bước 3: Xử lý yêu cầu đăng nhập
-if (isset($_POST['login'])) {
+if (isset($_POST['login'])) 
+{
     $username = $_POST['username'];
     $password = $_POST['password'];
    
@@ -31,6 +32,24 @@ if (isset($_POST['login'])) {
 
     }
   
-}  else{
+} 
+ else if (isset($_POST['register']))
+ {
+    // Lấy giá trị từ form
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $password = $_POST['password'];
+
+  
+  User::insertUserData($name,$phone,$address,$password);
+
+ 
+    // Chuyển hướng đến trang Labeling
+    header('Location:../View/Login.php');
+  
+}
+else {
         echo "<h1>Không Nhận Được thông tin gì cả</h1>";
+
 }
