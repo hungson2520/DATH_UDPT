@@ -1,3 +1,7 @@
+<?php 
+
+$role = $_GET['role'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,6 +22,16 @@
           <li>Test</li>
         </div>
         <div class="nav_ul_right">
+          <li style="width: 200px;color:yellow" >
+          Role: <?php if ($role == 1) {
+    echo " Người gán nhãn cấp 1";
+} elseif ($role == 2) {
+    echo " Người gán nhãn cấp 2";
+} elseif ($role == 3) {
+    echo "Quản lý";
+} ?> 
+        
+        </li>
           <li><i class="fa-solid fa-sun"></i></li>
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
@@ -30,16 +44,20 @@
 
     <div class="NavContent_right" style="width: 100%">
       <div class="NavContent_right_btn">
-        <button class="NavContent_Left_Btn" style="width: 100px">
-          Create
+     
+        <button class="NavContent_Left_Btn" style="width: 100px; <?php echo ($role != 3) ? 'cursor:not-allowed;' : ''; ?>" 
+         > Create
+        
+          
         </button>
         <button
+        class="btn_delete"
           style="
             width: 80px;
             border-radius: 5px;
             padding: 5px 10px;
-            cursor: pointer;
-          "
+            cursor: pointer;  background-color: red;
+            <?php echo ($role != 3) ? 'cursor:not-allowed' : ''; ?>"
         >
           Delete
         </button>
@@ -58,14 +76,9 @@
                 </tr>
               </thead>
               <tbody>
-              <?php foreach ($projects as $duAn) { ?>
-          <tr>
-            
-            <td><?php echo $duAn['tenDuAn']; ?></td>
-            <td><?php echo $duAn['moTa']; ?></td>
-            <td><?php echo $duAn['loaiDuAn']; ?></td>
-          </tr>
-        <?php } ?>
+                <tr>
+                  <td style="text-align: center">No data available</td>
+                </tr>
               </tbody>
             </table>
           </div>
