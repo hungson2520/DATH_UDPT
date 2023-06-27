@@ -49,6 +49,7 @@ $role = $_GET['role'];
          > Create
         
           <i class="fa-sharp fa-solid fa-caret-down"></i>
+          
         </button>
         <button
         class="btn_delete"
@@ -112,4 +113,5 @@ $role = $_GET['role'];
   <script src="./index.js"></script>
 
   <link rel="stylesheet" href="./CSS/CreateProject.css" />
+</html>
 </html>

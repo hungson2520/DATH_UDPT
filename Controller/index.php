@@ -3,8 +3,13 @@ session_start();
 
 // Bước 2: Nạp các tệp mô hình và lớp
 require_once '../Model/User.php';
+
 require_once '../Model/Label.php';
-// Bước 3: Xử lý yêu cầu đăng nhập
+
+
+
+
+
 if (isset($_POST['login'])) 
 {
     $username = $_POST['username'];
