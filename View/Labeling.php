@@ -233,6 +233,93 @@ var ID_DuAn = urlParams.get('ID_DuAn');
         <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
     </div>
 </form>`;
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var labelLi = document.querySelector('.label');
+    var contentRight = document.querySelector('.NavContent_right');
+    var originalContent = contentRight.innerHTML;
+
+
+    labelLi.addEventListener('click', function() {
+        contentRight.innerHTML=`<style>
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .create-button {
+        background-color: #2ecc71;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .create-form {
+      display: none;
+        position: relative;
+        background-color: #fff;
+        padding: 10px;
+        width: 200px;
+    }
+</style>
+
+<div class="table-container">
+    <button class="create-button" onclick="showCreateForm()">Create</button>
+
+    <form class="create-form" id="createForm">
+        <label for="labelName">Label Name:</label>
+        <input type="text" id="labelName" name="labelName">
+        <input type="submit" value="Submit">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID_Nhan</th>
+                <th>tenNhan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Thêm các hàng dữ liệu vào đây -->
+            <tr>
+                <td>1</td>
+                <td>John Doe</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+            </tr>
+            <!-- Các hàng dữ liệu khác -->
+        </tbody>
+    </table>
+</div>
+`;
+function showCreateForm() {
+        var form = document.getElementById('createForm');
+        form.style.display = 'block';
+    }
+
+    });
+});
+
+function showCreateForm() {
+        var form = document.getElementById('createForm');
+        form.style.display = 'block';
+    }
+
         
         var fileInput = document.querySelector('input[type="file"]');
         fileInput.addEventListener('change', function(event) {

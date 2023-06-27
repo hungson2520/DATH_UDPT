@@ -9,7 +9,7 @@ class Task {
 
     public static function getAllTasks() {
         // Kết nối cơ sở dữ liệu
-        $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+        $conn= mysqli_connect("localhost","root","","N01_GanNhan");
         
         // Truy vấn dữ liệu từ bảng TacVu
         $query = "SELECT * FROM TacVu";
