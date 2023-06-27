@@ -38,7 +38,7 @@
   padding: 0;
 }
 .nav_ul_left {
-  transform: translateX(-190px);
+  transform: translateX(-130px);
   display: flex;
   flex-direction: row;
 }
@@ -46,7 +46,7 @@
   display: flex;
   flex-direction: row;
   float: right;
-  transform: translateX(300px);
+  transform: translateX(250px);
 }
 
 /*---------------CSS CHO NavContent-------------------------  */

@@ -29,14 +29,48 @@ class User {
             $user->password = $row['MatKhau'];
             $user->role = $row['VaiTro'];
           
-       
+            $conn->close();
 
             // Trả về đối tượng người dùng đã xác thực
             return $user;
         } else {
+            $conn->close();
             return false;
         }
     }
+    public static function insertUserData($name, $phone, $address, $password)
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+        die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+
+    // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql = "INSERT INTO NguoiDung (Ten, SDT, DiaChi, MatKhau,VaiTro) VALUES ('$name', '$phone', '$address', '$password',1)";
+
+
+
+    // Bước 3: Thực hiện truy vấn INSERT
+    if ($conn->query($sql) === TRUE) {
+       
+
+       
+       
+        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+       
+       
+    } else {
+        echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+    }
+
+    // Bước 4: Đóng kết nối
+    $conn->close();
+}
+
+
     public function getId() {
         return $this->id;
     }

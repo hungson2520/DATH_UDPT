@@ -3,10 +3,10 @@ session_start();
 
 // Bước 2: Nạp các tệp mô hình và lớp
 require_once '../Model/User.php';
-
-
+require_once '../Model/Label.php';
 // Bước 3: Xử lý yêu cầu đăng nhập
-if (isset($_POST['login'])) {
+if (isset($_POST['login'])) 
+{
     $username = $_POST['username'];
     $password = $_POST['password'];
    
@@ -31,6 +31,35 @@ if (isset($_POST['login'])) {
 
     }
   
-}  else{
+} 
+ else if (isset($_POST['register']))
+ {
+    // Lấy giá trị từ form
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $password = $_POST['password'];
+
+  
+  User::insertUserData($name,$phone,$address,$password);
+
+ 
+    // Chuyển hướng đến trang Login
+    header('Location:../View/Login.php');
+  
+} else if(isset($_POST['SubmitUploadFile'] )){
+
+    $fileContent = file_get_contents($_FILES['file']['tmp_name']);
+    echo "Nội dung của file là :" .$fileContent;
+    $ID_DuAn=$_POST['ID_DuAn'];
+    echo " ID DỰ ÁN LÀ " .$ID_DuAn;
+   
+   Label::InsertDataToTacVu($ID_DuAn,$fileContent);
+}
+
+
+
+else {
         echo "<h1>Không Nhận Được thông tin gì cả</h1>";
+
 }

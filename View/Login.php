@@ -20,7 +20,7 @@
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
 
-          <li><button class="btn_LOGIN">LOGIN</button></li>
+          <a href="../View/RegisterView.php"><button class="btn_LOGIN">Đăng Ký</button></a>
         </div>
       </ul>
     </nav>
