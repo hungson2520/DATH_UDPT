@@ -54,7 +54,7 @@ $idNguoiDung=$_GET['idnguoidung'];
           <li  class="NavContent_Left_li dataset">
             <i class="fa-solid fa-database icon"></i>Dataset
           </li>
-          <li class="NavContent_Left_li">
+          <li class="NavContent_Left_li label">
             <i class="fa-solid fa-tag icon"></i>Label
           </li>
           <li class="NavContent_Left_li">
@@ -233,9 +233,32 @@ var ID_DuAn = urlParams.get('idDuAn');
         <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
     </div>
 </form>`;
+        
+        var fileInput = document.querySelector('input[type="file"]');
+        fileInput.addEventListener('change', function(event) {
+            var selectedFile = event.target.files[0];
+            console.log(selectedFile); // In ra thông tin của file được chọn
+            var fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                var fileContent = event.target.result;
+                console.log(fileContent); // In ra nội dung của file
+            };
+            fileReader.readAsText(selectedFile);
+        });
+    });
+
+    for (var i = 0; i < navItems.length; i++) {
+        navItems[i].addEventListener('click', function() {
+            if (!this.classList.contains('dataset')) {
+                contentRight.innerHTML = originalContent;
+            }
+        });
+    }
+  });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+
+  document.addEventListener('DOMContentLoaded', function() {
     var labelLi = document.querySelector('.label');
     var contentRight = document.querySelector('.NavContent_right');
     var originalContent = contentRight.innerHTML;
@@ -307,42 +330,12 @@ document.addEventListener('DOMContentLoaded', function() {
     </table>
 </div>
 `;
+});
+});
 function showCreateForm() {
         var form = document.getElementById('createForm');
         form.style.display = 'block';
     }
-
-    });
-});
-
-
-
-        
-        var fileInput = document.querySelector('input[type="file"]');
-        fileInput.addEventListener('change', function(event) {
-            var selectedFile = event.target.files[0];
-            console.log(selectedFile); // In ra thông tin của file được chọn
-            var fileReader = new FileReader();
-            fileReader.onload = function(event) {
-                var fileContent = event.target.result;
-                console.log(fileContent); // In ra nội dung của file
-            };
-            fileReader.readAsText(selectedFile);
-        });
-    });
-
-    for (var i = 0; i < navItems.length; i++) {
-        navItems[i].addEventListener('click', function() {
-            if (!this.classList.contains('dataset')) {
-                contentRight.innerHTML = originalContent;
-            }
-        });
-    }
-});
-
-
-
-
 
         document.addEventListener('DOMContentLoaded', function() {
   var navItems = document.querySelectorAll('.NavContent_Left_li');
