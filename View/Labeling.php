@@ -51,7 +51,7 @@ $role = $_GET['role'];
           <li class="NavContent_Left_li">
             <i class="fa-solid fa-house icon"></i>Home
           </li>
-          <li class="NavContent_Left_li">
+          <li  class="NavContent_Left_li dataset">
             <i class="fa-solid fa-database icon"></i>Dataset
           </li>
           <li class="NavContent_Left_li">
@@ -175,3 +175,89 @@ $role = $_GET['role'];
   
   <link rel="stylesheet" href="./CSS/Labeling.css" />
 </html>
+
+<style>
+        .NavContent_Left_li {
+            cursor: pointer;
+        }
+        .selected {
+            background-color: yellow;
+        }
+        
+        
+    </style>
+<script>
+       
+   // khi ấn vô li data set thì nội dung ở bên phải sẽ thay đổi
+   // Nếu ta không ấn vô thẻ li khác thì nội dung sẽ được giữ nguyên
+   
+
+   
+  
+        document.addEventListener('DOMContentLoaded', function() {
+    var datasetLi = document.querySelector('.dataset');
+    var contentRight = document.querySelector('.NavContent_right');
+    var originalContent = contentRight.innerHTML;
+
+    var navItems = document.querySelectorAll('.NavContent_Left_li');
+    var urlParams = new URLSearchParams(window.location.search);
+var ID_DuAn = urlParams.get('ID_DuAn');
+
+    datasetLi.addEventListener('click', function() {
+        contentRight.innerHTML=`<form action="../Controller/index.php" method="POST" enctype="multipart/form-data">
+        <input type="text" name="ID_DuAn" value="${ID_DuAn}">
+        <h1 style="margin-left:200px;margin-top:200px">Choose a file txt in here: <input type="file" name="file" accept="text/plain"></h1>
+        <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
+    </div>
+</form>`;
+        
+        var fileInput = document.querySelector('input[type="file"]');
+        fileInput.addEventListener('change', function(event) {
+            var selectedFile = event.target.files[0];
+            console.log(selectedFile); // In ra thông tin của file được chọn
+            var fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                var fileContent = event.target.result;
+                console.log(fileContent); // In ra nội dung của file
+            };
+            fileReader.readAsText(selectedFile);
+        });
+    });
+
+    for (var i = 0; i < navItems.length; i++) {
+        navItems[i].addEventListener('click', function() {
+            if (!this.classList.contains('dataset')) {
+                contentRight.innerHTML = originalContent;
+            }
+        });
+    }
+});
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+  var navItems = document.querySelectorAll('.NavContent_Left_li');
+
+  // Đặt màu nền mặc định cho thẻ li đầu tiên
+  navItems[0].style.backgroundColor = 'yellow';
+
+  for (var i = 0; i < navItems.length; i++) {
+    navItems[i].addEventListener('click', function() {
+      // Xóa màu nền của tất cả các thẻ li
+      for (var j = 0; j < navItems.length; j++) {
+        navItems[j].style.backgroundColor = '';
+      }
+     
+      // Đặt màu nền màu vàng cho thẻ li được click
+    //  this.style.innerHTML='<h1 style="margin-left:200px;margin-top:200px">Choose a file txt in here: <input type="file" accept="text/plain"></h1>';
+      this.style.backgroundColor = 'yellow';
+    
+      
+    });
+  }
+});
+        
+    </script>
+
