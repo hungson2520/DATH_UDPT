@@ -96,17 +96,16 @@ $role = $_GET['role'];
             <table class="table">
               <thead>
                 <tr >
-                  <th><input type="checkbox" id="checkbox-all"></th>
-                  <th class="text-header">Text</th>
-                  <th>Metadata</th>
-                  <th>Action</th>
+                  <!-- <th><input type="checkbox" id="checkbox-all"></th> -->
+                  <th class="text-header">ID</th>
+
+                  <th>Text</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <!-- <tr>
                   <td><input type="checkbox"></td>
                   <td>Row 1</td>
-                  <td>Metadata 1</td>
                   <td> <button class="NavContent_Left_Btn" style="width: 100px">
                     Annotate
                    
@@ -115,7 +114,7 @@ $role = $_GET['role'];
                 <tr>
                   <td><input type="checkbox"></td>
                   <td>Row 2</td>
-                  <td>Metadata 2</td>
+                 
                   <td><button class="NavContent_Left_Btn" style="width: 100px">
                     Annotate
                    
@@ -124,7 +123,7 @@ $role = $_GET['role'];
                 <tr>
                   <td><input type="checkbox"></td>
                   <td>Row 3</td>
-                  <td>Metadata 3</td>
+                  
                   <td><button class="NavContent_Left_Btn" style="width: 100px">
                     Annotate
                    
@@ -133,12 +132,36 @@ $role = $_GET['role'];
                 <tr>
                   <td><input type="checkbox"></td>
                   <td>Row 4</td>
-                  <td>Metadata 4</td>
+                  
                   <td><button class="NavContent_Left_Btn" style="width: 100px">
                     Annotate
                    
                   </button></td>
-                </tr>
+                </tr> -->
+                <?php
+            // Đường dẫn tới file Controller
+            require_once '../Controller/Task.php';
+
+            // Khởi tạo đối tượng của Controller
+            $taskController = new TaskController();
+
+            // Gọi phương thức lấy tất cả các tasks
+            $tasks = $taskController->getAllTasks();
+
+            
+            ?>
+            
+            <?php foreach ($tasks as $task): ?>
+                    <tr>
+                        
+                        <td><?php echo $task['ID_TacVu']; ?></td>
+                        <td><?php echo $task['TacVu']; ?></td>
+                        <td class="actionLinks">
+                        <a href="../View/GanNhanGhi.php?action=view&id=<?php echo $task['ID_TacVu']; ?>">OK</a>
+                      
+                        </td>
+                    </tr>
+            <?php endforeach; ?>
               </tbody>
             </table>
           </div>
