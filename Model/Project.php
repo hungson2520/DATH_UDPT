@@ -1,18 +1,19 @@
 <?php
+class Project {
+    private $ID_DuAn;
+    private $tenDuAn;
+    private $moTa;
+    private $ID_LoaiDuAn;
 public static function getAllProject()
 {
-    // Thay đổi các thông số kết nối theo cấu hình MySQL của bạn
+   
 
     // Tạo kết nối đến MySQL
-    $conn = new mysqli($servername, $username, $password, $database);
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
 
-    // Kiểm tra kết nối
-    if ($conn->connect_error) {
-        die("Kết nối tới MySQL thất bại: " . $conn->connect_error);
-    }
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
-    $sql = "SELECT * FROM duan";
+    $sql = "SELECT da.ID_DuAn,da.tenDuAn,da.moTa,da.ID_LoaiDuAn,lda.TenLoai FROM duan da, loaiduan lda WHERE da.ID_LoaiDuAn=lda.ID_Loai ";
 
     // Thực thi câu truy vấn
     $result = $conn->query($sql);
@@ -27,7 +28,7 @@ public static function getAllProject()
             $duAn[] = $row;
         }
     } else {
-        echo "Không có dữ liệu.";
+        return null;
     }
 
     // Đóng kết nối MySQL
@@ -35,5 +36,6 @@ public static function getAllProject()
 
     // Trả về mảng dữ liệu
     return $duAn;
+}
 }
 ?>

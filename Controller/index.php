@@ -22,11 +22,12 @@ if (isset($_POST['login']))
         // Bước 5: Lưu thông tin người dùng đã đăng nhập vào phiên làm việc
         $_SESSION['user'] = $user;
         $role = $user->getRole();
+        $id_nguoiDung=$user->getId();
         $_SESSION['role'] = $role;
         echo "role là".$role;
        
-        // Chuyển hướng đến trang Labeling
-        header('Location:../View/CreateProject.php?role=' . $role);
+        // Chuyển hướng đến trang Create Project
+        header('Location:../View/CreateProject.php?role=' . $role. '&idnguoidung=' . $id_nguoiDung);
         exit();
     } else {
         // Xử lý lỗi đăng nhập

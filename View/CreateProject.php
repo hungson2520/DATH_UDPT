@@ -1,6 +1,7 @@
 <?php 
 
 $role = $_GET['role'];
+$id_nguoiDung=$_GET['idnguoidung'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,16 +71,42 @@ $role = $_GET['role'];
             <table class="table">
               <thead>
                 <tr>
-                  <th><input type="checkbox" id="checkbox-all" /></th>
                   <th>Name</th>
                   <th>Description</th>
-                  <th>Type</th>
+                  <th >Type</th>
                 </tr>
               </thead>
               <tbody>
+                
+              <?php
+            // Đường dẫn tới file Controller
+            require_once '../Controller/Project_Controller.php';
+
+            // Khởi tạo đối tượng của Controller
+            $projectController = new ProjectController();
+
+            // Gọi phương thức lấy tất cả các tasks
+            $projects = $projectController->getAllProject();
+
+            
+            ?>
+            <?php if (!empty($projects)): ?>
+            <?php foreach ($projects as $project): ?>
+                    <tr>
+                        <td><?php echo $project['tenDuAn']; ?></td>
+                        <td><?php echo $project['moTa']; ?></td>
+                        <td><?php echo $project['TenLoai']; ?></td>
+                        <td class="taskLinks">
+                        <a href="../View/Labeling.php?action=all&idnguoidung=<?php echo $id_nguoiDung; ?>&idDuAn=<?php echo $project['ID_DuAn']; ?>&role=<?php echo $role; ?>">Nhãn</a>
+                        
+                        </td>
+                    </tr>
+            <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
                   <td style="text-align: center">No data available</td>
                 </tr>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>

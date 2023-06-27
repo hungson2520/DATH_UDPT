@@ -130,20 +130,24 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  height: 300px;
 }
 
 .table th {
   text-align: left;
   padding: 8px;
   border-bottom: 1px solid #ddd;
+  width: calc(100% / 3);
 }
 .table tr {
   border: 1px solid #333;
   padding: 10px;
   border-right: 1px solid #333;
+  width: calc(100% / 3);
 }
 .table td {
   padding: 10px;
+  width: calc(100% / 3);
 }
 .text-header {
   width: 70%;
@@ -187,4 +191,21 @@
 }
 button .btn_delete:hover {
   background-color: rgb(214, 19, 19);
+}
+.taskLinks {
+  display: flex;
+  align-items: center;
+}
+.taskLinks a {
+  text-decoration: none;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #428bca;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.taskLinks a:hover {
+  background-color: #3276b1;
 }

@@ -1,7 +1,7 @@
 <?php
 
 $role = $_GET['role'];
-
+$idNguoiDung=$_GET['idnguoidung'];
 
 ?>
 <!DOCTYPE html>
@@ -156,8 +156,8 @@ $role = $_GET['role'];
                         
                         <td><?php echo $task['ID_TacVu']; ?></td>
                         <td><?php echo $task['TacVu']; ?></td>
-                        <td class="actionLinks">
-                        <a href="../View/GanNhanGhi.php?action=view&id=<?php echo $task['ID_TacVu']; ?>">OK</a>
+                        <td class="LabelLinks">
+                        <a href="../View/GanNhanGhi.php?action=view&id=<?php echo $task['ID_TacVu']; ?>&idnguoidung=<?php echo $idNguoiDung;?>">Gán Nhãn</a>
                       
                         </td>
                     </tr>
@@ -224,11 +224,11 @@ $role = $_GET['role'];
 
     var navItems = document.querySelectorAll('.NavContent_Left_li');
     var urlParams = new URLSearchParams(window.location.search);
-var ID_DuAn = urlParams.get('ID_DuAn');
-
+var ID_DuAn = urlParams.get('idDuAn');
+// <input type="text" name="ID_DuAn" value="${ID_DuAn}">
     datasetLi.addEventListener('click', function() {
         contentRight.innerHTML=`<form action="../Controller/index.php" method="POST" enctype="multipart/form-data">
-        <input type="text" name="ID_DuAn" value="${ID_DuAn}">
+        <input type="hidden" name="ID_DuAn" value="${ID_DuAn}">
         <h1 style="margin-left:200px;margin-top:200px">Choose a file txt in here: <input type="file" name="file" accept="text/plain"></h1>
         <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
     </div>
@@ -315,10 +315,7 @@ function showCreateForm() {
     });
 });
 
-function showCreateForm() {
-        var form = document.getElementById('createForm');
-        form.style.display = 'block';
-    }
+
 
         
         var fileInput = document.querySelector('input[type="file"]');
