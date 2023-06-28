@@ -161,7 +161,7 @@ $idDuAn=$_GET['idDuAn'];
                         $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
 
-                              if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==5) {
+                              if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
                         
                              $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
                               } else {

@@ -9,7 +9,7 @@ public static function getAllProject()
    
 
     // Tạo kết nối đến MySQL
-    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
 
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
@@ -43,7 +43,7 @@ public static function getUserProject($idNguoiDung)
    
 
     // Tạo kết nối đến MySQL
-    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
 
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
@@ -74,7 +74,7 @@ public static function getUserProject($idNguoiDung)
 }
 public static function getProject($idDuAn) {
 
-     $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+     $conn= mysqli_connect("localhost","root","","N01_GanNhan");
     // Chuẩn bị câu truy vấn SQL để lấy dự án theo ID
     $sql = "SELECT ID_DuAn,tenDuAn,moTa,ID_LoaiDuAn FROM duan WHERE ID_DuAn=$idDuAn";
 
@@ -98,6 +98,31 @@ public static function getProject($idDuAn) {
         return null;
     }
 }
+
+public static function insertProject($tenDuAn, $loaiDuAn, $moTa) {
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+
+    // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql = "INSERT INTO duan (tenDuAn, moTa, ID_LoaiDuAn) VALUES ('$tenDuAn', '$moTa', '$loaiDuAn')";
+
+
+
+    // Bước 3: Thực hiện truy vấn INSERT
+    if ($conn->query($sql) === TRUE) {
+        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+    } else {
+        echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+    }
+
+    // Bước 4: Đóng kết nối
+    $conn->close();
+}
+
 
 }
 ?>

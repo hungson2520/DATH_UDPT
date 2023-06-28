@@ -9,7 +9,7 @@ class User {
     // Hàm xác thực người dùng
     public static function authenticate($username, $password) {
         // Kết nối cơ sở dữ liệu
-        $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+        $conn= mysqli_connect("localhost","root","","N01_GanNhan");
         // Làm sạch dữ liệu đầu vào
         $username = $conn->real_escape_string($username);
         $password = $conn->real_escape_string($password);
@@ -41,7 +41,7 @@ class User {
     public static function insertUserData($name, $phone, $address, $password)
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
-    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
     // Kiểm tra kết nối
     if ($conn->connect_error) {
         die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);

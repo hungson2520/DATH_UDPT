@@ -29,6 +29,17 @@ class ProjectController {
     }
 }
 
+if (isset($_POST['createProject']))
+ {
+    // Lấy giá trị từ form
+    $tenDuAn = $_POST['projectName'];
+    $moTa = $_POST['projectDescription1'];
+    $id_loaiDuAn = $_POST['projectType1'];
+    Project::insertProject($tenDuAn,$id_loaiDuAn,$moTa);
+    //header('Location:../View/Login.php');   
+  
+}
+
 // Khởi tạo đối tượng của Controller
 //$taskController = new TaskController();
 

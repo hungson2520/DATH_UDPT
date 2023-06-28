@@ -7,7 +7,7 @@ class Task {
 
     public static function getAllTasks() {
         // Kết nối cơ sở dữ liệu
-        $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+        $conn= mysqli_connect("localhost","root","","N01_GanNhan");
         
         // Truy vấn dữ liệu từ bảng TacVu
         $query = "SELECT * FROM TacVu";
@@ -31,7 +31,7 @@ class Task {
     }
     public static function getAllTaskProject($idDuAn) {
         // Kết nối cơ sở dữ liệu
-        $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+        $conn= mysqli_connect("localhost","root","","N01_GanNhan");
         
         // Truy vấn dữ liệu từ bảng TacVu
         $query = "SELECT * FROM TacVu WHERE ID_DuAn=$idDuAn";
@@ -56,7 +56,7 @@ class Task {
 
     public static function insertLabelOfTask($id_nguoidung, $id_tacvu, $ketqua) {
         // Bước 1: Kết nối đến cơ sở dữ liệu
-        $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
+        $conn= mysqli_connect("localhost","root","","N01_GanNhan");
         // Kiểm tra kết nối
         if ($conn->connect_error) {
         die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
