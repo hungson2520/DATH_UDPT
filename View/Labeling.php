@@ -145,13 +145,10 @@ $idDuAn=$_GET['idDuAn'];
             // Khởi tạo đối tượng của Controller
             $taskController = new TaskController();
             $projectController = new ProjectController();
-            // Gọi phương thức lấy tất cả các tasks
-<<<<<<< Updated upstream
+            // Gọi phương thức lấy tất cả các <<<<<<< 
+
+           
             $tasks = $taskController->getTaskProject($idDuAn);
-            
-=======
-            $tasks = $taskController->getAllTasks();
-            
             
             // liên kết tới Controller
             require_once '../Controller/User_Controller.php';
@@ -162,7 +159,6 @@ $idDuAn=$_GET['idDuAn'];
             // Gọi phương thức lấy tất cả người dùng để phân công
             $phanCongNguoiDung = $UserController->ShowBangPhanCong_Controller();
 
->>>>>>> Stashed changes
             
             ?>
             
