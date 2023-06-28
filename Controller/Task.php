@@ -18,6 +18,11 @@ class TaskController {
         $tasks = $this->taskModel->getAllTasks();
         return $tasks;
     }
+    public function getTaskProject($idDuAn) {
+        // Gọi phương thức trong Model để lấy dữ liệu
+        $tasks = $this->taskModel->getAllTaskProject($idDuAn);
+        return $tasks;
+    }
 }
 
 // Khởi tạo đối tượng của Controller

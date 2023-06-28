@@ -85,8 +85,13 @@ $id_nguoiDung=$_GET['idnguoidung'];
             // Khởi tạo đối tượng của Controller
             $projectController = new ProjectController();
 
-            // Gọi phương thức lấy tất cả các tasks
-            $projects = $projectController->getAllProject();
+
+            if ($role == 3) {
+              // Gọi phương thức lấy tất cả các projects
+              $projects = $projectController->getAllProject();
+          } else {
+              $projects=$projectController->getUserProject($id_nguoiDung);
+          }
 
             
             ?>

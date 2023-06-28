@@ -2,7 +2,7 @@
 
 $role = $_GET['role'];
 $idNguoiDung=$_GET['idnguoidung'];
-
+$idDuAn=$_GET['idDuAn'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,13 +141,13 @@ $idNguoiDung=$_GET['idnguoidung'];
                 <?php
             // Đường dẫn tới file Controller
             require_once '../Controller/Task.php';
-
+            require_once '../Controller/Project_Controller.php';
             // Khởi tạo đối tượng của Controller
             $taskController = new TaskController();
-
+            $projectController = new ProjectController();
             // Gọi phương thức lấy tất cả các tasks
-            $tasks = $taskController->getAllTasks();
-
+            $tasks = $taskController->getTaskProject($idDuAn);
+            
             
             ?>
             
@@ -157,7 +157,21 @@ $idNguoiDung=$_GET['idnguoidung'];
                         <td><?php echo $task['ID_TacVu']; ?></td>
                         <td><?php echo $task['TacVu']; ?></td>
                         <td class="LabelLinks">
-                        <a href="../View/GanNhanGhi.php?action=view&id=<?php echo $task['ID_TacVu']; ?>&idnguoidung=<?php echo $idNguoiDung;?>">Gán Nhãn</a>
+                        <?php
+                        $duAn = $projectController->getProject($idDuAn);
+                            $loaiDuan = $duAn['ID_LoaiDuAn'];
+
+                              if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==5) {
+                        
+                             $url = "../View/GanNhan.php?action=view&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                              } else {
+                          // URL cho trang href mặc định
+                           $url = "../View/GanNhanGhi.php?action=view&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                               }
+                        ?>
+
+                        <a href="<?php echo $url; ?>">Gán Nhãn</a>
+                        <!-- <a href="../View/GanNhanGhi.php?action=view&id=<?php echo $task['ID_TacVu']; ?>&idnguoidung=<?php echo $idNguoiDung;?>">Gán Nhãn</a> -->
                       
                         </td>
                     </tr>
