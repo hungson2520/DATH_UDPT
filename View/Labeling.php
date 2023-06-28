@@ -163,10 +163,10 @@ $idDuAn=$_GET['idDuAn'];
 
                               if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==5) {
                         
-                             $url = "../View/GanNhan.php?action=view&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                             $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
                               } else {
                           // URL cho trang href mặc định
-                           $url = "../View/GanNhanGhi.php?action=view&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                           $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
                                }
                         ?>
 

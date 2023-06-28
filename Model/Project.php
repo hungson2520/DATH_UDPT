@@ -9,7 +9,7 @@ public static function getAllProject()
    
 
     // Tạo kết nối đến MySQL
-    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
 
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
@@ -43,7 +43,7 @@ public static function getUserProject($idNguoiDung)
    
 
     // Tạo kết nối đến MySQL
-    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
 
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
@@ -74,7 +74,7 @@ public static function getUserProject($idNguoiDung)
 }
 public static function getProject($idDuAn) {
 
-     $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+     $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
     // Chuẩn bị câu truy vấn SQL để lấy dự án theo ID
     $sql = "SELECT ID_DuAn,tenDuAn,moTa,ID_LoaiDuAn FROM duan WHERE ID_DuAn=$idDuAn";
 
