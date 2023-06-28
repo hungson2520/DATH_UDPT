@@ -70,6 +70,56 @@ class User {
     $conn->close();
 }
 
+public static function ShowBangPhanCong()
+{
+
+     // Tạo kết nối đến MySQL
+     $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+     $sql = "SELECT nd.ID_NguoiDung , nd.Ten, nd.SDT ,vt.TenVaiTro FROM NguoiDung nd, VaiTro vt WHERE nd.VaiTro= vt.ID_VaiTro And vt.ID_VaiTro !=3 ";
+     $result = $conn->query($sql);
+
+     // Kiểm tra và xử lý kết quả
+     $phanCong = array(); // Mảng để lưu trữ dữ liệu
+ 
+     if ($result->num_rows > 0) {
+         // Dùng vòng lặp để duyệt qua từng hàng dữ liệu
+         while ($row = $result->fetch_assoc()) {
+             // Thêm hàng dữ liệu vào mảng
+             $phanCong[] = $row;
+         }
+     } else {
+         return null;
+     }
+ 
+     // Đóng kết nối MySQL
+     $conn->close();
+ 
+     // Trả về mảng dữ liệu
+     return $phanCong;
+
+
+}
+public static function ThemVaoBangPhanCong($IdDuAn,$IdNguoiDung)
+{
+
+     // Tạo kết nối đến MySQL
+     $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+     $sql = "INSERT INTO PhanCong (ID_NguoiDung, ID_DuAn) VALUES ('$IdNguoiDung', '$IdDuAn')";
+     if (mysqli_query($conn, $sql)) {
+        echo "<h1>Thêm dữ liệu thành công</h1>";
+    } else {
+        echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    // Đóng kết nối
+    mysqli_close($conn);
+    
+ 
+     
+
+
+}
+
 
     public function getId() {
         return $this->id;

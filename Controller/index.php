@@ -6,7 +6,7 @@ require_once '../Model/User.php';
 
 require_once '../Model/Label.php';
 
-
+require_once '../Model/User.php';
 
 
 
@@ -63,7 +63,17 @@ if (isset($_POST['login']))
    Label::InsertDataToTacVu($ID_DuAn,$fileContent);
 }
 
+else if(isset($_POST['selectedIDs'])&&isset($_POST['idDuAn'])){
+    $selectedIDs = json_decode($_POST['selectedIDs']);
+   $IdDuAn=json_decode($_POST['idDuAn']);
+echo "ID dự án nhận được : " .$IdDuAn;
+    echo " danh sách ID nhận được là :";
+    foreach ($selectedIDs as $idNguoiDung) {
+       User::ThemVaoBangPhanCong($IdDuAn,$idNguoiDung);
+    }
+    exit();
 
+}
 
 else {
         echo "<h1>Không Nhận Được thông tin gì cả</h1>";

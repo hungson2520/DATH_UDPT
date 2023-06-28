@@ -9,8 +9,8 @@ class ProjectController {
     private $projectModel;
 
     public function __construct() {
-        $this->projectModel = new Project();
-    }
+         $this->projectModel = new Project();
+ }
 
     public function getAllProject() {
         // Gọi phương thức trong Model để lấy dữ liệu
@@ -40,8 +40,11 @@ if (isset($_POST['createProject']))
   
 }
 
-// Khởi tạo đối tượng của Controller
-//$taskController = new TaskController();
+ //Khởi tạo đối tượng của Controller
+ //$taskController = new TaskController();
+$project = new ProjectController();
+$project->getAllProject();
+
 
 // Gọi phương thức lấy tất cả các tasks
 //$taskController->getAllTasks();

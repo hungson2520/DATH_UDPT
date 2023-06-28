@@ -55,8 +55,8 @@ if (isset($_POST['labeling']))
 
 
 // Khởi tạo đối tượng của Controller
-//$taskController = new TaskController();
+$taskController = new TaskController();
 
 // Gọi phương thức lấy tất cả các tasks
-//$taskController->getAllTasks();
+$taskController->getAllTasks();
 ?>

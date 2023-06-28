@@ -21,7 +21,7 @@ $idDuAn=$_GET['idDuAn'];
       <ul class="nav_ul">
         <div class="nav_ul_left">
           <li><i class="fa-solid fa-bars"></i></li>
-          <li>Test</li>
+          <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li>
         </div>
         <div class="nav_ul_right">
           <li style="width: 200px;color:yellow"> Role: <?php if ($role == 1) {
@@ -57,7 +57,7 @@ $idDuAn=$_GET['idDuAn'];
           <li class="NavContent_Left_li label">
             <i class="fa-solid fa-tag icon"></i>Label
           </li>
-          <li class="NavContent_Left_li">
+          <li class="NavContent_Left_li member">
             <i class="fa-solid fa-user icon"></i>
             Members
           </li>
@@ -97,9 +97,9 @@ $idDuAn=$_GET['idDuAn'];
               <thead>
                 <tr >
                   <!-- <th><input type="checkbox" id="checkbox-all"></th> -->
-                  <th class="text-header">ID</th>
+                  <th >ID</th>
 
-                  <th>Text</th>
+                  <th class="text-header">Text</th>
                 </tr>
               </thead>
               <tbody>
@@ -146,8 +146,23 @@ $idDuAn=$_GET['idDuAn'];
             $taskController = new TaskController();
             $projectController = new ProjectController();
             // Gọi phương thức lấy tất cả các tasks
+<<<<<<< Updated upstream
             $tasks = $taskController->getTaskProject($idDuAn);
             
+=======
+            $tasks = $taskController->getAllTasks();
+            
+            
+            // liên kết tới Controller
+            require_once '../Controller/User_Controller.php';
+
+            // Khởi tạo đối tượng của UserController
+            $UserController = new UserController();
+
+            // Gọi phương thức lấy tất cả người dùng để phân công
+            $phanCongNguoiDung = $UserController->ShowBangPhanCong_Controller();
+
+>>>>>>> Stashed changes
             
             ?>
             
@@ -228,15 +243,15 @@ $idDuAn=$_GET['idDuAn'];
    // khi ấn vô li data set thì nội dung ở bên phải sẽ thay đổi
    // Nếu ta không ấn vô thẻ li khác thì nội dung sẽ được giữ nguyên
    
-
    
-  
-        document.addEventListener('DOMContentLoaded', function() {
+   // Giao diện của DATASET 
+   document.addEventListener('DOMContentLoaded', function() {
     var datasetLi = document.querySelector('.dataset');
-    var contentRight = document.querySelector('.NavContent_right');
+    var navItems = document.querySelectorAll('.NavContent_Left_li');
+   var contentRight = document.querySelector('.NavContent_right');
     var originalContent = contentRight.innerHTML;
 
-    var navItems = document.querySelectorAll('.NavContent_Left_li');
+   
     var urlParams = new URLSearchParams(window.location.search);
 var ID_DuAn = urlParams.get('idDuAn');
 // <input type="text" name="ID_DuAn" value="${ID_DuAn}">
@@ -247,6 +262,7 @@ var ID_DuAn = urlParams.get('idDuAn');
         <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
     </div>
 </form>`;
+console.log("giao diện dataset",contentRight.innerHTML);
         
         var fileInput = document.querySelector('input[type="file"]');
         fileInput.addEventListener('change', function(event) {
@@ -270,8 +286,115 @@ var ID_DuAn = urlParams.get('idDuAn');
     }
   });
 
+/**-------------------------------Kết thúc Dataset -------------------------------*/
+
+/**---------------------------- Bắt đầu MEMBER------------------------- ----------------- -------*/
+
+// GIAO DIỆN MEMBER
+var memberInformation = document.createElement("div");
+  memberInformation.id = "memberInformation";
+  memberInformation.innerHTML = `
+    <h1 style="margin-left: 450px; color: green;">Phân Công</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID_NguoiDung</th>
+          <th>Tên Người Dùng</th>
+          <th>Số điện Thoại</th>
+          <th>Vai Trò</th>
+          <th>Phân Công</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($phanCongNguoiDung as $pcnd): ?>
+          <tr>
+            <td><?php echo $pcnd['ID_NguoiDung']; ?></td>
+            <td><?php echo $pcnd['Ten']; ?></td>
+            <td><?php echo $pcnd['SDT']; ?></td>
+            <td><?php echo $pcnd['TenVaiTro']; ?></td>
+            <td><input class="PhanCongNguoiDung" type="checkbox" style="width: 20px; height: 20px;"></td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <input type="submit" value="Save" id="saveButton_phancong">
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        overflow: auto;
+      }
+
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        margin-left: 500px;
+        margin-top: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: darkgreen;
+        color: white;
+      }
+
+      input[type="submit"]:hover {
+        background-color: green;
+      }
+      tr:hover{
+        background-color: gray;
+        cursor:pointer;
+      }
+    </style>
+  `;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+ 
+    var memberLi = document.querySelector('.member');
+  var contentRight = document.querySelector('.NavContent_right');
+  var navItems = document.querySelectorAll('.NavContent_Left_li');
 
 
+    memberLi.addEventListener('click', function() {
+   
+      contentRight.innerHTML=memberInformation.innerHTML;
+
+     
+        for (var i = 0; i < navItems.length; i++) {
+        navItems[i].addEventListener('click', function() {
+            if (!this.classList.contains('member')) {
+              console.log("navItem không chứa member");
+                contentRight.innerHTML = originalContent;
+            }
+        });
+    }
+  });
+
+  })
+
+
+  var saveButton = document.getElementById('saveButton_phancong');
+
+
+
+
+
+/**-------------------------------Kết thúc Member -------------------------------*/
+
+/**---------------------------- Bắt đầu Label------------------------- ----------------- -------*/
+  // GIAO DIỆN LABEL
   document.addEventListener('DOMContentLoaded', function() {
     var labelLi = document.querySelector('.label');
     var contentRight = document.querySelector('.NavContent_right');
@@ -342,7 +465,12 @@ var ID_DuAn = urlParams.get('idDuAn');
             <!-- Các hàng dữ liệu khác -->
         </tbody>
     </table>
+
 </div>
+
+
+
+
 `;
 });
 });
@@ -351,23 +479,79 @@ function showCreateForm() {
         form.style.display = 'block';
     }
 
-        document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   var navItems = document.querySelectorAll('.NavContent_Left_li');
 
   // Đặt màu nền mặc định cho thẻ li đầu tiên
   navItems[0].style.backgroundColor = 'yellow';
 
-  for (var i = 0; i < navItems.length; i++) {
+  for (let i = 0; i < navItems.length; i++) {
     navItems[i].addEventListener('click', function() {
-      // Xóa màu nền của tất cả các thẻ li
-      for (var j = 0; j < navItems.length; j++) {
+      console.log("thẻ LI ĐƯỢC THẮP SÁNG LÀ ",i)
+      // Xóa màu nền của tất cả các thẻ li khác
+      for (let j = 0; j < navItems.length; j++) {
+        
         navItems[j].style.backgroundColor = '';
+        
       }
      
-      // Đặt màu nền màu vàng cho thẻ li được click
-    //  this.style.innerHTML='<h1 style="margin-left:200px;margin-top:200px">Choose a file txt in here: <input type="file" accept="text/plain"></h1>';
-      this.style.backgroundColor = 'yellow';
     
+      this.style.backgroundColor = 'yellow';
+      var saveButton = document.getElementById('saveButton_phancong');
+     if(saveButton  &&  navItems[3].style.backgroundColor==='yellow');
+ {
+ 
+      console.log("navItem[3] có màu vàng nè");
+      
+      console.log("nút saveButton",saveButton);
+      saveButton?.addEventListener('click', function() {
+    // Lấy tất cả các ô checkbox trong bảng
+    var checkboxes = document.querySelectorAll('.PhanCongNguoiDung');
+    console.log("checkboxs là ",checkboxes);
+
+    // Lưu trữ các ID_NguoiDung đã được chọn
+    var selectedIDs = [];
+
+    // Duyệt qua từng ô checkbox và kiểm tra xem có được chọn hay không
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        // Nếu ô checkbox được chọn, lưu trữ ID_NguoiDung tương ứng
+        var row = checkboxes[i].parentNode.parentNode;
+        var idNguoiDung = row.cells[0].textContent;
+        selectedIDs.push(idNguoiDung);
+      }
+    }
+    var url = new URL(window.location.href);
+
+// Lấy đối tượng URLSearchParams từ URL
+var searchParams = new URLSearchParams(url.search);
+
+// Lấy giá trị của tham số idDuAn
+var idDuAn = searchParams.get('idDuAn');
+
+console.log("id Du An là",idDuAn);
+    // Dùng AJAX ĐỂ GỬI Các ID được chọn QUA PHP 
+    var xhr = new XMLHttpRequest();
+xhr.open('POST', '../Controller/index.php', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+};
+      
+// Chuyển đổi danh sách ID thành chuỗi JSON và gửi đi
+var dataID_NguoiDung = JSON.stringify(selectedIDs);
+var dataID_DuAn =JSON.stringify(idDuAn);
+xhr.send('selectedIDs=' + encodeURIComponent(dataID_NguoiDung)+'&idDuAn=' + encodeURIComponent(dataID_DuAn));
+    
+
+    // Hiển thị các ID_NguoiDung đã được chọn
+  
+  });
+
+
+     }
       
     });
   }
