@@ -128,15 +128,8 @@
   transform: translateX(-10px);
   border-top: 1px solid yellow;
   border-bottom: 1px solid yellow;
-<<<<<<< Updated upstream
   overflow-y: scroll;
   max-height: 300px;
-=======
-  max-height: 300px;
-  overflow-y: scroll;
-
-  position: relative;
->>>>>>> Stashed changes
 }
 
 .table {

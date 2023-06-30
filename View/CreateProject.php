@@ -301,16 +301,4 @@ if(formContainer.classList.contains('form-container')){
     //formContainer.remove();
   });
 });
-<<<<<<< Updated upstream
-=======
-// hiện thông báo : thêm vào csdl thành công
-//form biến mất
-
-
-
-
-
-
-
->>>>>>> Stashed changes
   </script>
