@@ -1,18 +1,16 @@
 <?PHP
 // hàm kết nối dữ liệu
 
-$conn= mysqli_connect("localhost","root","","N01_GanNhan");
 
 
+class DatabaseConnection {
+  public $password= "";
+  
 
-
-if(!$conn){
-  echo "Kết nối thất bại";
+  public function getPassword (){
+    return $this->password;
+  }
+  
 }
-else{
-    echo "Kết nối thành công";
-}
-
-
 
 ?>

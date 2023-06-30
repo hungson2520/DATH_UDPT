@@ -11,7 +11,7 @@ class Label {
    
 
     // Tạo kết nối đến MySQL
-    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
 
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
@@ -43,7 +43,7 @@ class Label {
 public static function insertLabel($nhan, $ID_DuAn) 
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
-    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","Bluebeach1","N01_GanNhan");
     // Kiểm tra kết nối
     if ($conn->connect_error) {
     die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);

@@ -38,6 +38,11 @@ class TaskController {
         $task= $this->taskModel->insertLabelOfTask($id_nguoiDung,$id_TacVu,$data);
         return $task;
     }
+
+    public function getDataAndLabelOfTacVu ($id_tacvu) {
+        $tasks = $this->taskModel->getNhanTacVu($id_tacvu);
+        return $tasks;
+    }
 }
 
 if (isset($_POST['labeling']))
@@ -50,13 +55,25 @@ if (isset($_POST['labeling']))
     Task::insertLabelOfTask($id_nguoidung,$id_tacvu,$data);
     //header('Location:../View/Login.php');   
   
+}else
+
+if (isset($_POST['labeling_2']))
+ {
+    // Lấy giá trị từ form
+    $data = $_POST['label_of_task'];
+    $id_nguoidung = $_POST['idnguoidung'];
+    $id_tacvu = $_POST['idtacvu'];
+    
+    Task::insertLabelOfTask_2($id_nguoidung,$id_tacvu,$data);
+    //header('Location:../View/Login.php');   
+  
 }
 
 
 
 // Khởi tạo đối tượng của Controller
-$taskController = new TaskController();
+// $taskController = new TaskController();
 
-// Gọi phương thức lấy tất cả các tasks
-$taskController->getAllTasks();
+// // Gọi phương thức lấy tất cả các tasks
+// $taskController->getAllTasks();
 ?>

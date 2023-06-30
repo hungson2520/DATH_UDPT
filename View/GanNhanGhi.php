@@ -26,7 +26,7 @@
 </head>
 <body>
   
-  <form method = "post" class="labeling-form" action = "../Controller/Task.php" name="labeling">
+  <form method = "post" class="labeling-form" action = "../Controller/Task.php" name="labeling_2">
     <?php
         $idnguoidung = $_GET['idnguoidung'];
         $idtacvu = $_GET['id'];
