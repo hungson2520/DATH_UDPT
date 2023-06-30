@@ -71,7 +71,7 @@ echo "ID dự án nhận được : " .$IdDuAn;
     foreach ($selectedIDs as $idNguoiDung) {
        User::ThemVaoBangPhanCong($IdDuAn,$idNguoiDung);
     }
-    exit();
+   // exit();
 
 }
 

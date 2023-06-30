@@ -29,6 +29,50 @@ class ProjectController {
     }
 }
 
+
+if (isset($_POST['formDataExport']))
+ { 
+    
+    $formData = json_decode($_POST['formDataExport']);
+    $NameFile = $formData['outputName'];
+    $idDuAn = $formData['idDuAn'];
+    echo "ID DỰ ÁN EXPORT NHẬN BÊN CONTROLLER " .$IdDuAn;
+    echo " Name của file là ".$NameFile;
+    exit();
+   // Gọi hàm trong Model để lấy dữ liệu
+   // Loại Text Generation
+   if($IdDuAn==1 ||$IdDuAn==2 || $IdDuAn==4){
+   $data = Project::ShowProject_TextGeneration($IdDuAn);
+  // $downloadsDir = realpath($_SERVER['DOCUMENT_ROOT'] . '/../Downloads/');
+  // $filename = $downloadsDir . '/data_export_TextGenagration_IdDuAn_' . $IdDuAn . '.txt';
+   
+  //$filename = "C:\Users\HUNGSON\Downloads\data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
+  $pathName = "C:\\Users\\HUNGSON\\Downloads\\";
+  //$filename = "data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
+  $filename = $pathName . "data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
+
+   $file = fopen($filename, 'w');
+
+   // Ghi dữ liệu vào tệp tin
+   fwrite($file, $data);
+
+   // Đóng tệp tin
+   fclose($file);
+
+   // Thiết lập header để tải xuống tệp tin văn bản
+   header('Content-Type: application/octet-stream');
+   header('Content-Disposition: attachment; filename="' . $filename . '"');
+   header('Content-Length: ' . filesize($filename));
+
+   // Gửi nội dung tệp tin cho người dùng
+   readfile($filename);
+   }
+
+   
+  
+}
+
+
 if (isset($_POST['createProject']))
  {
     // Lấy giá trị từ form
@@ -46,6 +90,5 @@ if (isset($_POST['createProject']))
 // $project->getAllProject();
 
 
-// Gọi phương thức lấy tất cả các tasks
-//$taskController->getAllTasks();
+
 ?>

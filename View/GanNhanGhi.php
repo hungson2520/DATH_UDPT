@@ -43,12 +43,12 @@
     <input type="hidden" name="idtacvu" value="<?php echo $idtacvu ?>">
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
     <div class="input-container">
-        <label for="input1">Input 1:</label>
+        <label for="input1">Input :</label>
         <input type="text" style="width: 700px; height: 150px" readonly value="<?php echo $task['TacVu'] ?>">
     </div>
   
     <div class="input-container">
-        <label for="input2">Input 2:</label>
+        <label for="input2">OutPut:</label>
         <input type="text" style="width: 700px; height: 150px" id="input2" name="input2" placeholder="Kết quả nhãn ghi...">
     </div>
     <button class="submit-button" type="submit" name="labeling">Submit</button>

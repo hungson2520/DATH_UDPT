@@ -66,8 +66,4 @@
          console.log("Nhập Đúng MK RỒI");
         }
       }
-<<<<<<< HEAD
     </script>
-=======
-    </script>
->>>>>>> 440b4a96a0f8b00576d64f77bfdfc6d3b250a6d1

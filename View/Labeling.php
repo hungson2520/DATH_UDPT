@@ -48,8 +48,8 @@ $idDuAn=$_GET['idDuAn'];
           <i class="fa-regular fa-circle-play"></i>Start Annovation
         </button>
         <ul class="NavContent_Left_ul">
-          <li class="NavContent_Left_li">
-            <i class="fa-solid fa-house icon"></i>Home
+          <li class="NavContent_Left_li Home">
+            <i class="fa-solid fa-house icon "></i>Home
           </li>
           <li  class="NavContent_Left_li dataset">
             <i class="fa-solid fa-database icon"></i>Dataset
@@ -71,10 +71,21 @@ $idDuAn=$_GET['idDuAn'];
       </div>
       <div class="NavContent_right">
         <div class="NavContent_right_btn">
-          <button class="NavContent_Left_Btn" style="width: 100px">
-            Action
+          <button  id="exportBtn" class="export NavContent_Left_Btn" >
+            EXPORT RESULT 
             <i class="fa-sharp fa-solid fa-caret-down"></i>
+            
           </button>
+          <!-- <div class="export_wrapper">
+  <button class="export NavContent_Left_Btn">
+    EXPORT RESULT 
+    <i class="fa-sharp fa-solid fa-caret-down"></i>
+  </button>
+  <ul class="export_type">
+    <li class="type1">Loại 1</li>
+    <li class="type2">Loại 2</li>
+  </ul>
+</div> -->
           <button
             style="
               width: 80px;
@@ -591,6 +602,115 @@ xhr.send('selectedIDs=' + encodeURIComponent(dataID_NguoiDung)+'&idDuAn=' + enco
     });
   }
 });
-        
+
+//====== BẮT ĐẦU ĐOẠN CODE EXPORT BTN
+document.addEventListener('DOMContentLoaded', function() {
+    var HomeLi = document.querySelector('.Home');
+    var navItems = document.querySelectorAll('.NavContent_Left_li');
+   var contentRight = document.querySelector('.NavContent_right');
+    var originalContent = contentRight.innerHTML;
+
+
+ HomeLi.addEventListener("click",function(){   
+// TẠO FORM ĐỂ GỬI INPUT FILE NAME
+const formContainer = document.createElement('div');
+ 
+var formExport =`<div id="formContainerExport">
+  <form id="myFormExport">
+    <input type="text" id="fileNameInputExport" placeholder="Nhập vào tên file">
+    <input type="submit" id="submitExport" value="Lưu">
+  </form>
+</div>
+
+<style>
+  #formContainerExport {
+    transform: translateY(-520px) translateX(320px);
+    max-width:250px;
+    display:"none";
+  
+  }
+</style>
+`
+
+ 
+formContainer.innerHTML = formExport;
+document.getElementById('formContainerExport').style.display = 'none'
+
+// Thêm div chứa form vào trang
+document.body.appendChild(formContainer);
+
+document.getElementById('submitExport').addEventListener('click', function(event) {
+  event.preventDefault();
+
+  // Lấy giá trị từ input
+  var fileName = document.getElementById('fileNameInput').value;
+    console.log('Tên file:', fileName);
+
+    // Ẩn form
+    document.getElementById('formContainerExport').style.display = 'none'
+document.getElementById('exportBtn').addEventListener('click', function() {
+  // Hiển thị form
+  // var formContainer1 = document.getElementById('formContainerExport');
+  // console.log("formContainer1 là ",formContainer1);
+  // formContainer1.style.display = 'block'
+  setTimeout(function(){
+  var formContainer1 = document.getElementById('formContainerExport');
+  console.log("formContainer1 là ",formContainer1);
+  formContainer1.style.display = 'block';},1000)
+
+});
+
+
+ console.log("NÚT EXPORT BTN ĐƯỢC CLICK")
+ var url = new URL(window.location.href);
+ var searchParams = new URLSearchParams(url.search);
+
+// Lấy giá trị của tham số idDuAn
+var idDuAn = searchParams.get('idDuAn');
+
+console.log("id Du An là",idDuAn);
+
+// Lấy giá trị từ input
+
+
+// Gửi dữ liệu bằng AJAX
+// var xhr = new XMLHttpRequest();
+// xhr.open('POST', '../Controller/Project_Controller.php', true);
+// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+// xhr.onreadystatechange = function() {
+//   if (xhr.readyState === 4 && xhr.status === 200) {
+//     console.log(xhr.responseText);
+//     console.log("Gửi thành công");
+//   }
+// };
+
+// var data = {
+//   fileName: fileName,
+//   idDuAn: idDuAn
+// };
+// var encodedData = encodeURIComponent(JSON.stringify(data));
+
+// xhr.send('formDataExport=' + encodedData);
+
+
+// var xhr2 = new XMLHttpRequest();
+// xhr2.open('POST', '../Controller/Project_Controller.php', true);
+// xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+// xhr2.onreadystatechange = function() {
+//   if (xhr2.readyState === 4 && xhr2.status === 200) {
+//    console.log(xhr2.responseText);
+//    console.log("gửi thành công xhr.readyState==4");
+//   }
+// };
+
+// var data_IdDuAn=JSON.stringify(idDuAn);
+// xhr.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn))
+// xhr2.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn));
+// console.log("GỬI DỮ LIỆU QUA THÀNH CÔNG RỒI NHÉ")
+
+});
+ })
+
+}) 
     </script>
 

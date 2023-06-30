@@ -125,6 +125,52 @@ public static function insertProject($tenDuAn, $loaiDuAn, $moTa)
     // Bước 4: Đóng kết nối
     $conn->close();
 }
+
+
+public static function ShowProject_TextGeneration($idDuAN) 
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+
+    // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql = "SELECT kqng.ID_NguoiDung, kqng.ID_TacVu,kqng.KetQua , tv.ID_DuAn FROM `ketquanhanghi`kqng ,`tacvu` tv WHERE kqng.ID_TacVu=tv.ID_TacVu And tv.ID_DuAN='$idDuAN'";
+
+
+
+    // Bước 3: Thực hiện truy vấn INSERT
+    // if ($conn->query($sql) === TRUE) {
+    //     echo "<h1>ĐÃ TRUY VẤN THÀNH CÔNG</h1>";
+    // } else {
+    //     echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+    // }
+    
+    // Bước 4: Lấy dữ liệu từ kết quả truy vấn
+    $result = $conn->query($sql);
+    $data = "";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            // Ghi dữ liệu vào biến $data
+            $data .= "ID Người dùng: " . $row['ID_NguoiDung'] . "\n";
+            $data .= "ID Tác vụ: " . $row['ID_TacVu'] . "\n";
+            $data .= "Kết quả: " . $row['KetQua'] . "\n";
+            $data .= "ID Dự án: " . $row['ID_DuAn'] . "\n";
+           
+            
+            $data .= "---------------------------------------\n";
+        }
+    }
+
+
+    // Bước 4: Đóng kết nối
+    $conn->close();
+    return $data;
+}
+
+
 }
 
 

@@ -67,8 +67,8 @@ $id_nguoiDung=$_GET['idnguoidung'];
           <div class="NavContent_right_search_top">
             <i class="fa-solid fa-magnifying-glass"></i>Search
           </div>
-          <div class="NavContent_right_search_top_left">
-            <table class="table">
+          <div class="NavContent_right_search_top_left" >
+            <table class="table" >
               <thead>
                 <tr>
                   <th>Name</th>
@@ -76,7 +76,7 @@ $id_nguoiDung=$_GET['idnguoidung'];
                   <th >Type</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody  style="overflow-y: scroll;">
                 
               <?php
             // Đường dẫn tới file Controller
@@ -205,6 +205,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #45a049;
+  margin-Top:10px;
 }
   </style>
 
@@ -236,11 +237,42 @@ button[type="submit"]:hover {
 
   <div class="form-group">
     <button type="submit" name="createProject">Tạo dự án</button>
+    <button type="submit"  id="cancel_button"  name="cancel">Huỷ </button>
   </div>
 </form>
+
+
+
   `;
 
-  // Gán HTML của form vào div
+
+  
+
+  function cancelForm() {
+  //   var temporaryForm = document.getElementById("temporaryForm");
+ 
+  formContainer.classList.remove('form-container');
+  //  temporaryForm.style.display="none";
+  document.body.removeChild(formContainer);
+  console.log(" vô được hàm Cancel FORM ");
+}
+var btn_cancel;
+if(formContainer.classList.contains('form-container')){
+  setTimeout(function() {
+  btn_cancel = document.getElementById("cancel_button");
+  
+  if (btn_cancel) {
+    console.log("có btn_cancel rồi nè");
+    console.log("Nút button: ", btn_cancel);
+    btn_cancel?.addEventListener(("click"),cancelForm);
+  }}, 100);
+ 
+
+}
+  
+
+  
+ 
   formContainer.innerHTML = formHTML;
 
   // Thêm div chứa form vào trang
@@ -269,4 +301,16 @@ button[type="submit"]:hover {
     //formContainer.remove();
   });
 });
+<<<<<<< Updated upstream
+=======
+// hiện thông báo : thêm vào csdl thành công
+//form biến mất
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
   </script>
