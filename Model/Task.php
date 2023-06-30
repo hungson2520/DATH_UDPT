@@ -4,7 +4,19 @@ class Task {
     private $id_DuAn;
     private $TacVu;
     
-
+    public static function InsertDataToTacVu($ID_DuAn, $TacVu) {
+        $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+        $query = "INSERT INTO TACVU (ID_DuAn, TacVu) VALUES ('$ID_DuAn', '$TacVu')";
+       
+      
+        if ($result = $conn->query($query)) {
+            echo"<h1>Thêm Vào Bảng Tác Vụ Thành Công rồi nhé</h1>";
+            
+        } else {
+            echo"<h1>Không Thêm Vào Bảng Tác Vụ được</h1>";
+          
+        }
+    }
     public static function getAllTasks() {
         // Kết nối cơ sở dữ liệu
         $conn= mysqli_connect("localhost","root","","N01_GanNhan");

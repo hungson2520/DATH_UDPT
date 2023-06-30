@@ -9,11 +9,11 @@ public static function getAllProject()
    
 
     // Tạo kết nối đến MySQL
-    $conn= mysqli_connect("localhost","root","","N01_GanNhan");
+    $conn= mysqli_connect("localhost","root","quanbinhmu123","N01_GanNhan");
 
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
-    $sql = "SELECT da.ID_DuAn,da.tenDuAn,da.moTa,da.ID_LoaiDuAn,lda.TenLoai FROM duan da, loaiduan lda WHERE da.ID_LoaiDuAn=lda.ID_LoaiDuAn ";
+    $sql = "SELECT da.ID_DuAn,da.tenDuAn,da.moTa,da.ID_LoaiDuAn,lda.TenLoai FROM duan da, loaiduan lda WHERE da.ID_LoaiDuAn=lda.ID_LoaiDuAn";
 
     // Thực thi câu truy vấn
     $result = $conn->query($sql);
@@ -49,7 +49,7 @@ public static function getUserProject($idNguoiDung)
 
     // Câu truy vấn SQL để lấy tất cả dữ liệu từ project
     $sql = "SELECT da.ID_DuAn,da.tenDuAn,da.moTa,da.ID_LoaiDuAn,lda.TenLoai FROM duan da, loaiduan lda 
-    WHERE da.ID_LoaiDuAn=lda.ID_Loai and da.ID_DuAn in (select ID_DuAn from PhanCong where ID_NguoiDung = $idNguoiDung) ";
+    WHERE da.ID_LoaiDuAn=lda.ID_LoaiDuAn and da.ID_DuAn in (select ID_DuAn from PhanCong where ID_NguoiDung = $idNguoiDung) ";
 
     // Thực thi câu truy vấn
     $result = $conn->query($sql);
@@ -73,6 +73,7 @@ public static function getUserProject($idNguoiDung)
     // Trả về mảng dữ liệu
     return $duAn;
 }
+
 public static function getProject($idDuAn) {
 
      $conn= mysqli_connect("localhost","root","","N01_GanNhan");

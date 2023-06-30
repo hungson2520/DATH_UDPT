@@ -4,7 +4,7 @@ session_start();
 // Bước 2: Nạp các tệp mô hình và lớp
 require_once '../Model/User.php';
 
-require_once '../Model/Label.php';
+require_once '../Model/Task.php';
 
 require_once '../Model/User.php';
 
@@ -60,7 +60,7 @@ if (isset($_POST['login']))
     $ID_DuAn=$_POST['ID_DuAn'];
     echo " ID DỰ ÁN LÀ " .$ID_DuAn;
    
-   Label::InsertDataToTacVu($ID_DuAn,$fileContent);
+   Task::InsertDataToTacVu($ID_DuAn,$fileContent);
 }
 
 else if(isset($_POST['selectedIDs'])&&isset($_POST['idDuAn'])){

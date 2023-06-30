@@ -142,9 +142,11 @@ $idDuAn=$_GET['idDuAn'];
             // Đường dẫn tới file Controller
             require_once '../Controller/Task.php';
             require_once '../Controller/Project_Controller.php';
+            require_once '../Controller/Label_Controller.php';
             // Khởi tạo đối tượng của Controller
             $taskController = new TaskController();
             $projectController = new ProjectController();
+            $labelController = new LabelController();
             // Gọi phương thức lấy tất cả các <<<<<<< 
 
            
@@ -158,10 +160,14 @@ $idDuAn=$_GET['idDuAn'];
 
             // Gọi phương thức lấy tất cả người dùng để phân công
             $phanCongNguoiDung = $UserController->ShowBangPhanCong_Controller();
+            
+
+            // Khởi tạo đối tượng của Controller
+           $labels=$labelController->getLabel($idDuAn);
 
             
             ?>
-            
+             <?php if (!empty($tasks)): ?>
             <?php foreach ($tasks as $task): ?>
                     <tr>
                         
@@ -187,6 +193,11 @@ $idDuAn=$_GET['idDuAn'];
                         </td>
                     </tr>
             <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                  <td style="text-align: center">Không có tác vụ nào</td>
+                </tr>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>
@@ -395,23 +406,31 @@ var memberInformation = document.createElement("div");
     var labelLi = document.querySelector('.label');
     var contentRight = document.querySelector('.NavContent_right');
     var originalContent = contentRight.innerHTML;
-
-
     labelLi.addEventListener('click', function() {
         contentRight.innerHTML=`<style>
     .table-container {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        margin-bottom: 20px;
     }
 
     .create-button {
-        background-color: #2ecc71;
-        color: #fff;
-        padding: 10px 20px;
         border: none;
         cursor: pointer;
+        margin-top: 20px;
         margin-bottom: 10px;
+        margin-right: 10px;
+        margin-left: 10px;
+        background-color: blue;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 15px;
+        padding: 6px 6px;
+        cursor: pointer;
+        width: 80px;
+        font-family:;
     }
 
     table {
@@ -425,47 +444,67 @@ var memberInformation = document.createElement("div");
         border-bottom: 1px solid #ddd;
     }
     .create-form {
-      display: none;
-        position: relative;
+        display: none;
         background-color: #fff;
         padding: 10px;
-        width: 200px;
+        width: 150px;
+    }
+
+    .form-label {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .form-input {
+        width: calc(100% - 90px);
+        padding: 5px;
+        margin-bottom: 120x;
+        display: inline-block;
+    }
+
+    .form-submit {
+        background-color: #2ecc71;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
     }
 </style>
 
 <div class="table-container">
     <button class="create-button" onclick="showCreateForm()">Create</button>
 
-    <form class="create-form" id="createForm">
+    <form class="create-form" id="createForm" action="../Controller/Label_Controller.php" method="POST">
         <label for="labelName">Label Name:</label>
         <input type="text" id="labelName" name="labelName">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Thêm nhãn" name="createLabel">
+        <input type="hidden" id="ID_DuAn" name="ID_DuAn" value="<?php echo $idDuAn ?>">
     </form>
     <table>
         <thead>
             <tr>
-                <th>ID_Nhan</th>
-                <th>tenNhan</th>
+                <th>Mã nhãn</th>
+                <th>Tên nhãn</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Thêm các hàng dữ liệu vào đây -->
-            <tr>
-                <td>1</td>
-                <td>John Doe</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-            </tr>
-            <!-- Các hàng dữ liệu khác -->
+        <?php if (!empty($labels)): ?>
+            <?php foreach ($labels as $label): ?>
+                    <tr>
+                        <td><?php echo $label['ID_Nhan']; ?></td>
+                        <td><?php echo $label['Nhan']; ?></td>
+                    </tr>
+            <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                  <td style="text-align: center">Không có nhãn nào</td>
+                </tr>
+                <?php endif; ?>
         </tbody>
     </table>
-
 </div>
-
-
-
 
 `;
 });

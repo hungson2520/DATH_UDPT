@@ -90,7 +90,7 @@ $id_nguoiDung=$_GET['idnguoidung'];
               // Gọi phương thức lấy tất cả các projects
               $projects = $projectController->getAllProject();
           } else {
-              $projects=$projectController->getUserProject($id_nguoiDung);
+              $projects=$projectController->getUserProject(intval($id_nguoiDung));
           }
 
             
@@ -109,7 +109,7 @@ $id_nguoiDung=$_GET['idnguoidung'];
             <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                  <td style="text-align: center">No data available</td>
+                  <td style="text-align: center">Không có dự án nào</td>
                 </tr>
                 <?php endif; ?>
               </tbody>
@@ -269,12 +269,4 @@ button[type="submit"]:hover {
     //formContainer.remove();
   });
 });
-
-
-
-
-
-
-
-
   </script>

@@ -42,8 +42,8 @@ if (isset($_POST['createProject']))
 
  //Khởi tạo đối tượng của Controller
  //$taskController = new TaskController();
-$project = new ProjectController();
-$project->getAllProject();
+// $project = new ProjectController();
+// $project->getAllProject();
 
 
 // Gọi phương thức lấy tất cả các tasks
