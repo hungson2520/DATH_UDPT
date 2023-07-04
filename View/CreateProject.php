@@ -10,6 +10,8 @@ $id_nguoiDung=$_GET['idnguoidung'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRANG CREATE PROJECT.HTML</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script
       src="https://kit.fontawesome.com/901acbd329.js"
       crossorigin="anonymous"
@@ -47,33 +49,60 @@ $id_nguoiDung=$_GET['idnguoidung'];
       <div class="NavContent_right_btn">
      
         <button class="NavContent_Left_Btn" id="createButton" style="width: 100px; <?php echo ($role != 3) ? 'cursor:not-allowed;' : ''; ?>" 
-         > Create
+         > Tạo dự án
         
 
           
-        </button>
-        <button
-        class="btn_delete"
-          style="
-            width: 80px;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;  background-color: red;
-            <?php echo ($role != 3) ? 'cursor:not-allowed' : ''; ?>"
-        >
-          Delete
         </button>
         <div class="NavContent_right_search">
           <div class="NavContent_right_search_top">
             <i class="fa-solid fa-magnifying-glass"></i>Search
           </div>
           <div class="NavContent_right_search_top_left" >
+          <?php
+    if (isset($_GET["msg"])) {
+        $msg = $_GET["msg"];
+        if($msg=="success")
+        {
+          $message="Thêm dự án thành công";
+        }
+        else
+        {
+          $message="Thêm dự án thất bại";
+        }
+        echo '<div class="alert alert-warning alert-dismissible fade show alert-sm" role="alert">
+        ' . $message . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+        }
+        ?>
+         <?php
+    if (isset($_GET["dmsg"])) {
+        $msg = $_GET["dmsg"];
+        if($msg=="success")
+        {
+          $message="Xóa dự án thành công";
+        }
+        else
+        {
+          $message="Không thể xóa dự án đang tiến hành";
+        }
+        echo '<div class="alert alert-warning alert-dismissible fade show alert-sm" role="alert">
+        ' . $message . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+        }
+        ?>
             <table class="table" >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th >Type</th>
+                  <th>Tên dự án</th>
+                  <th>Mô tả</th>
+                  <th >Loại dự án</th>
+                  <?php if ($role == 3) : ?>
+                  <th> Thao tác </th>
+                  <?php endif; ?>
+                  <th> Gán nhãn </th>
                 </tr>
               </thead>
               <tbody  style="overflow-y: scroll;">
@@ -99,11 +128,19 @@ $id_nguoiDung=$_GET['idnguoidung'];
             <?php foreach ($projects as $project): ?>
                     <tr>
                         <td><?php echo $project['tenDuAn']; ?></td>
-                        <td><?php echo $project['moTa']; ?></td>
+                        <td> <?php
+                         if ($project['moTa'] == null) {
+                        echo "Không có mô tả";
+                        } else {echo $project['moTa'];} ?></td>
                         <td><?php echo $project['TenLoai']; ?></td>
+                        <?php if ($role == 3): ?>
+                        <td>
+                        <a href="edit.php?idDuAn=<?php echo $project["ID_DuAn"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
+                        <a href="../Controller/Project_Controller.php?action=delete&idDuAn=<?php echo $project["ID_DuAn"]?>&role=<?php echo $role;?>&idnguoidung=<?php echo $id_nguoiDung;?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+                        </td>
+                        <?php endif ;?>
                         <td class="taskLinks">
                         <a href="../View/Labeling.php?action=all&idnguoidung=<?php echo $id_nguoiDung; ?>&idDuAn=<?php echo $project['ID_DuAn']; ?>&role=<?php echo $role; ?>">Nhãn</a>
-                        
                         </td>
                     </tr>
             <?php endforeach; ?>
@@ -147,14 +184,24 @@ $id_nguoiDung=$_GET['idnguoidung'];
   <link rel="stylesheet" href="./CSS/CreateProject.css" />
 </html> 
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script>
   const createButton = document.getElementById('createButton');
 
 // Thêm sự kiện click vào button "Create"
 createButton.addEventListener('click', function() {
   // Tạo một div chứa form tạm thời
-  const formContainer = document.createElement('div');
+
+  var currentURL = window.location.href;
+    var params = new URLSearchParams(new URL(currentURL).search);
+    var role = params.get('role');
+    if(role!=3)
+    {
+      alert('Bạn không có chức năng này');
+      event.preventDefault(); 
+    }
+  else
+  {const formContainer = document.createElement('div');
   formContainer.classList.add('form-container'); // Thêm class cho div nếu cần thiết
 
   // Tạo HTML cho form tạm thời
@@ -201,12 +248,17 @@ button[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom:15px
 }
 
 button[type="submit"]:hover {
   background-color: #45a049;
   margin-Top:10px;
 }
+#cancel_button {
+    background-color: red;
+    color: white;
+  }
   </style>
 
   <form id="temporaryForm" method = "POST" class="form-container" action = "../Controller/Project_Controller.php" name="createProject">  
@@ -215,6 +267,8 @@ button[type="submit"]:hover {
   <div class="form-group">
     <label for="projectName">Tên dự án:</label>
     <input type="text" id="projectName" name="projectName" required>
+    <input type="hidden" name="role" value="<?php echo $role ?>">
+    <input type="hidden" name="idnguoidung" value="<?php echo $id_nguoiDung ?>">
   </div>
 
   <div class="form-group">
@@ -234,20 +288,11 @@ button[type="submit"]:hover {
     <label for="projectDescription">Mô tả:</label>
     <textarea id="projectDescription" name="projectDescription1" required></textarea>
   </div>
-
   <div class="form-group">
     <button type="submit" name="createProject">Tạo dự án</button>
     <button type="submit"  id="cancel_button"  name="cancel">Huỷ </button>
   </div>
-</form>
-
-
-
-  `;
-
-
-  
-
+</form> `; 
   function cancelForm() {
   //   var temporaryForm = document.getElementById("temporaryForm");
  
@@ -266,13 +311,7 @@ if(formContainer.classList.contains('form-container')){
     console.log("Nút button: ", btn_cancel);
     btn_cancel?.addEventListener(("click"),cancelForm);
   }}, 100);
- 
-
 }
-  
-
-  
- 
   formContainer.innerHTML = formHTML;
 
   // Thêm div chứa form vào trang
@@ -300,5 +339,28 @@ if(formContainer.classList.contains('form-container')){
     // Sau khi xử lý, bạn có thể xóa form tạm thời bằng cách sử dụng formContainer.remove();
     //formContainer.remove();
   });
+}
 });
   </script>
+<!-- <script>
+var currentURL = window.location.href;
+var searchParams = new URLSearchParams(currentURL);
+var msgValue = searchParams.get("msg"); 
+console.log(searchParams);
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Thêm dự án thành công");
+    }
+    else
+    {
+    alert("Thêm dự án thất bại");
+    }
+    searchParams.delete("msg");
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi.");
+  }
+</script> -->

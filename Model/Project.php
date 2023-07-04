@@ -119,19 +119,37 @@ public static function insertProject($tenDuAn, $loaiDuAn, $moTa)
     if ($conn->connect_error) {
     die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
     }
-
     // Bước 2: Chuẩn bị truy vấn INSERT
     $sql = "INSERT INTO duan (tenDuAn, moTa, ID_LoaiDuAn) VALUES ('$tenDuAn', '$moTa', '$loaiDuAn')";
-
-
-
     // Bước 3: Thực hiện truy vấn INSERT
     if ($conn->query($sql) === TRUE) {
-        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+        return true;
     } else {
-        echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+       return false;
     }
+    // Bước 4: Đóng kết nối
+    $conn->close();
+}
 
+
+public static function delete($idDuAn) 
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+    // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql = "DELETE from duan WHERE ID_DuAn=$idDuAn";
+    // Bước 3: Thực hiện truy vấn INSERT
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+       return false;
+    }
     // Bước 4: Đóng kết nối
     $conn->close();
 }
@@ -184,10 +202,4 @@ public static function ShowProject_TextGeneration($idDuAN)
 
 
 }
-
-
- 
- 
-
-
 ?>

@@ -44,28 +44,19 @@ $idDuAn=$_GET['idDuAn'];
 
     <div class="NavContent">
       <div class="NavContent_left">
-        <button class="NavContent_Left_Btn">
-          <i class="fa-regular fa-circle-play"></i>Start Annovation
-        </button>
         <ul class="NavContent_Left_ul">
           <li class="NavContent_Left_li Home">
-            <i class="fa-solid fa-house icon "></i>Home
+            <i class="fa-solid fa-house icon "></i>Trang chủ
           </li>
           <li  class="NavContent_Left_li dataset">
-            <i class="fa-solid fa-database icon"></i>Dataset
+            <i class="fa-solid fa-database icon"></i>Dữ liệu
           </li>
           <li class="NavContent_Left_li label">
-            <i class="fa-solid fa-tag icon"></i>Label
+            <i class="fa-solid fa-tag icon"></i>Nhãn
           </li>
           <li class="NavContent_Left_li member">
             <i class="fa-solid fa-user icon"></i>
-            Members
-          </li>
-          <li class="NavContent_Left_li">
-            <i class="fa-solid fa-book-open-reader icon"></i>Guideline
-          </li>
-          <li class="NavContent_Left_li">
-            <i class="fa-solid fa-chart-simple icon"></i>Statistics
+            Phân công
           </li>
         </ul>
       </div>
@@ -274,12 +265,32 @@ $idDuAn=$_GET['idDuAn'];
 var ID_DuAn = urlParams.get('idDuAn');
 // <input type="text" name="ID_DuAn" value="${ID_DuAn}">
     datasetLi.addEventListener('click', function() {
+      var currentURL = window.location.href;
+    var params = new URLSearchParams(new URL(currentURL).search);
+    var role = params.get('role');
+    if(role!=3)
+    {
+      contentRight.innerHTML=`
+      <style>
+    .container {
+      display: grid;
+      height: 100vh;
+      margin-top:150px;
+      margin-left:350px;
+    }
+  </style>
+  <div class="container">
+    <h1>Bạn không có chức năng này</h1>
+  </div>`;
+    }
+    else {
         contentRight.innerHTML=`<form action="../Controller/index.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="ID_DuAn" value="${ID_DuAn}">
-        <h1 style="margin-left:200px;margin-top:200px">Choose a file txt in here: <input type="file" name="file" accept="text/plain"></h1>
+        <h2 style="margin-left:300px;margin-top:200px">Chọn một file txt <input type="file" name="file" accept="text/plain"></h2>
+        <br>
         <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
     </div>
-</form>`;
+</form>`; }
 console.log("giao diện dataset",contentRight.innerHTML);
         
         var fileInput = document.querySelector('input[type="file"]');
@@ -386,8 +397,26 @@ var memberInformation = document.createElement("div");
 
 
     memberLi.addEventListener('click', function() {
-   
-      contentRight.innerHTML=memberInformation.innerHTML;
+    var currentURL = window.location.href;
+    var params = new URLSearchParams(new URL(currentURL).search);
+    var role = params.get('role');
+    if(role!=3)
+    {
+      contentRight.innerHTML=`
+      <style>
+    .container {
+      display: grid;
+      height: 100vh;
+      margin-top:150px;
+      margin-left:350px;
+    }
+  </style>
+  <div class="container">
+    <h1>Bạn không có chức năng này</h1>
+  </div>`;
+    }
+   else
+     { contentRight.innerHTML=memberInformation.innerHTML; }
 
      
         for (var i = 0; i < navItems.length; i++) {
@@ -418,7 +447,26 @@ var memberInformation = document.createElement("div");
     var contentRight = document.querySelector('.NavContent_right');
     var originalContent = contentRight.innerHTML;
     labelLi.addEventListener('click', function() {
-        contentRight.innerHTML=`<style>
+      var currentURL = window.location.href;
+    var params = new URLSearchParams(new URL(currentURL).search);
+    var role = params.get('role');
+    if(role!=3)
+    {
+      contentRight.innerHTML=`
+      <style>
+    .container {
+      display: grid;
+      height: 100vh;
+      margin-top:150px;
+      margin-left:350px;
+    }
+  </style>
+  <div class="container">
+    <h1>Bạn không có chức năng này</h1>
+  </div>`;
+    }
+    else
+   {     contentRight.innerHTML=`<style>
     .table-container {
         display: flex;
         flex-direction: column;
@@ -445,7 +493,7 @@ var memberInformation = document.createElement("div");
     }
 
     table {
-        width: 100%;
+        width: 70%;
         border-collapse: collapse;
     }
 
@@ -517,7 +565,7 @@ var memberInformation = document.createElement("div");
     </table>
 </div>
 
-`;
+`; }
 });
 });
 function showCreateForm() {
@@ -544,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
       this.style.backgroundColor = 'yellow';
       var saveButton = document.getElementById('saveButton_phancong');
-     if(saveButton  &&  navItems[3].style.backgroundColor==='yellow');
+     if(saveButton  &&  navItems[3].style.backgroundColor=='yellow');
  {
  
       console.log("navItem[3] có màu vàng nè");
