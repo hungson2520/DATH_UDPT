@@ -105,41 +105,6 @@ $idDuAn=$_GET['idDuAn'];
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Row 1</td>
-                  <td> <button class="NavContent_Left_Btn" style="width: 100px">
-                    Annotate
-                   
-                  </button></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Row 2</td>
-                 
-                  <td><button class="NavContent_Left_Btn" style="width: 100px">
-                    Annotate
-                   
-                  </button></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Row 3</td>
-                  
-                  <td><button class="NavContent_Left_Btn" style="width: 100px">
-                    Annotate
-                   
-                  </button></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Row 4</td>
-                  
-                  <td><button class="NavContent_Left_Btn" style="width: 100px">
-                    Annotate
-                   
-                  </button></td>
-                </tr> -->
                 <?php
             // Đường dẫn tới file Controller
             require_once '../Controller/Task.php';
@@ -530,22 +495,52 @@ var memberInformation = document.createElement("div");
         display: inline-block;
         vertical-align: top;
     }
+    .fixbutton {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-right: 10px;
+      background-color: #428bca; 
+      color: white; 
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .fixbutton:hover {
+      background-color: #45a049;
+    }
+    .deletebutton {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-right: 10px;
+      background-color: red; 
+      color: white; 
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .deletefixbutton:hover {
+      background-color: #45a049;
+    }
 </style>
-
 <div class="table-container">
     <button class="create-button" onclick="showCreateForm()">Create</button>
 
-    <form class="create-form" id="createForm" action="../Controller/Label_Controller.php" method="POST">
+    <form class="create-form" id="createForm" action="../Controller/Label_Controller.php?action=create" method="POST">
         <label for="labelName">Label Name:</label>
         <input type="text" id="labelName" name="labelName">
         <input type="submit" value="Thêm nhãn" name="createLabel">
         <input type="hidden" id="ID_DuAn" name="ID_DuAn" value="<?php echo $idDuAn ?>">
+        <input type="hidden" id="role" name="role" value="<?php echo $role ?>">
+        <input type="hidden" id="idnguoidung" name="idnguoidung" value="<?php echo $idNguoiDung ?>">
     </form>
     <table>
         <thead>
             <tr>
                 <th>Mã nhãn</th>
                 <th>Tên nhãn</th>
+                <th> Thao tác </th>
             </tr>
         </thead>
         <tbody>
@@ -554,6 +549,8 @@ var memberInformation = document.createElement("div");
                     <tr>
                         <td><?php echo $label['ID_Nhan']; ?></td>
                         <td><?php echo $label['Nhan']; ?></td>
+                        <td><a class="fixbutton" href="#"></i>Sửa</a>
+                        <a class="deletebutton" href="../Controller/Label_Controller.php?action=delete&idDuAn=<?php echo $idDuAn?>&role=<?php echo $role;?>&idnguoidung=<?php echo $idNguoiDung;?>&idNhan=<?php echo $label['ID_Nhan']?>"></i>Xóa</a></td>
                     </tr>
             <?php endforeach; ?>
             <?php else: ?>
@@ -761,4 +758,48 @@ console.log("id Du An là",idDuAn);
 
 }) 
     </script>
+<script>
+var currentURL = window.location.href;
+var searchParams = new URLSearchParams(currentURL);
+var msgValue = searchParams.get("dmsg"); 
+console.log(currentURL);
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Xóa nhãn thành công");
+      // Chuyển hướng trang với URL đã chỉnh sửa
+      window.location.href = url;
+    }
+    else
+    {
+    alert("Không thể xóa nhãn đang sử dụng");
+    }
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi.");
+  }
+</script>
 
+<script>
+var currentURL = window.location.href;
+var searchParams = new URLSearchParams(currentURL);
+var msgValue = searchParams.get("msg"); 
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Thêm nhãn thành công");
+      // Chuyển hướng trang với URL đã chỉnh sửa
+    }
+    else
+    {
+    alert("Thêm nhãn thất bại");
+    }
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi.");
+  }
+</script>

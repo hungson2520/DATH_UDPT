@@ -60,11 +60,32 @@ public static function insertLabel($nhan, $ID_DuAn)
 
     // Bước 3: Thực hiện truy vấn INSERT
     if ($conn->query($sql) === TRUE) {
-        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+        return true;
     } else {
-        echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+       return false;
     }
 
+    // Bước 4: Đóng kết nối
+    $conn->close();
+}
+public static function deleteLabel($idNhan) 
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+    // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql = "DELETE from nhan WHERE ID_Nhan=$idNhan";
+    // Bước 3: Thực hiện truy vấn INSERT
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+       return false;
+    }
     // Bước 4: Đóng kết nối
     $conn->close();
 }

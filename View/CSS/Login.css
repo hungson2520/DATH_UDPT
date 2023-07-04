@@ -38,8 +38,8 @@ input[type="password"] {
 
 .navigation {
   width: 100%;
-  background-color: green;
-  height: 50px;
+  background-color:#428bca;
+  height: 80px;
   box-shadow: 2px 2px 10px rgba(137, 135, 135, 0.8);
   position: fixed;
 }
