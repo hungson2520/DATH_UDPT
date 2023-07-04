@@ -155,7 +155,191 @@ public static function delete($idDuAn)
 }
 
 
-public static function ShowProject_TextGeneration($idDuAN) 
+public static function ShowReSultProject($idDuAN) 
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);}
+
+    // Bước 2: Chuẩn bị truy vấn SELECT
+    // LOẠI DỰ ÁN 1 2 4
+    $sql = "SELECT nd.Ten, da.TenDuAn, lda.TenLoai, tv.TacVu , kqng.ketqua 
+    FROM `ketquanhanghi`kqng ,`tacvu` tv , `nguoidung` nd,`loaiduan` lda,`duan` da 
+    WHERE kqng.ID_tacvu=tv.ID_TacVu
+    and nd.ID_NguoiDung=kqng.ID_NguoiDung and da.ID_DuAn=tv.ID_DuAn and da.ID_LoaiDuAn=lda.ID_LoaiDuAn 
+    And tv.ID_DuAN='$idDuAN' AND da.ID_LoaiDuAn IN (1, 2, 4)";
+
+
+
+    // Bước 3: Thực hiện truy vấn INSERT
+    if ($conn->query($sql) === TRUE) {
+        echo "<h1>ĐÃ TRUY VẤN THÀNH CÔNG</h1>";
+    } else {
+      //  echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+    }
+    
+    // Bước 4: Lấy dữ liệu từ kết quả truy vấn
+      $result = $conn->query($sql);
+        if($result){
+        
+            $data = "";
+            $ListProject=array();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                   
+                   
+                    $ListProject[] = $row;
+                    $data .= "---------------------------------------\n";
+                   
+                }
+            }
+        }
+        $conn->close();
+    return $ListProject;
+}
+
+
+// xử lý loại 3 5 6
+public static function ShowReSultProject_Type2($idDuAN)
+{
+
+ // Bước 1: Kết nối đến cơ sở dữ liệu
+ $connection = new DatabaseConnection();
+ $pw = $connection->getPassword();
+ $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+ // Kiểm tra kết nối
+ if ($conn->connect_error) {die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);}
+
+//  $sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da  
+//   WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan 
+//     and tv.ID_TacVu=kqn.ID_TacVu and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) And tv.ID_DuAN='$idDuAN' ";
+$sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu,da.tenDuAn,lda.TenLoai 
+FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da, loaiduan lda 
+WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan and tv.ID_TacVu=kqn.ID_TacVu 
+and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';
+
+";
+ 
+ $result = $conn->query($sql2);
+        if($result){
+        
+            $data = "";
+            $ListProject=array();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                   
+                   
+                    $ListProject[] = $row;
+                    $data .= "---------------------------------------\n";
+                   
+                }
+            }
+        }
+        $conn->close();
+    return $ListProject;
+
+
+
+
+} 
+
+public static function  WriteReSultProject_Type2($idDuAN)
+{
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error); }
+
+    // $sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da  
+    // WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan 
+    //   and tv.ID_TacVu=kqn.ID_TacVu and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) And tv.ID_DuAN='$idDuAN' ";
+
+    $sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu,da.tenDuAn,lda.TenLoai 
+    FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da, loaiduan lda 
+    WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan and tv.ID_TacVu=kqn.ID_TacVu 
+    and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';
+    
+    ";
+
+   
+     // Bước 4: Lấy dữ liệu từ kết quả truy vấn
+     $result = $conn->query($sql2);
+   
+     // NẾU LOẠI DỰ ÁN LÀ 3 HOẶC 5 HOẶC 6
+       if($result)
+       {
+           
+       $data = "";
+    
+       if ($result->num_rows > 0) {
+           while ($row = $result->fetch_assoc()) {
+            $data .= "Tên Loại Dự Án : " . $row['TenLoai'] . "\n";
+            $data .= "Tên  Dự Án : " . $row['tenDuAn'] . "\n";
+               $data .= "Tác Vụ : " . $row['TacVu'] . "\n";
+               $data .= "Nhãn: " . $row['Nhan'] . "\n";
+               $data .= "Tên Người Thực Hiện : " . $row['Ten'] . "\n";
+               $data .= "Từ Ngữ Thực Thể: " . $row['TuNgu'] . "\n";
+            
+              
+              
+               $data .= "---------------------------------------\n";
+               
+              
+           }
+       }
+       return $data;
+    }
+
+
+
+
+
+
+} 
+public static function getLoaiDuAn($ID_LoaiDuAn) {
+    $allowedValues = array(1, 2, 4);
+    
+    if (in_array($ID_LoaiDuAn, $allowedValues)) {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
+public static function CheckTypeProject($idDuAn)
+{
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    $sql="SELECT `ID_DuAn`, `tenDuAn`, `ID_LoaiDuAn`, `moTa` FROM `duan` WHERE ID_DuAn= '$idDuAn' ";
+    $result = $conn->query($sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $ID_LoaiDuAn = $row['ID_LoaiDuAn'];
+        $loaiDuAn = Project::getLoaiDuAn($ID_LoaiDuAn);
+        return $loaiDuAn;
+        // Tiếp tục xử lý dữ liệu
+        // ...
+      }
+
+
+}
+
+
+   
+
+
+    
+   
+
+
+
+
+public static function  WriteReSultProject($idDuAN) 
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
     $connection = new DatabaseConnection();
@@ -166,37 +350,50 @@ public static function ShowProject_TextGeneration($idDuAN)
     die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
     }
 
-    // Bước 2: Chuẩn bị truy vấn INSERT
-    $sql = "SELECT kqng.ID_NguoiDung, kqng.ID_TacVu,kqng.KetQua , tv.ID_DuAn FROM `ketquanhanghi`kqng ,`tacvu` tv WHERE kqng.ID_TacVu=tv.ID_TacVu And tv.ID_DuAN='$idDuAN'";
+    // Bước 2: Chuẩn bị truy vấn SELECT
+    $sql = "SELECT nd.Ten, da.TenDuAn, lda.TenLoai, tv.TacVu , kqng.ketqua 
+    FROM `ketquanhanghi`kqng ,`tacvu` tv , `nguoidung` nd,`loaiduan` lda,`duan` da 
+    WHERE kqng.ID_tacvu=tv.ID_TacVu
+    and nd.ID_NguoiDung=kqng.ID_NguoiDung and da.ID_DuAn=tv.ID_DuAn and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN' AND da.ID_LoaiDuAn IN (1, 2, 4)";
 
 
 
-    // Bước 3: Thực hiện truy vấn INSERT
-    // if ($conn->query($sql) === TRUE) {
-    //     echo "<h1>ĐÃ TRUY VẤN THÀNH CÔNG</h1>";
-    // } else {
-    //     echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
-    // }
+    
     
     // Bước 4: Lấy dữ liệu từ kết quả truy vấn
+   
+    // Bước 4: Lấy dữ liệu từ kết quả truy vấn
     $result = $conn->query($sql);
+   
+  // NẾU LOẠI DỰ ÁN LÀ 1 HOẶC 2 HOẶC 4
+    if($result)
+    {
+        
     $data = "";
+ 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            // Ghi dữ liệu vào biến $data
-            $data .= "ID Người dùng: " . $row['ID_NguoiDung'] . "\n";
-            $data .= "ID Tác vụ: " . $row['ID_TacVu'] . "\n";
-            $data .= "Kết quả: " . $row['KetQua'] . "\n";
-            $data .= "ID Dự án: " . $row['ID_DuAn'] . "\n";
            
-            
+            $data .= "Tên Người dùng: " . $row['Ten'] . "\n";
+            $data .= "Tên Dự Án: " . $row['TenDuAn'] . "\n";
+            $data .= "Tên Loại Dự Án: " . $row['TenLoai'] . "\n";
+            $data .= "Tác Vụ: " . $row['TacVu'] . "\n";
+            $data .= "Kết Quả: " . $row['ketqua'] . "\n";
+           
+           
             $data .= "---------------------------------------\n";
+            
+           
         }
     }
+  }
+
+
+
 
 
     // Bước 4: Đóng kết nối
-    $conn->close();
+ 
     return $data;
 }
 

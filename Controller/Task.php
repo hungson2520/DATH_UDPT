@@ -35,8 +35,9 @@ class TaskController {
     }
 
     public function insertAnswerOfTask($id_nguoiDung, $id_TacVu, $data) {
-        $task= $this->taskModel->insertLabelOfTask($id_nguoiDung,$id_TacVu,$data);
-        return $task;
+       // $task= $this->taskModel->insertLabelOfTask($id_nguoiDung,$id_TacVu,$data);
+       $this->taskModel->insertLabelOfTask($id_nguoiDung,$id_TacVu,$data);
+       // return $task;
     }
 
     public function getDataAndLabelOfTacVu ($id_tacvu) {

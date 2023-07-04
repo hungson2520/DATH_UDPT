@@ -55,6 +55,9 @@
   display: flex;
   height: 600px;
   margin-top: 10px;
+  position: relative;
+  /*CÁI Z INDEX -1 RẤT QUAN TRONG ĐẢM BÁO BÊN DƯỚI CÁI ĐĂNG XUẤT*/
+  z-index: -1;
 }
 
 .NavContent_left {
@@ -85,10 +88,10 @@
   cursor: pointer;
   width: 150px;
 }
-.export {
+/* .export {
   position: relative;
   z-index: 1;
-}
+} */
 .export_type {
   display: none;
   position: absolute;
@@ -109,6 +112,8 @@
   list-style: none;
   width: 100%;
   align-items: center;
+  z-index: 0;
+  position: relative;
 }
 .NavContent_Left_li {
   list-style: none;
@@ -117,12 +122,14 @@
   padding: 15px 10px;
   cursor: pointer;
   text-align: center;
-
+  z-index: 0;
+  position: relative;
   margin-left: 0;
   transform: translateX(-40px);
 }
 .NavContent_Left_li:hover {
   background-color: gray;
+  z-index: 0;
 }
 .NavContent_Left_Btn:hover {
   background-color: rgb(13, 13, 215);
@@ -249,3 +256,42 @@
 .export_wrapper:hover .export_type {
   display: block;
 } */
+
+/*--------------------CSS CHO PHẦN HOVER XUẤT HIỆN CHỖ ĐĂNG XUẤT----------------------*/
+.sub-menu {
+  display: none;
+  position: absolute;
+  background-color: gray;
+  padding: 10px;
+  z-index: 9999; /* Đảm bảo danh sách hiển thị trên các phần tử khác */
+  transform: translateY(10px);
+  transform: translateX(10px);
+  text-align: center;
+  width: 105px;
+  height: 130px;
+}
+/* .hidden {
+  display: none;
+} */
+.sub-menu li {
+  margin: 5px 5px;
+  font-size: 12px;
+}
+/* .sub-menu a {
+  width: 150px;
+} */
+
+.sub-menu .visible {
+  display: block;
+}
+.toggle-menu {
+  /* position: relative; */
+  /* Sử dụng position là "relative" cho phần tử cha */
+  z-index: 3;
+}
+.sub-menu a:hover {
+  background-color: #3276b1;
+}
+.toggle-menu:hover .sub-menu {
+  display: block;
+}

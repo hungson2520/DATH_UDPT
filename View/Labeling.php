@@ -20,9 +20,20 @@ $idDuAn=$_GET['idDuAn'];
     <nav class="navigation">
       <ul class="nav_ul">
         <div class="nav_ul_left">
-          <li><i class="fa-solid fa-bars"></i></li>
-          <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li>
+          <!-- <li><i class="fa-solid fa-bars"></i></li>
+          <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li> -->
+          <li class="toggle-menu"><i class="fa-solid fa-bars"></i>
+         <ul style="display:block" class="sub-menu">
+               <li><a href="#">Đăng xuất</a></li>
+               <li><a href="#">Thống kê</a></li>
+              <li><a href="#">Quản lý dự án</a></li>
+           </ul>
+        </li>
+        <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li>
+           </div>
+          
         </div>
+        
         <div class="nav_ul_right">
           <li style="width: 200px;color:yellow"> Role: <?php if ($role == 1) {
     echo " Người gán nhãn cấp 1";
@@ -31,18 +42,24 @@ $idDuAn=$_GET['idDuAn'];
 } elseif ($role == 3) {
     echo "Quản lý";
 } ?> </li>
-          <li><i class="fa-solid fa-sun"></i></li>
+          <li   ><i class="fa-solid fa-sun"></i>
+               
+        
+        </li>
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
           <li>PROJECTS</li>
          
-          <li><i class="fa-solid fa-bars"></i></li>
+          <li><i class="fa-solid fa-bars"></i>
+        
+        
+          </li>
           <li></li>
         </div>
       </ul>
     </nav>
 
-    <div class="NavContent">
+    <div id="NavContent" class="NavContent">
       <div class="NavContent_left">
         <ul class="NavContent_Left_ul">
           <li class="NavContent_Left_li Home">
@@ -63,7 +80,7 @@ $idDuAn=$_GET['idDuAn'];
       <div class="NavContent_right">
         <div class="NavContent_right_btn">
           <button  id="exportBtn" class="export NavContent_Left_Btn" >
-            EXPORT RESULT 
+            View Result 
             <i class="fa-sharp fa-solid fa-caret-down"></i>
             
           </button>
@@ -657,56 +674,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
  HomeLi.addEventListener("click",function(){   
-// TẠO FORM ĐỂ GỬI INPUT FILE NAME
-const formContainer = document.createElement('div');
- 
-var formExport =`<div id="formContainerExport">
-  <form id="myFormExport">
-    <input type="text" id="fileNameInputExport" placeholder="Nhập vào tên file">
-    <input type="submit" id="submitExport" value="Lưu">
-  </form>
-</div>
-
-<style>
-  #formContainerExport {
-    transform: translateY(-520px) translateX(320px);
-    max-width:250px;
-    display:"none";
   
-  }
-</style>
-`
-
- 
-formContainer.innerHTML = formExport;
-document.getElementById('formContainerExport').style.display = 'none'
-
-// Thêm div chứa form vào trang
-document.body.appendChild(formContainer);
-
-document.getElementById('submitExport').addEventListener('click', function(event) {
-  event.preventDefault();
-
-  // Lấy giá trị từ input
-  var fileName = document.getElementById('fileNameInput').value;
-    console.log('Tên file:', fileName);
-
-    // Ẩn form
-    document.getElementById('formContainerExport').style.display = 'none'
 document.getElementById('exportBtn').addEventListener('click', function() {
-  // Hiển thị form
-  // var formContainer1 = document.getElementById('formContainerExport');
-  // console.log("formContainer1 là ",formContainer1);
-  // formContainer1.style.display = 'block'
-  setTimeout(function(){
-  var formContainer1 = document.getElementById('formContainerExport');
-  console.log("formContainer1 là ",formContainer1);
-  formContainer1.style.display = 'block';},1000)
-
-});
-
-
- console.log("NÚT EXPORT BTN ĐƯỢC CLICK")
+  console.log("NÚT EXPORT BTN ĐƯỢC CLICK")
  var url = new URL(window.location.href);
  var searchParams = new URLSearchParams(url.search);
 
@@ -715,48 +685,53 @@ var idDuAn = searchParams.get('idDuAn');
 
 console.log("id Du An là",idDuAn);
 
-// Lấy giá trị từ input
+var xhr2 = new XMLHttpRequest();
+xhr2.open('POST', '../Controller/Result_Export_Controller.php', true);
+xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr2.onreadystatechange = function() {
+  if (xhr2.readyState === 4 && xhr2.status === 200) {
+   console.log(xhr2.responseText);
+   console.log("gửi thành công xhr.readyState==4");
+  }
+};
+
+var data_IdDuAn=JSON.stringify(idDuAn);
+
+xhr2.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn));
+console.log("GỬI DỮ LIỆU QUA THÀNH CÔNG RỒI NHÉ");
+window.location.href = '../View/Result_Export.php?idDuAn=<?php echo $idDuAn; ?>';
+
+});
 
 
-// Gửi dữ liệu bằng AJAX
-// var xhr = new XMLHttpRequest();
-// xhr.open('POST', '../Controller/Project_Controller.php', true);
-// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-// xhr.onreadystatechange = function() {
-//   if (xhr.readyState === 4 && xhr.status === 200) {
-//     console.log(xhr.responseText);
-//     console.log("Gửi thành công");
-//   }
-// };
 
-// var data = {
-//   fileName: fileName,
-//   idDuAn: idDuAn
-// };
-// var encodedData = encodeURIComponent(JSON.stringify(data));
-
-// xhr.send('formDataExport=' + encodedData);
-
-
-// var xhr2 = new XMLHttpRequest();
-// xhr2.open('POST', '../Controller/Project_Controller.php', true);
-// xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-// xhr2.onreadystatechange = function() {
-//   if (xhr2.readyState === 4 && xhr2.status === 200) {
-//    console.log(xhr2.responseText);
-//    console.log("gửi thành công xhr.readyState==4");
-//   }
-// };
-
-// var data_IdDuAn=JSON.stringify(idDuAn);
-// xhr.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn))
-// xhr2.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn));
-// console.log("GỬI DỮ LIỆU QUA THÀNH CÔNG RỒI NHÉ")
 
 });
  })
 
-}) 
+//----- XỬ LÝ JAVASCRIPT KHI TA ẤN VÔ ĐỂ HIỆN ĐĂNG XUẤT
+var toggleMenu = document.querySelector('.toggle-menu');
+var subMenu = document.querySelector('.sub-menu');
+
+toggleMenu.addEventListener('click', function() {
+  if( subMenu.style.display=="block"){
+   // document.getElementsById('NavContent').style.zIndex='1';
+   document.getElementById('NavContent').style.zIndex='1';
+ 
+ subMenu.style.display="none";
+}
+ else {
+ // document.getElementsById('NavContent').style.zIndex='-1';
+ document.getElementById('NavContent').style.zIndex='-1';
+  subMenu.style.display="block";
+ }
+});
+
+
+
+subMenu.addEventListener('click', function(event) {
+  event.stopPropagation(); // Ngăn chặn sự kiện click lan ra bên ngoài
+});
     </script>
 <script>
 var currentURL = window.location.href;

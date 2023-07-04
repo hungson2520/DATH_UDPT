@@ -74,8 +74,19 @@ echo "ID dự án nhận được : " .$IdDuAn;
    // exit();
 
 }
+if(isset($_POST['data_TenFile'])&&isset($_POST['idDuAn']))
+ { 
+  $fileName = json_decode($_POST['data_TenFile']);
+  $IdDuAn=json_decode($_POST['idDuAn']);
+echo "ID dự án nhận được : " .$IdDuAn;
+echo "Tên File Nhận được là : " .$fileName;
+exit();
+   
+
+
+ }
 
 else {
-        echo "<h1>Không Nhận Được thông tin gì cả</h1>";
+        echo "<h1>Không Nhận Được thông tin gì cả hết á !!!!</h1>";
 
 }

@@ -1,0 +1,89 @@
+.navigation {
+  width: 100%;
+  background-color: green;
+  height: 50px;
+  box-shadow: 2px 2px 10px rgba(137, 135, 135, 0.8);
+}
+
+.navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navigation li {
+  width: 100px;
+  text-align: center;
+  align-items: center;
+  margin-top: 12px;
+  cursor: pointer;
+  transform: translateY(5px);
+}
+
+.navigation li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+.nav_ul {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.nav_ul_left {
+  transform: translateX(-150px);
+  display: flex;
+  flex-direction: row;
+}
+.nav_ul_right {
+  display: flex;
+  flex-direction: row;
+  float: right;
+  transform: translateX(250px);
+}
+/*-----------------------CSS CHO TABLE---------------------------------*/
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.table {
+  width: 100%;
+}
+
+.table th,
+.table td {
+  /* width: 20%; */
+  text-align: center;
+  border: 1px solid black;
+  padding: 8px;
+}
+/*------------------------------------------css cho form submit tên file---------------------------------------*/
+#formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: 5px;
+  transform: translateX(-150px);
+}
+#exportBtn {
+  margin-left: 700px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+  background-color: aqua;
+}
+#exportForm {
+  text-align: center;
+  margin-left: 400px;
+}
