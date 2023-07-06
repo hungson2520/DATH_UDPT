@@ -52,30 +52,6 @@ if (Project::delete($idDuAn)) {
     
 //     $idDuAn= json_decode($_POST['ID_DuAn_Export']);
    
-<<<<<<< Updated upstream
-  //$filename = "C:\Users\HUNGSON\Downloads\data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
-  $pathName = "C:\\Users\\HUNGSON\\Downloads\\";
-  //$filename = "data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
-  $filename = $pathName . "data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
-
-   $file = fopen($filename, 'w');
-
-   // Ghi dữ liệu vào tệp tin
-   fwrite($file, $data);
-
-   // Đóng tệp tin
-   fclose($file);
-
-   // Thiết lập header để tải xuống tệp tin văn bản
-   header('Content-Type: application/octet-stream');
-   header('Content-Disposition: attachment; filename="' . $filename . '"');
-   header('Content-Length: ' . filesize($filename));
-
-   // Gửi nội dung tệp tin cho người dùng
-   readfile($filename);
-   }  
-}
-=======
 //     echo "ID DỰ ÁN EXPORT NHẬN BÊN CONTROLLER " .$IdDuAn;
     
  
@@ -109,7 +85,6 @@ if (Project::delete($idDuAn)) {
 //    }}
 
 
->>>>>>> Stashed changes
 if (isset($_POST['createProject']))
  {
     // Lấy giá trị từ form

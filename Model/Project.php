@@ -8,7 +8,6 @@ class Project {
     private $ID_LoaiDuAn;
 public static function getAllProject()
 {
-   
 
     // Tạo kết nối đến MySQL
     $connection = new DatabaseConnection();
@@ -189,8 +188,6 @@ public static function ShowReSultProject($idDuAN)
             $ListProject=array();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                   
-                   
                     $ListProject[] = $row;
                     $data .= "---------------------------------------\n";
                    
@@ -201,11 +198,9 @@ public static function ShowReSultProject($idDuAN)
     return $ListProject;
 }
 
-
 // xử lý loại 3 5 6
 public static function ShowReSultProject_Type2($idDuAN)
 {
-
  // Bước 1: Kết nối đến cơ sở dữ liệu
  $connection = new DatabaseConnection();
  $pw = $connection->getPassword();
@@ -230,8 +225,6 @@ and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.I
             $ListProject=array();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                   
-                   
                     $ListProject[] = $row;
                     $data .= "---------------------------------------\n";
                    
@@ -240,10 +233,6 @@ and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.I
         }
         $conn->close();
     return $ListProject;
-
-
-
-
 } 
 
 public static function  WriteReSultProject_Type2($idDuAN)
@@ -280,27 +269,19 @@ public static function  WriteReSultProject_Type2($idDuAN)
            while ($row = $result->fetch_assoc()) {
             $data .= "Tên Loại Dự Án : " . $row['TenLoai'] . "\n";
             $data .= "Tên  Dự Án : " . $row['tenDuAn'] . "\n";
-               $data .= "Tác Vụ : " . $row['TacVu'] . "\n";
-               $data .= "Nhãn: " . $row['Nhan'] . "\n";
-               $data .= "Tên Người Thực Hiện : " . $row['Ten'] . "\n";
-               $data .= "Từ Ngữ Thực Thể: " . $row['TuNgu'] . "\n";
-            
-              
-              
-               $data .= "---------------------------------------\n";
+            $data .= "Tác Vụ : " . $row['TacVu'] . "\n";
+            $data .= "Nhãn: " . $row['Nhan'] . "\n";
+            $data .= "Tên Người Thực Hiện : " . $row['Ten'] . "\n";
+            $data .= "Từ Ngữ Thực Thể: " . $row['TuNgu'] . "\n";
+            $data .= "---------------------------------------\n";
                
               
            }
        }
        return $data;
     }
-
-
-
-
-
-
 } 
+
 public static function getLoaiDuAn($ID_LoaiDuAn) {
     $allowedValues = array(1, 2, 4);
     
@@ -325,8 +306,6 @@ public static function CheckTypeProject($idDuAn)
         // Tiếp tục xử lý dữ liệu
         // ...
       }
-
-
 }
 
 
