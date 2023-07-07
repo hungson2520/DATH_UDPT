@@ -15,6 +15,7 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
       h1 {
         text-align: center;
         color: navy;
+        font-family: Cambria;
       }
       </style>
       <h1> Gán nhãn câu trả lời của cặp câu hỏi và văn bản</h1>';
@@ -23,6 +24,7 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
       h1 {
         text-align: center;
         color: navy;
+        font-family: Cambria;
       }
       </style>
       <h1> DỊCH MÁY</h1>';
@@ -31,6 +33,7 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
       h1 {
         text-align: center;
         color: navy;
+        font-family: Cambria;
       }
       </style>
       <h1> TÌM CÂU HỎI ĐỒNG NGHĨA</h1>';
@@ -55,12 +58,12 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
     <div class="input-container">
         <label for="input1">Tác vụ</label>
-        <input type="text" style="width: 700px; height: 150px" readonly value="<?php echo $task['TacVu'] ?>">
+        <textarea name = "input2" type="text" rows="5" style="width: 640px; height: 90px" readonly><?php echo $task['TacVu'] ?></textarea>
     </div>
   
     <div class="input-container">
-        <label for="input2">Câu trả lời của bạ</label>
-        <input type="text" style="width: 700px; height: 150px" id="input2" name="input2" placeholder="Kết quả nhãn ghi...">
+        <label for="input2">Câu trả lời</label>
+        <textarea name = "input2" type="text" rows="5" style="width: 640px; height: 50px" placeholder="Kết quả nhãn ghi..."></textarea>
     </div>
     <button class="submit-button" type="submit" name="labeling">GÁN NHÃN</button>
   </form>

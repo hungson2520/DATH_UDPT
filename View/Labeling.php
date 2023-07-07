@@ -182,19 +182,15 @@ if ($role == 3) {
                         $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
 
-                            if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
+                            if ($loaiDuan ==1 || $loaiDuan==2) {
                         
-<<<<<<< HEAD
-                             $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idDuAn=" . $task['ID_DuAn'];
-                              } else {
+                             $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
+                              } elseif ($loaiDuan ==4){
+                                $url = "../View/GanNhanThucThe.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
+                              }
+                              else {
                           // URL cho trang href mặc định
-                           $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idDuAn=" . $task['ID_DuAn'];
-=======
-                            $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
-                              } else {
-                            // URL cho trang href mặc định
-                            $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
->>>>>>> 6e0935611c7ec6cea0f78e04837cf6f24568e53a
+                            $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
                                }
                         ?>
 

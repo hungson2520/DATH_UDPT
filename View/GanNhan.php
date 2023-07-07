@@ -1,31 +1,36 @@
-
+<?php
+$idNguoiDung=$_GET['idnguoidung'];
+$idLoaiDuAn=$_GET['idLoaiDuAn'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Trang web với các ô nhập kích cỡ lớn</title>
   
-  <style>
-    .input-container {
-      margin-bottom: 10px;
-    }
-    .input-container input {
-      width: 300px;
-      height: 50px;
-      font-size: 18px;
-      padding: 10px;
-    }
-    .submit-button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  </style>
+  <link rel="stylesheet" href="./CSS/GanNhanGhi.css" />
 </head>
 <body>
-  
+<?php
+    if ($idLoaiDuAn == 1) {
+      echo '<style>
+      h1 {
+        text-align: center;
+        color: navy;
+        font-family: Cambria;
+      }
+      </style>
+      <h1>PHÂN LOẠI VĂN BẢN</h1>';
+    }elseif($idLoaiDuAn == 2){
+      echo '<style>
+      h1 {
+        text-align: center;
+        color: navy;
+        font-family: Cambria;
+      }
+      </style>
+      <h1>HỎI ĐÁP</h1>';
+    }
+  ?>
   <form method = "post" class="labeling-form" action = "../Controller/Task.php" name="labeling_2">
     <?php
         $idnguoidung = $_GET['idnguoidung'];
@@ -46,15 +51,15 @@
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
 
     <div class="input-container">
-        <label for="input1">Input 1:</label>
-        <input type="text" style="width: 700px; height: 150px" readonly value="<?php echo $task['TacVu'] ?>">
+        <label for="input1">Tác vụ</label>
+        <textarea name = "input2" type="text" rows="5" style="width: 640px; height: 90px" readonly><?php echo $task['TacVu'] ?></textarea>
     </div>
 
     
     
 
     <div class="form-group">
-        <label for="Label">Nhãn:</label>
+        <label for="Label">Nhãn</label>
         <select id="label_of_task" name="label_of_task" required>
             <option value="">-- Chọn nhãn cho tác vụ --</option>
 
@@ -67,7 +72,7 @@
         </select>
     </div>
 
-    <button class="submit-button" type="submit" name="labeling_2">Submit</button>
+    <button class="submit-button" type="submit" name="labeling_2">GÁN NHÃN</button>
   
     
     
