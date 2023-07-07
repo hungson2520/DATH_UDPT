@@ -94,6 +94,7 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
         $idDuAn = $_GET['id'];
         $idKQN=$_GET['idKQN'];
         $idtacvu1=$_GET['idTacVu'];
+        $role=$_GET['role'];
        
         // Đường dẫn tới file Controller
         require_once '../Controller/Task.php';
@@ -110,10 +111,10 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
 
         $label1=$taskController->getNhanvaKQN_Controller($idDuAn);
     ?>
-    
+    <input type="hidden" name="id_duan" value="<?php echo $idDuAn ?>">
     <input type="hidden" name="idkqn" value="<?php echo $idKQN ?>">
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
-
+    <input type="hidden" name="role" value="<?php echo $role ?>">
     <div class="input-container">
         <label for="input1">Tác vụ</label>
         <textarea name = "input2" type="text" rows="5" style="width: 640px; height: 90px" readonly><?php echo $task['TacVu'] ?></textarea>

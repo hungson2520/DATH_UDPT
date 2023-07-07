@@ -76,7 +76,7 @@ if (isset($_POST['ID_DuAn_Export']))
   echo "đang ở trang result export controller";
 echo "ID dự án nhận được : " .$IdDuAn;
 echo "Tên File Nhận được là : " .$fileName;
- $pathName = "C:\\Users\\HUNGSON\\Downloads\\";
+ $pathName = "C:\\Users\\ASUS\\Downloads\\";
 $filenameExport = $pathName .$fileName;
 $result2= new Result_export_controller();
 $type= $result2->CheckTypeProject_Controller($IdDuAn);

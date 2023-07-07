@@ -135,9 +135,16 @@ if (isset($_POST['labeling_update_1']))
     $data = $_POST['input2'];
     $id_nguoidung = $_POST['idnguoidung'];
     $idKQNG = $_POST['idKQNG'];
+    $id_duan = $_POST['id_duan'];
+    $role = $_POST['role'];
     
-    echo "vô update labeling 2 rồi nha";
-    Task::UpadteLabelOfTask_Type356($id_nguoidung,$data,$idKQNG);
+    
+    
+    if(Task::UpadteLabelOfTask_Type356($id_nguoidung,$data,$idKQNG)){
+        header("Location: ../View/Result_Export.php?idDuAn=$id_duan&role=$role&id=$id_nguoidung&lmsg_2=success");
+    }else{
+        header("Location: ../View/Result_Export.php?idDuAn=$id_duan&role=$role&id=$id_nguoidung&lmsg_2=fail");
+    }
      
   
 }
@@ -145,8 +152,14 @@ if(isset($_POST['update_labeling_2']))
 {  $data = $_POST['label_of_task'];
     $id_nguoidung = $_POST['idnguoidung'];
     $id_ketquanhan = $_POST['idkqn'];
-
-    Task::UpadteLabelOfTask_Type12($id_nguoidung,$data,$id_ketquanhan);
+    $id_duan = $_POST['id_duan'];
+    $role = $_POST['role'];
+    
+    if(Task::UpadteLabelOfTask_Type12($id_nguoidung,$data,$id_ketquanhan)){
+        header("Location: ../View/Result_Export.php?idDuAn=$id_duan&role=$role&id=$id_nguoidung&lmsg=success");
+    }else{
+        header("Location: ../View/Result_Export.php?idDuAn=$id_duan&role=$role&id=$id_nguoidung&lmsg=fail");
+    }
 
 }
 

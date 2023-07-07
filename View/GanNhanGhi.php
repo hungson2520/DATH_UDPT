@@ -8,6 +8,7 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
   <link rel="stylesheet" href="./CSS/GanNhanGhi.css" />
 </head>
 <body>
+  <input type="hidden" name="role" value="<?php echo $role ?>">
   <?php
     if ($idLoaiDuAn == 5) {
       echo '<style>
@@ -91,7 +92,8 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
     
     $idnguoidung = $_GET['idnguoidung'];
     $idKQNG = $_GET['idKQNG'];
-   
+    $role=$_GET['role'];
+    $idDuAn=$_GET['id'];
     
     $taskController1 = new TaskController();
    $KQNG=$taskController1->getDataFromKetQuaNhanGhi_Controller($idKQNG);
@@ -105,6 +107,8 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
     
     <input type="hidden" name="idKQNG" value="<?php echo $idKQNG ?>">
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
+    <input type="hidden" name="role" value="<?php echo $role ?>">
+    <input type="hidden" name="id_duan" value="<?php echo $idDuAn ?>">
     <div class="input-container">
         <label for="input1">Kết Quả Hiện Tại</label>
         <textarea name = "input2" type="text" rows="5" style="width: 640px; height: 90px" readonly><?php if (isset($KQNG['KetQua'])) { echo $KQNG['KetQua']; }  ?></textarea>

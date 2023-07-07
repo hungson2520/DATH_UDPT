@@ -1,10 +1,10 @@
 <?php
-$role=3;
 require_once '../Controller/Result_Export_Controller.php';
 require_once '../Controller/Project_Controller.php';
 $projectController = new ProjectController();
 $result1= new Result_export_controller();
 $projectController = new ProjectController();
+
 if(isset($_GET['idDuAn'])&& isset($_GET['role']))
 { 
 
@@ -15,21 +15,32 @@ if(isset($_GET['idDuAn'])&& isset($_GET['role']))
   $duAn = $projectController->getProject($idDuAn);
   $tenDuAn = $duAn['tenDuAn'];
   // 3 5 6
+$filterResult = [];
   if($type==1){
   
-  $KetQua = $result1->ShowResultProject_Controller($idDuAn);
+  $KetQua1 = $result1->ShowResultProject_Controller($idDuAn);
   }
   // 1 2 4 
   elseif($type==2){
-    $KetQua=$result1->ShowResultProject_Type2_Controller($idDuAn);
+    $KetQua1=$result1->ShowResultProject_Type2_Controller($idDuAn);
     
   }
   $duAn = $projectController->getProject($idDuAn);
   $loaiDuan = $duAn['ID_LoaiDuAn'];
-  
- 
+  foreach ($KetQua1 as $KQ) {
+    if ($KQ['ID_NguoiDung'] == $idnguoidung) {
+        $filterResult[] = $KQ;
+    }
+  }
+  if($role==1)
+  {
+    $KetQua=$filterResult;
+  }
+  else
+  {
+    $KetQua=$KetQua1;
+  }
 }
-
 // 3 5 6: gán nhãn ghi.php
 // 1 2 :gannhan.php
 //4:gannhanthucthe
@@ -48,6 +59,7 @@ if(isset($_GET['idDuAn'])&& isset($_GET['role']))
     ></script>
   </head>
   <body>
+    <input type="hidden" name="role" value="<?php echo $role ?>">
     <nav class="navigation">
       <ul class="nav_ul">
         <div class="nav_ul_left">
@@ -73,7 +85,7 @@ if(isset($_GET['idDuAn'])&& isset($_GET['role']))
         </div>
       </ul>
     </nav>
-    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :<?php echo  $idDuAn ?></h1>
+    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :<?php echo  $tenDuAn ?></h1>
 
     <?php 
   
@@ -90,7 +102,9 @@ if ($type == 1) {
       <th style="width: 15%;">Tên Loại Dự Án</th>
       <th style="width: 15%;">Tác Vụ</th>
       <th style="width: 15%;">Kết Quả</th>
+      <?php if($role>1) {?>
       <th style="width: 15%;">Sửa Kết Quả</th>
+      <?php }?>
     </tr>
   </thead>
   <tbody>
@@ -102,7 +116,9 @@ if ($type == 1) {
       <td><?php echo $KQ['TenLoai']; ?></td>
       <td><?php echo $KQ['TacVu']; ?></td>
       <td><?php echo $KQ['ketqua']; ?></td>
-      <th><a class="edit" href="../View/GanNhanGhi.php?action=update&id=<?php echo $idDuAn?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQNG=<?php echo $KQ['ID_KetQuaNhanGhi']; ?>">Sửa</a></th>
+      <?php if($role>1) {?>
+      <th><a class="edit" href="../View/GanNhanGhi.php?action=update&id=<?php echo $idDuAn?>&role=<?php echo $role?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQNG=<?php echo $KQ['ID_KetQuaNhanGhi']; ?>">Sửa</a></th>
+      <?php }?>
     </tr>
 
     <?php endforeach; ?>
@@ -139,7 +155,9 @@ elseif ($type == 2) { ?>
       <th style="width: 10%;">Nhãn</th>
       <th style="width: 10%;">Tên Người Làm</th>
       <th style="width: 10%;">Từ Ngữ Thực Thể</th>
+      <?php if($role>1) {?>
       <th style="width: 10%;">Sửa Kết Quả</th>
+      <?php }?>
 
      
      
@@ -155,7 +173,9 @@ elseif ($type == 2) { ?>
       <td><?php echo $KQ['Nhan']; ?></td>
       <td><?php echo $KQ['Ten']; ?></td>
       <td><?php echo $KQ['TuNgu']; ?></td>
-      <th><a class="edit" href="../View/GanNhan.php?action=update&id=<?php echo $idDuAn?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQN=<?php echo $KQ['ID_KetQuaNhan']; ?>&idTacVu=<?php echo $KQ['ID_TacVu']; ?>">Sửa</a></th>
+      <?php if($role>1) {?>
+      <th><a class="edit" href="../View/GanNhan.php?action=update&id=<?php echo $idDuAn?>&role=<?php echo $role?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQN=<?php echo $KQ['ID_KetQuaNhan']; ?>&idTacVu=<?php echo $KQ['ID_TacVu']; ?>">Sửa</a></th>
+      <?php }?>
     </tr>
 
     <?php endforeach; ?>
@@ -182,8 +202,9 @@ elseif ($type == 2) { ?>
 
            
 </div>
+<?php if($role>2) {?>
 <button id="exportBtn">Xuất kết quả</button>
-
+<?php }?>
 <div id="formContainer" style="display: none;">
   <form id="exportForm" >
     <input type="text" id="fileNameInput" placeholder="Nhập vào tên file">
@@ -268,3 +289,70 @@ setTimeout(function(){
 
 
 </script>
+<script>
+var url_gannhan = window.location.href;
+var searchParams = new URLSearchParams(url_gannhan);
+var msgValue = searchParams.get("lmsg"); 
+console.log(searchParams);
+
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Cập nhật nhãn thành công");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg'));
+      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    else
+    {
+      alert("Cập nhật thất bại");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg'));
+      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    searchParams.delete("msg");
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi");
+  }
+  </script>
+
+<script>
+var url_gannhan = window.location.href;
+var searchParams = new URLSearchParams(url_gannhan);
+var msgValue = searchParams.get("lmsg_2"); 
+console.log(searchParams);
+
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Cập nhật nhãn thành công");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg_2'));
+      params.delete('lmsg_2'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    else
+    {
+      alert("Cập nhật thất bại");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg_2'));
+      params.delete('lmsg_2'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    searchParams.delete("msg");
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi");
+  }
+  </script>

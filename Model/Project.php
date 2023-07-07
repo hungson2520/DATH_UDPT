@@ -186,7 +186,7 @@ public static function ShowReSultProject($idDuAN)
 
     // Bước 2: Chuẩn bị truy vấn SELECT
     // LOẠI DỰ ÁN 3 5 6
-    $sql = "SELECT kqng.ID_KetQuaNhanGhi, nd.Ten, da.TenDuAn, lda.TenLoai, tv.TacVu , kqng.ketqua 
+    $sql = "SELECT kqng.ID_KetQuaNhanGhi, kqng.ID_NguoiDung,nd.Ten, da.TenDuAn, lda.TenLoai, tv.TacVu , kqng.ketqua 
     FROM `ketquanhanghi`kqng ,`tacvu` tv , `nguoidung` nd,`loaiduan` lda,`duan` da 
     WHERE kqng.ID_tacvu=tv.ID_TacVu
     and nd.ID_NguoiDung=kqng.ID_NguoiDung and da.ID_DuAn=tv.ID_DuAn and da.ID_LoaiDuAn=lda.ID_LoaiDuAn 
@@ -233,7 +233,7 @@ public static function ShowReSultProject_Type2($idDuAN)
 //  $sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da  
 //   WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan 
 //     and tv.ID_TacVu=kqn.ID_TacVu and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) And tv.ID_DuAN='$idDuAN' ";
-$sql2="SELECT kqn.ID_KetQuaNhan,tv.ID_TacVu ,n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu,da.tenDuAn,lda.TenLoai 
+$sql2="SELECT kqn.ID_KetQuaNhan,tv.ID_TacVu ,n.Nhan,kqn.ID_NguoiDung, nd.Ten ,tv.TacVu,kqn.TuNgu,da.tenDuAn,lda.TenLoai 
 FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da, loaiduan lda 
 WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan and tv.ID_TacVu=kqn.ID_TacVu 
 and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 1,2,4) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';

@@ -111,13 +111,13 @@ class Task {
             }
     
             // Bước 2: Chuẩn bị truy vấn INSERT
-            $sql = "update ketquanhanghi
-            set ID_NguoiDung= '$id_nguoidung' , KetQua = '$ketqua'
-            where ID_KetQuaNhanGhi='$idKQNG' ";
+            $sql = "UPDATE ketquanhanghi
+            set ID_NguoiDung= $id_nguoidung , KetQua = '$ketqua'
+            where ID_KetQuaNhanGhi=$idKQNG ";
             if ($conn->query($sql) === TRUE) {
-                echo "<h1>Update dữ liệu thành công</h1>";
+                return true;
             } else {
-                echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+                return false;
                 
             }
 
@@ -134,11 +134,11 @@ class Task {
             die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
             }
 
-            $sql="UPDATE `ketquanhan` SET `ID_Nhan`='$idNhan' ,ID_NguoiDung= '$id_nguoidung' WHERE ID_KetQuaNhan='$idKQN' ";
+            $sql="UPDATE ketquanhan SET ID_Nhan=$idNhan ,ID_NguoiDung=$id_nguoidung WHERE ID_KetQuaNhan=$idKQN ";
             if ($conn->query($sql) === TRUE) {
-                echo "<h1>Update dữ liệu thành công</h1>";
+                return true;
             } else {
-                echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+                return false;
                 
             }
 
