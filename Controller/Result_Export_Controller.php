@@ -89,7 +89,7 @@ if($type==2){
   echo "TYPE 2 NÈ";
   
 }
-echo "dữ liệu trong file : " .$data;
+header('Location:../View/Result_Export.php?action=all&idDuAn=' .$ID_DuAn.'&success_xuatfile='. urlencode($success_xuatfile));
 
   $file = fopen($filenameExport, 'w');
 

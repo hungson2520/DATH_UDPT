@@ -22,8 +22,10 @@ input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;s
+  border: 1px solid #ccc;
   border-radius: 3px;
+  margin-right: 10px;
+  transform: translateX(-10px);
 }
 
 .container button {
@@ -96,4 +98,17 @@ input[type="password"] {
 }
 .btn_LOGIN:hover {
   background-color: gray;
+}
+
+.nav_ul_left > li {
+  transform: translateY(20px);
+  color: white;
+}
+.nav_ul_right > li {
+  transform: translateY(20px);
+  color: white;
+}
+.user,
+.pass {
+  margin-right: 5px;
 }

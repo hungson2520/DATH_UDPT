@@ -1,4 +1,5 @@
 <?php
+
 $role = $_GET['role'];
 $idNguoiDung=$_GET['idnguoidung'];
 $idDuAn=$_GET['idDuAn'];
@@ -32,15 +33,9 @@ if ($role == 3) {
           <!-- <li><i class="fa-solid fa-bars"></i></li>
           <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li> -->
           <li class="toggle-menu"><i class="fa-solid fa-bars"></i>
-<<<<<<< HEAD
-         <ul style="display:none" class="sub-menu">
-               <li><a href="#">Đăng xuất</a></li>
-               <li><a href="#">Thống kê</a></li>
-=======
           <ul style="display:block" class="sub-menu">
               <li><a href="#">Đăng xuất</a></li>
               <?php if ($disMenu) { ?>
->>>>>>> 5caaddfece259b19fed4f4a295b20def3e62ce53
               <li><a href="#">Quản lý dự án</a></li>
               <?php
                         require_once '../Controller/Project_Controller.php';
@@ -54,21 +49,21 @@ if ($role == 3) {
               ?>
               <?php }?>
           </ul>
-
         </li>
         <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li>
            </div>
           
         </div>
+        
         <div class="nav_ul_right">
           <li style="width: 200px;color:yellow"> Role: <?php if ($role == 1) {
-              echo " Người gán nhãn cấp 1";
-              } elseif ($role == 2) {
-                echo " Người gán nhãn cấp 2";
-              } elseif ($role == 3) {
-                echo "Quản lý";
-          } ?> </li>
-          <li><i class="fa-solid fa-sun"></i>
+    echo " Người gán nhãn cấp 1";
+} elseif ($role == 2) {
+    echo " Người gán nhãn cấp 2";
+} elseif ($role == 3) {
+    echo "Quản lý";
+} ?> </li>
+          <li   ><i class="fa-solid fa-sun"></i>
                
         
         </li>
@@ -160,11 +155,11 @@ if ($role == 3) {
             
 
             // Khởi tạo đối tượng của Controller
-            $labels=$labelController->getLabel($idDuAn);
+           $labels=$labelController->getLabel($idDuAn);
 
             
             ?>
-            <?php if (!empty($tasks)): ?>
+             <?php if (!empty($tasks)): ?>
             <?php foreach ($tasks as $task): ?>
                     <tr>
                         
@@ -175,15 +170,12 @@ if ($role == 3) {
                         $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
 
-                            if ($loaiDuan ==1 || $loaiDuan==2) {
+                              if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
                         
-                             $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
-                              } elseif ($loaiDuan ==4){
-                                $url = "../View/GanNhanThucThe.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
-                              }
-                              else {
+                             $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                              } else {
                           // URL cho trang href mặc định
-                            $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
+                           $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
                                }
                         ?>
 
@@ -265,6 +257,23 @@ var ID_DuAn = urlParams.get('idDuAn');
     datasetLi.addEventListener('click', function() {
       var currentURL = window.location.href;
     var params = new URLSearchParams(new URL(currentURL).search);
+    var fileInput = document.getElementById('fileInput');
+
+    
+ 
+
+  //   document.getElementById('fileSubmit').addEventListener("click",function(){
+     
+  //   var fileInput = document.getElementById('fileInput');
+  //   if (fileInput.files.length != 0) {
+  //     document.getElementById('fileSubmit').disable=true;
+  //     alert("Bạn chưa chọn file để thêm tác vụ mới");
+     
+  //   }
+  // })
+  
+ 
+  
     var role = params.get('role');
     if(role!=3)
     {
@@ -737,7 +746,8 @@ window.location.href = '../View/Result_Export.php?idDuAn=<?php echo $idDuAn; ?>'
 //----- XỬ LÝ JAVASCRIPT KHI TA ẤN VÔ ĐỂ HIỆN ĐĂNG XUẤT
 var toggleMenu = document.querySelector('.toggle-menu');
 var subMenu = document.querySelector('.sub-menu');
-
+document.getElementById('NavContent').style.zIndex='1';
+ 
 toggleMenu.addEventListener('click', function() {
   if( subMenu.style.display=="block"){
    // document.getElementsById('NavContent').style.zIndex='1';
@@ -802,4 +812,75 @@ var msg = msgValue || "";
   {
     console.log("Không tìm thấy URL trong chuỗi.");
   }
+
+
+
+  // Xuất ra thông báo lỗi khi thêm 1 tác vụ mới:
+   // Mục đích của dòng này là để show thông báo lỗi ra
+   if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error1_ThemTacVu'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('error1_ThemTacVu'));
+      // Hiển thị thông báo lỗi
+      alert("Bạn đã chọn 1 file rỗng hoặc chưa chọn file!");
+      params.delete('error1_ThemTacVu');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+      
+    }
+  }
+
+
+
+
+  //  Mục đích của dòng này để show thông báo : "Thêm Tác Vụ mới thành công"
+
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('success_ThemTacVu'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('success_ThemTacVu'));
+     
+      alert("Thêm Tác Vụ mới thành công!");
+      params.delete('success_ThemTacVu');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+      
+    }
+  }
+
+
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('success_phancong'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const succe = decodeURIComponent(params.get('success_phancong'));
+     console.log("chạy vào success_phancong");
+      alert("Phân công cho người dùng thành công!");
+      params.delete('success_phancong');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+      
+    }
+  } 
+
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error_phancong'))
+     {
+      console.log("chạy vào error_phancong");
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const err = decodeURIComponent(params.get('error_phancong'));
+     
+      alert("Người dùng này đã được phân công rồi!");
+      params.delete('success_phancong');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+      
+    }
+  } 
 </script>

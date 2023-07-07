@@ -36,8 +36,10 @@ class User {
             // Trả về đối tượng người dùng đã xác thực
             return $user;
         } else {
+            
             $conn->close();
-            return false;
+            return  false;
+           
         }
     }
     public static function insertUserData($name, $phone, $address, $password)
@@ -50,7 +52,17 @@ class User {
     if ($conn->connect_error) {
         die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
     }
+    $sql2 = "SELECT COUNT(*) AS count FROM NguoiDung WHERE SDT = '$phone'";
 
+    $result = $conn->query($sql2);
+    $row = $result->fetch_assoc();
+    $count = $row['count'];
+    
+    if ($count > 0) {
+        // Dòng dữ liệu bị trùng khóa chính
+        echo "Lỗi: Dữ liệu bị trùng khóa chính";
+        return -1;
+    }
     // Bước 2: Chuẩn bị truy vấn INSERT
     $sql = "INSERT INTO NguoiDung (Ten, SDT, DiaChi, MatKhau,VaiTro) VALUES ('$name', '$phone', '$address', '$password',1)";
 
@@ -60,9 +72,9 @@ class User {
     if ($conn->query($sql) === TRUE) {
        
 
+       return 1;
        
-       
-        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+      
        
        
     } else {
@@ -120,7 +132,7 @@ public static function ThemVaoBangPhanCong($IdDuAn,$IdNguoiDung)
         echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
     }
 
-    // Đóng kết nối
+ 
    
     
  

@@ -4,7 +4,7 @@
 
 
 class DatabaseConnection {
-  public $password= "Bluebeach1";
+  public $password= "";
   
 
   public function getPassword (){

@@ -66,4 +66,28 @@
          console.log("Nhập Đúng MK RỒI");
         }
       }
+
+
+
+      
+
+const params = new URLSearchParams(window.location.search);
+if (params.has('error')) {
+  const error = decodeURIComponent(params.get('error'));
+  alert("Đã Tồn Tại Tài Khoản!");
+  params.delete('error'); // Xóa tham số 'error' khỏi URL
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+}
+const params2 = new URLSearchParams(window.location.search);
+if (params2.has('success')) {
+  const error = decodeURIComponent(params2.get('success'));
+  alert("Tạo Tài Khoản Thành Công!");
+  params.delete('success'); // Xóa tham số 'error' khỏi URL
+  const newUrl = `${window.location.pathname}?${params2.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+}
+
+
+
     </script>

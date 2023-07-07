@@ -1,12 +1,16 @@
 <?php
-$role=1;
+$role=3;
 require_once '../Controller/Result_Export_Controller.php';
 $result1= new Result_export_controller();
 if(isset($_GET['idDuAn']))
 { 
   $idDuAn= $_GET['idDuAn'];
   $type=$result1->CheckTypeProject_Controller($idDuAn);
+  echo "<h1>ID DỰ ÁN </h1>" .$type;
+  echo "type là " .$type;
+ 
   if($type==1){
+  
   $KetQua = $result1->ShowResultProject_Controller($idDuAn);
   }
   elseif($type==2){
@@ -55,15 +59,10 @@ if(isset($_GET['idDuAn']))
         </div>
       </ul>
     </nav>
-    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án : <?php echo $tenDuAn ?></h1>
+    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :</h1>
 
     <?php 
-    //  $res = $result1->ShowResultProject_Controller($idDuAn);
-    //  $columnCount = mysqli_num_fields($res);
-//     $columnCount = 0;
-// while ($field = mysqli_fetch_field_direct($res)) {
-//     $columnCount++;
-// }
+  
 
 if ($type == 1) {
     // Xử lý khi có 5 cột
@@ -230,4 +229,14 @@ setTimeout(function(){
     
    
   });
+
+
+  const params = new URLSearchParams(window.location.search);
+if (params.has('success_xuatfile')) {
+  const error = decodeURIComponent(params.get('success_xuatfile'));
+  alert(" Đã tải xuống file thành công!");
+  params.delete('success_xuatfile'); // Xóa tham số 'error' khỏi URL
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+}
 </script>

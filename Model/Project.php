@@ -198,12 +198,8 @@ public static function ShowReSultProject($idDuAN)
     return $ListProject;
 }
 
-<<<<<<< HEAD
 
 // xử lý loại 1 2 4
-=======
-// xử lý loại 3 5 6
->>>>>>> 5caaddfece259b19fed4f4a295b20def3e62ce53
 public static function ShowReSultProject_Type2($idDuAN)
 {
  // Bước 1: Kết nối đến cơ sở dữ liệu
@@ -291,7 +287,10 @@ public static function getLoaiDuAn($ID_LoaiDuAn) {
     $allowedValues = array(1, 2, 4);
     
     if (in_array($ID_LoaiDuAn, $allowedValues)) {
-      return 1;
+      return 2;
+    }
+    else{
+   return 1;
     }
   }
 

@@ -42,3 +42,16 @@
     </div>
   </body>
 </html>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+if (params.has('error')) {
+  const error = decodeURIComponent(params.get('error'));
+  alert("Thông Tin Đăng Nhập Không Chính Xác!");
+  params.delete('error'); // Xóa tham số 'error' khỏi URL
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+}
+
+
+</script>
