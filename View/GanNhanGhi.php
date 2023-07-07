@@ -1,7 +1,4 @@
 <?php
-$idNguoiDung=$_GET['idnguoidung'];
-$idDuAn=$_GET['idDuAn'];
-$role=$_GET['role'];
 $idLoaiDuAn=$_GET['idLoaiDuAn'];
 ?>
 <!DOCTYPE html>
@@ -49,6 +46,9 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
          require_once '../Controller/Result_Export_Controller.php';  
      
         if ($action=="create"){
+          $idNguoiDung=$_GET['idnguoidung'];
+    $idDuAn=$_GET['idDuAn'];
+    $role=$_GET['role'];
    // Khởi tạo đối tượng của Controller
    $taskController = new TaskController();
         

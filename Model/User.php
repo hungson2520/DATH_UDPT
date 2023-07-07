@@ -85,13 +85,9 @@ if ($count > 0) {
 
        return 1;
        
-<<<<<<< Updated upstream
-      
-=======
        
         echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
         return 1;
->>>>>>> Stashed changes
        
        
     } else {

@@ -288,14 +288,8 @@ public static function getLoaiDuAn($ID_LoaiDuAn) {
     
     if (in_array($ID_LoaiDuAn, $allowedValues)) {
       return 2;
-<<<<<<< Updated upstream
-    }
-    else{
-   return 1;
-=======
     } else {
       return 1;
->>>>>>> Stashed changes
     }
   }
 

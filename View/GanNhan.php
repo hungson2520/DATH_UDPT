@@ -1,7 +1,4 @@
 <?php
-$idNguoiDung=$_GET['idnguoidung'];
-$idDuAn=$_GET['idDuAn'];
-$role=$_GET['role'];
 $idLoaiDuAn=$_GET['idLoaiDuAn'];
 ?>
 <!DOCTYPE html>
@@ -39,6 +36,9 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
   ?>
   <form method = "post" class="labeling-form" action = "../Controller/Task.php" name="labeling_2">
     <?php
+        $idNguoiDung=$_GET['idnguoidung'];
+        $idDuAn=$_GET['idDuAn'];
+        $role=$_GET['role'];
         $idnguoidung = $_GET['idnguoidung'];
         $idtacvu = $_GET['id'];
         // Đường dẫn tới file Controller

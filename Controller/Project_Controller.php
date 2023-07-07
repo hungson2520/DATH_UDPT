@@ -72,14 +72,8 @@ if (isset($_GET['action'])) {
 
 //    // Gửi nội dung tệp tin cho người dùng
 //    readfile($filename);
-<<<<<<< Updated upstream
-//    }}
-
-
-=======
 //    }  
 // }
->>>>>>> Stashed changes
 if (isset($_POST['createProject']))
  {
     // Lấy giá trị từ form
