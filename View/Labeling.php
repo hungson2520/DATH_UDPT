@@ -1,9 +1,18 @@
 <?php
-
 $role = $_GET['role'];
 $idNguoiDung=$_GET['idnguoidung'];
 $idDuAn=$_GET['idDuAn'];
 ?>
+
+<?php
+if ($role == 3) {
+        $disMenu = true;
+    } else {
+        // Hiển thị form dành cho vai trò 
+        $disMenu =false;
+}?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,26 +32,37 @@ $idDuAn=$_GET['idDuAn'];
           <!-- <li><i class="fa-solid fa-bars"></i></li>
           <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li> -->
           <li class="toggle-menu"><i class="fa-solid fa-bars"></i>
-         <ul style="display:block" class="sub-menu">
-               <li><a href="#">Đăng xuất</a></li>
-               <li><a href="#">Thống kê</a></li>
+          <ul style="display:block" class="sub-menu">
+              <li><a href="#">Đăng xuất</a></li>
+              <?php if ($disMenu) { ?>
               <li><a href="#">Quản lý dự án</a></li>
-           </ul>
+              <?php
+                        require_once '../Controller/Project_Controller.php';
+                        $projectController = new ProjectController();
+                        $duAn = $projectController->getProject($idDuAn);
+                        $loaiDuan = $duAn['ID_LoaiDuAn'];
+                        if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
+                            echo '<li><a href="../View/Statistic.php?action=all&idnguoidung='. $idNguoiDung .'&idDuAn='. $idDuAn .'&role='. $role .'">Thống kê</a></li>';
+                        }
+                        else echo '<li><a href="../View/StatisticGhi.php?action=all&idnguoidung='. $idNguoiDung .'&idDuAn='. $idDuAn .'&role='. $role .'">Thống kê</a></li>';
+              ?>
+              <?php }?>
+          </ul>
+
         </li>
         <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li>
            </div>
           
         </div>
-        
         <div class="nav_ul_right">
           <li style="width: 200px;color:yellow"> Role: <?php if ($role == 1) {
-    echo " Người gán nhãn cấp 1";
-} elseif ($role == 2) {
-    echo " Người gán nhãn cấp 2";
-} elseif ($role == 3) {
-    echo "Quản lý";
-} ?> </li>
-          <li   ><i class="fa-solid fa-sun"></i>
+              echo " Người gán nhãn cấp 1";
+              } elseif ($role == 2) {
+                echo " Người gán nhãn cấp 2";
+              } elseif ($role == 3) {
+                echo "Quản lý";
+          } ?> </li>
+          <li><i class="fa-solid fa-sun"></i>
                
         
         </li>
@@ -147,11 +167,11 @@ $idDuAn=$_GET['idDuAn'];
             
 
             // Khởi tạo đối tượng của Controller
-           $labels=$labelController->getLabel($idDuAn);
+            $labels=$labelController->getLabel($idDuAn);
 
             
             ?>
-             <?php if (!empty($tasks)): ?>
+            <?php if (!empty($tasks)): ?>
             <?php foreach ($tasks as $task): ?>
                     <tr>
                         
@@ -162,12 +182,19 @@ $idDuAn=$_GET['idDuAn'];
                         $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
 
-                              if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
+                            if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
                         
+<<<<<<< HEAD
                              $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idDuAn=" . $task['ID_DuAn'];
                               } else {
                           // URL cho trang href mặc định
                            $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idDuAn=" . $task['ID_DuAn'];
+=======
+                            $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                              } else {
+                            // URL cho trang href mặc định
+                            $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+>>>>>>> 6e0935611c7ec6cea0f78e04837cf6f24568e53a
                                }
                         ?>
 

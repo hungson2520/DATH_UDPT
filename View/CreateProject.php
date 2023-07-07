@@ -118,9 +118,9 @@ $id_nguoiDung=$_GET['idnguoidung'];
             if ($role == 3) {
               // Gọi phương thức lấy tất cả các projects
               $projects = $projectController->getAllProject();
-          } else {
+            } else {
               $projects=$projectController->getUserProject(intval($id_nguoiDung));
-          }
+            }
 
             
             ?>
