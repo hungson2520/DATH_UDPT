@@ -52,7 +52,21 @@ if (Project::delete($idDuAn)) {
     
 //     $idDuAn= json_decode($_POST['ID_DuAn_Export']);
    
+<<<<<<< HEAD
   //$filename = "C:\Users\HUNGSON\Downloads\data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
+=======
+//     echo "ID DỰ ÁN EXPORT NHẬN BÊN CONTROLLER " .$IdDuAn;
+    
+ 
+//    // Gọi hàm trong Model để lấy dữ liệu
+//    // Loại Text Generation
+//    if($IdDuAn==1 ||$IdDuAn==2 || $IdDuAn==4){
+//    $data = Project::ShowProject_TextGeneration($IdDuAn);
+//   // $downloadsDir = realpath($_SERVER['DOCUMENT_ROOT'] . '/../Downloads/');
+//   // $filename = $downloadsDir . '/data_export_TextGenagration_IdDuAn_' . $IdDuAn . '.txt';
+   
+//   //$filename = "C:\Users\HUNGSON\Downloads\data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
+>>>>>>> 5caaddfece259b19fed4f4a295b20def3e62ce53
 //   $pathName = "C:\\Users\\HUNGSON\\Downloads\\";
 //   //$filename = "data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
 //   $filename = $pathName . "data_export_TextGenagration_IdDuAn_{$IdDuAn}.txt";
@@ -75,7 +89,6 @@ if (Project::delete($idDuAn)) {
 //    }}
 
 
->>>>>>> Stashed changes
 if (isset($_POST['createProject']))
  {
     // Lấy giá trị từ form

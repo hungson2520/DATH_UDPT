@@ -1,0 +1,165 @@
+/* Định dạng các yếu tố trong trang web */
+
+/* Định dạng phần tiêu đề h1 */
+h1 {
+  text-align: center;
+  color: navy;
+}
+
+/* Định dạng các phần input-container */
+.input-container {
+  margin-bottom: 10px;
+}
+
+/* Định dạng phần label của input-container */
+.input-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Định dạng các input text trong input-container */
+.input-container input[type="text"] {
+  width: 700px;
+  height: 150px;
+}
+
+/* Định dạng nút submit-button */
+.submit-button {
+  background-color: navy;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Định dạng phần form labeling-form */
+.labeling-form {
+  margin-top: 20px;
+}
+
+/* ---------------------------------------------------------- */
+/* Định dạng các yếu tố trong trang web */
+
+/* Định dạng phần tiêu đề h1 */
+h1 {
+  text-align: center;
+  color: navy;
+}
+
+/* Định dạng các phần input-container */
+.input-container {
+  margin-bottom: 30px;
+  /*text-align: center; /* Căn giữa nội dung trong input-container */
+}
+
+/* Định dạng phần label của input-container */
+.input-container label {
+  display: block;
+  color: rgb(2, 144, 165);
+  margin-bottom: 20px;
+  margin-left: 410px;
+  text-align: left; /* Căn trái nội dung label */
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Cambria;
+}
+
+/* Định dạng các input text trong input-container */
+.input-container input[type="text"] {
+  width: 700px;
+  height: 150px;
+  margin: 0 auto; /* Căn giữa ô input */
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-top: 20px;
+  font-family: Cambria;
+  overflow-wrap: break-word;
+}
+
+/* Định dạng nút submit-button */
+.submit-button {
+  background-color: navy;
+  color: white;
+  font-size: 30px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto; /* Căn giữa button */
+  margin-top: 20px;
+  font-family: Cambria;
+}
+
+/* Định dạng phần form labeling-form */
+.labeling-form {
+  margin-top: 20px;
+  text-align: center; /* Căn giữa nội dung trong form */
+  font-family: Cambria;
+}
+
+/* ------------------------------------------------------- */
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: rgb(2, 144, 165);
+  margin-bottom: 20px;
+  margin-left: 410px;
+  text-align: left; /* Căn trái nội dung label */
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Cambria;
+}
+
+.form-group select {
+  width: 700px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-group select option:first-child {
+  font-style: italic;
+  color: #999;
+}
+
+.submit-button {
+  background-color: navy;
+  color: white;
+  font-size: 30px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto; /* Căn giữa button */
+  margin-top: 20px;
+  font-family: Cambria;
+}
+
+.input-container textarea {
+  width: 600px;
+  height: 150px;
+  margin: 0 auto; /* Căn giữa ô input */
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-top: 20px;
+  font-family: Cambria;
+  padding: 30px;
+}
+
+
+
+

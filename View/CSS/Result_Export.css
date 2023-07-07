@@ -87,3 +87,7 @@
   text-align: center;
   margin-left: 400px;
 }
+.number{
+  width: 50%;
+  transform: translateY(-300px);
+}

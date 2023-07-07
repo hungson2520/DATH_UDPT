@@ -6,10 +6,8 @@ class Label {
     private $Nhan;
     private $ID_DuAn;
 
-    public static function getLabel($idDuAn)
+public static function getLabel($idDuAn)
 {
-   
-
     // Tạo kết nối đến MySQL
     $connection = new DatabaseConnection();
     $pw = $connection->getPassword();
@@ -56,8 +54,6 @@ public static function insertLabel($nhan, $ID_DuAn)
     // Bước 2: Chuẩn bị truy vấn INSERT
     $sql = "INSERT INTO nhan (nhan, ID_DuAn) VALUES ('$nhan', '$ID_DuAn')";
 
-
-
     // Bước 3: Thực hiện truy vấn INSERT
     if ($conn->query($sql) === TRUE) {
         return true;
@@ -68,6 +64,7 @@ public static function insertLabel($nhan, $ID_DuAn)
     // Bước 4: Đóng kết nối
     $conn->close();
 }
+
 public static function deleteLabel($idNhan) 
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
@@ -89,4 +86,5 @@ public static function deleteLabel($idNhan)
     // Bước 4: Đóng kết nối
     $conn->close();
 }
+
 }

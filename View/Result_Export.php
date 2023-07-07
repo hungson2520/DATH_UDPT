@@ -10,12 +10,9 @@ if(isset($_GET['idDuAn']))
   $KetQua = $result1->ShowResultProject_Controller($idDuAn);
   }
   elseif($type==2){
-    $KetQua=$result1->ShowResultProject_Type2_Controller($idDuAn);
+  $KetQua=$result1->ShowResultProject_Type2_Controller($idDuAn);
   }
-
-
 }
-
 
 
 ?>
@@ -136,14 +133,12 @@ elseif ($type == 2) { ?>
   <?php if (!empty($KetQua)): ?>
             <?php foreach ($KetQua as $KQ): ?>
     <tr>
-    <td><?php echo $KQ['TenLoai']; ?></td>
+      <td><?php echo $KQ['TenLoai']; ?></td>
       <td><?php echo $KQ['tenDuAn']; ?></td>
-    <td><?php echo $KQ['TacVu']; ?></td>
+      <td><?php echo $KQ['TacVu']; ?></td>
       <td><?php echo $KQ['Nhan']; ?></td>
       <td><?php echo $KQ['Ten']; ?></td>
-      <td><?php echo $KQ['TuNgu']; ?></td>
-     
-     
+      <td><?php echo $KQ['TuNgu']; ?></td>0
     </tr>
 
     <?php endforeach; ?>
