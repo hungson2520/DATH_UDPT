@@ -130,6 +130,27 @@ public static function insertProject($tenDuAn, $loaiDuAn, $moTa)
     $conn->close();
 }
 
+public static function updateProject($idDuAn,$tenDuAn, $loaiDuAn, $moTa) 
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+    // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql = "UPDATE  duan SET tenDuAn = '$tenDuAn',moTa='$moTa',ID_LoaiDuAn=$loaiDuAn WHERE ID_DuAn=$idDuAn";
+    // Bước 3: Thực hiện truy vấn INSERT
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+       return false;
+    }
+    // Bước 4: Đóng kết nối
+    $conn->close();
+}
 
 public static function delete($idDuAn) 
 {

@@ -528,6 +528,12 @@ var memberInformation = document.createElement("div");
         padding: 10px;
         width: 150px;
     }
+    .-form {
+        display: none;
+        background-color: #fff;
+        padding: 10px;
+        width: 150px;
+    }
 
     .form-label {
         margin-bottom: 10px;
@@ -583,7 +589,7 @@ var memberInformation = document.createElement("div");
     <button class="create-button" onclick="showCreateForm()">Create</button>
 
     <form class="create-form" id="createForm" action="../Controller/Label_Controller.php?action=create" method="POST">
-        <label for="labelName">Label Name:</label>
+        <label for="labelName">Tên nhãn:</label>
         <input type="text" id="labelName" name="labelName">
         <input type="submit" value="Thêm nhãn" name="createLabel">
         <input type="hidden" id="ID_DuAn" name="ID_DuAn" value="<?php echo $idDuAn ?>">
@@ -604,8 +610,7 @@ var memberInformation = document.createElement("div");
                     <tr>
                         <td><?php echo $label['ID_Nhan']; ?></td>
                         <td><?php echo $label['Nhan']; ?></td>
-                        <td><a class="fixbutton" href="#"></i>Sửa</a>
-                        <a class="deletebutton" href="../Controller/Label_Controller.php?action=delete&idDuAn=<?php echo $idDuAn?>&role=<?php echo $role;?>&idnguoidung=<?php echo $idNguoiDung;?>&idNhan=<?php echo $label['ID_Nhan']?>"></i>Xóa</a></td>
+                        <td><a class="deletebutton" href="../Controller/Label_Controller.php?action=delete&idDuAn=<?php echo $idDuAn?>&role=<?php echo $role;?>&idnguoidung=<?php echo $idNguoiDung;?>&idNhan=<?php echo $label['ID_Nhan']?>"></i>Xóa</a></td>
                     </tr>
             <?php endforeach; ?>
             <?php else: ?>
@@ -783,11 +788,20 @@ var msg = msgValue || "";
     {
       alert("Xóa nhãn thành công");
       // Chuyển hướng trang với URL đã chỉnh sửa
-      window.location.href = url;
+      const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('dmsg'));
+      params.delete('dmsg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
     }
     else
     {
     alert("Không thể xóa nhãn đang sử dụng");
+    const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('dmsg'));
+      params.delete('dmsg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
     }
   } 
   else 
@@ -805,11 +819,21 @@ var msg = msgValue || "";
     if(msg=="success")
     {
       alert("Thêm nhãn thành công");
+      const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('msg'));
+      params.delete('msg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
       // Chuyển hướng trang với URL đã chỉnh sửa
     }
     else
     {
     alert("Thêm nhãn thất bại");
+    const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('msg'));
+      params.delete('msg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
     }
   } 
   else 
@@ -888,35 +912,37 @@ var msg = msgValue || "";
 </script>
 
 <script>
-  var url_gannhan = window.location.href;
-  var searchParams = new URLSearchParams(url_gannhan);
-  var msgValue = searchParams.get("lmsg"); 
-  console.log(searchParams);
-  
-  var msg = msgValue || "";
-    if(msg!=""){
-      if(msg=="success")
-      {
-        alert("Gán nhãn thành công");
-        const params = new URLSearchParams(window.location.search);
-        const error = decodeURIComponent(params.get('lmsg'));
-        params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
-      }
-      else
-      {
-        alert("Gán nhãn thất bại");
-        const params = new URLSearchParams(window.location.search);
-        const error = decodeURIComponent(params.get('lmsg'));
-        params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
-      }
-      searchParams.delete("msg");
-    } 
-    else 
+var url_gannhan = window.location.href;
+var searchParams = new URLSearchParams(url_gannhan);
+var msgValue = searchParams.get("lmsg"); 
+console.log(searchParams);
+
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
     {
-      console.log("Không tìm thấy URL trong chuỗi.");
+      alert("Gán nhãn thành công");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg'));
+      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
     }
-</script>
+    else
+    {
+      alert("Gán nhãn thất bại");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg'));
+      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    searchParams.delete("msg");
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi");
+  }
+  </script>
+
+
