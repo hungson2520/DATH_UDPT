@@ -137,4 +137,7 @@ echo "Tên File Nhận được là : " .$fileName;
 
  }
 
+// else {
+//         echo "<h1>Không Nhận Được thông tin gì cả hết á !!!!</h1>";
 
+// }

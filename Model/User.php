@@ -64,6 +64,17 @@ class User {
         return -1;
     }
     // Bước 2: Chuẩn bị truy vấn INSERT
+    $sql1 = "SELECT COUNT(*) AS count FROM NguoiDung WHERE SDT= '$phone'";
+
+$result = $conn->query($sql1);
+$row = $result->fetch_assoc();
+$count = $row['count'];
+
+if ($count > 0) {
+    // Dòng dữ liệu bị trùng khóa chính
+    echo "Lỗi: Dữ liệu bị trùng khóa chính";
+    return -1;
+}
     $sql = "INSERT INTO NguoiDung (Ten, SDT, DiaChi, MatKhau,VaiTro) VALUES ('$name', '$phone', '$address', '$password',1)";
 
 
@@ -74,10 +85,13 @@ class User {
 
        return 1;
        
-      
+       
+        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+        return 1;
        
        
     } else {
+       
             echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
             return -1;
         
@@ -125,11 +139,25 @@ public static function ThemVaoBangPhanCong($IdDuAn,$IdNguoiDung)
     $connection = new DatabaseConnection();
     $pw = $connection->getPassword();
     $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+
+    $sql1 = "SELECT COUNT(*) AS count FROM PhanCong WHERE ID_NguoiDung= '$IdNguoiDung' And ID_DuAn='$IdDuAn'";
+
+    $result = $conn->query($sql1);
+    $row = $result->fetch_assoc();
+    $count = $row['count'];
+    
+    if ($count > 0) {
+        // Dòng dữ liệu bị trùng khóa chính
+        echo "Lỗi: Dữ liệu bị trùng khóa chính";
+        return -1;
+    }
      $sql = "INSERT INTO PhanCong (ID_NguoiDung, ID_DuAn) VALUES ('$IdNguoiDung', '$IdDuAn')";
      if (mysqli_query($conn, $sql)) {
         echo "<h1>Thêm dữ liệu thành công</h1>";
+        return 1;
     } else {
         echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
+        return -1;
     }
 
  

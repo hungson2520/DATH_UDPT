@@ -1,24 +1,38 @@
 <?php
 $role=3;
 require_once '../Controller/Result_Export_Controller.php';
+require_once '../Controller/Project_Controller.php';
+$projectController = new ProjectController();
 $result1= new Result_export_controller();
-if(isset($_GET['idDuAn']))
+$projectController = new ProjectController();
+if(isset($_GET['idDuAn'])&& isset($_GET['role']))
 { 
+
+  $idnguoidung =$_GET['id'];
   $idDuAn= $_GET['idDuAn'];
+  $role=$_GET['role'];
   $type=$result1->CheckTypeProject_Controller($idDuAn);
-  echo "<h1>ID DỰ ÁN </h1>" .$type;
-  echo "type là " .$type;
-  $idnguoidung=1;
+  $duAn = $projectController->getProject($idDuAn);
+  $tenDuAn = $duAn['tenDuAn'];
+  // 3 5 6
   if($type==1){
   
   $KetQua = $result1->ShowResultProject_Controller($idDuAn);
   }
+  // 1 2 4 
   elseif($type==2){
-  $KetQua=$result1->ShowResultProject_Type2_Controller($idDuAn);
+    $KetQua=$result1->ShowResultProject_Type2_Controller($idDuAn);
+    
   }
+  $duAn = $projectController->getProject($idDuAn);
+  $loaiDuan = $duAn['ID_LoaiDuAn'];
+  
+ 
 }
 
-
+// 3 5 6: gán nhãn ghi.php
+// 1 2 :gannhan.php
+//4:gannhanthucthe
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +73,13 @@ if(isset($_GET['idDuAn']))
         </div>
       </ul>
     </nav>
-    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :</h1>
+    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :<?php echo  $idDuAn ?></h1>
 
     <?php 
   
 
 if ($type == 1) {
-    // Xử lý khi có 5 cột
+    // 3 5 6
   ?>
     <div class="table-container">
     <table class="table">
@@ -88,6 +102,7 @@ if ($type == 1) {
       <td><?php echo $KQ['TenLoai']; ?></td>
       <td><?php echo $KQ['TacVu']; ?></td>
       <td><?php echo $KQ['ketqua']; ?></td>
+      <th><a class="edit" href="../View/GanNhanGhi.php?action=update&id=<?php echo $idDuAn?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQNG=<?php echo $KQ['ID_KetQuaNhanGhi']; ?>">Sửa</a></th>
     </tr>
 
     <?php endforeach; ?>
@@ -124,6 +139,8 @@ elseif ($type == 2) { ?>
       <th style="width: 10%;">Nhãn</th>
       <th style="width: 10%;">Tên Người Làm</th>
       <th style="width: 10%;">Từ Ngữ Thực Thể</th>
+      <th style="width: 10%;">Sửa Kết Quả</th>
+
      
      
     </tr>
@@ -137,7 +154,8 @@ elseif ($type == 2) { ?>
       <td><?php echo $KQ['TacVu']; ?></td>
       <td><?php echo $KQ['Nhan']; ?></td>
       <td><?php echo $KQ['Ten']; ?></td>
-      <td><?php echo $KQ['TuNgu']; ?></td>0
+      <td><?php echo $KQ['TuNgu']; ?></td>
+      <th><a class="edit" href="../View/GanNhan.php?action=update&id=<?php echo $idDuAn?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQN=<?php echo $KQ['ID_KetQuaNhan']; ?>&idTacVu=<?php echo $KQ['ID_TacVu']; ?>">Sửa</a></th>
     </tr>
 
     <?php endforeach; ?>
@@ -231,12 +249,22 @@ setTimeout(function(){
   });
 
 
-  const params = new URLSearchParams(window.location.search);
-if (params.has('success_xuatfile')) {
-  const error = decodeURIComponent(params.get('success_xuatfile'));
-  alert(" Đã tải xuống file thành công!");
-  params.delete('success_xuatfile'); // Xóa tham số 'error' khỏi URL
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('success_xuatfile'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('error'));
+      // Hiển thị thông báo lỗi
+      alert("Đã Tải xuống file rồi!");
+      params.delete('success_xuatfile');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, '', newUrl);
-}
+      
+    }
+  }
+
+
+
+
 </script>

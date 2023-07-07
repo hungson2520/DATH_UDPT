@@ -68,26 +68,49 @@
       }
 
 
-
+       // Mục đích của dòng này là để show thông báo lỗi ra
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('error'));
+      // Hiển thị thông báo lỗi
+      alert("Tên đăng nhập đã tồn tại rồi!");
+      params.delete('error');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
       
-
-const params = new URLSearchParams(window.location.search);
-if (params.has('error')) {
-  const error = decodeURIComponent(params.get('error'));
-  alert("Đã Tồn Tại Tài Khoản!");
-  params.delete('error'); // Xóa tham số 'error' khỏi URL
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
+    }
+    if (params.has('success'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('success'));
+      // Hiển thị thông báo lỗi
+      alert("Bạn đã đăng ký tài khoản thành công rồi!");
+      params.delete('success');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, '', newUrl);
-}
-const params2 = new URLSearchParams(window.location.search);
-if (params2.has('success')) {
-  const error = decodeURIComponent(params2.get('success'));
-  alert("Tạo Tài Khoản Thành Công!");
-  params.delete('success'); // Xóa tham số 'error' khỏi URL
-  const newUrl = `${window.location.pathname}?${params2.toString()}`;
+      
+    }
+  }
+
+
+
+
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('success_xuatfile'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('success_xuatfile'));
+      // Hiển thị thông báo tải xuống thành công
+      alert("Đã tải xuống file thành công!");
+      params.delete('success_xuatfile');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, '', newUrl);
-}
-
-
+      
+    }
+  }
 
     </script>

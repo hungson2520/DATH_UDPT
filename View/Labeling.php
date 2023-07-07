@@ -115,6 +115,10 @@ if ($role == 3) {
     <li class="type2">Loại 2</li>
   </ul>
 </div> -->
+        
+
+    
+        
         <div class="NavContent_right_search">
           <div class="NavContent_right_search_top">
          <i class="fa-solid fa-magnifying-glass"></i>Search
@@ -167,17 +171,16 @@ if ($role == 3) {
                         <td><?php echo $task['TacVu']; ?></td>
                         <td class="LabelLinks">
                         <?php
-                        $duAn = $projectController->getProject($idDuAn);
+                            $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
                             if ($loaiDuan ==1 || $loaiDuan==2) {                        
-                              $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
-                               } elseif ($loaiDuan ==4){
-                                 $url = "../View/GanNhanThucThe.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
-                               }
-                               else {
-                           // URL cho trang href mặc định
-                             $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
-                                }
+                              $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung ."&idDuAn=". $idDuAn ."&role=".$role. "&idLoaiDuAn=" . $loaiDuan;
+                            } elseif ($loaiDuan ==4) {
+                                 $url = "../View/GanNhanThucThe.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung ."&idDuAn=". $idDuAn ."&role=".$role. "&idLoaiDuAn=" . $loaiDuan;
+                            } else {
+                              // URL cho trang href mặc định
+                             $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung ."&idDuAn=". $idDuAn ."&role=".$role. "&idLoaiDuAn=" . $loaiDuan;
+                            }
                         ?>
 
                         <a href="<?php echo $url; ?>">Gán Nhãn</a>
@@ -739,7 +742,7 @@ var data_IdDuAn=JSON.stringify(idDuAn);
 
 xhr2.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn));
 console.log("GỬI DỮ LIỆU QUA THÀNH CÔNG RỒI NHÉ");
-window.location.href = '../View/Result_Export.php?idDuAn=<?php echo $idDuAn; ?>';
+window.location.href = '../View/Result_Export.php?idDuAn=<?php echo $idDuAn;?>&role=<?php echo $role?>&id=<?php echo $idNguoiDung?>';
 
 });
 
@@ -838,8 +841,6 @@ var msg = msgValue || "";
     console.log("Không tìm thấy URL trong chuỗi.");
   }
 
-
-
   // Xuất ra thông báo lỗi khi thêm 1 tác vụ mới:
    // Mục đích của dòng này là để show thông báo lỗi ra
    if (typeof URLSearchParams !== 'undefined' && window.location.search) {
@@ -910,5 +911,38 @@ var msg = msgValue || "";
   } 
 </script>
 
+<script>
+var url_gannhan = window.location.href;
+var searchParams = new URLSearchParams(url_gannhan);
+var msgValue = searchParams.get("lmsg"); 
+console.log(searchParams);
+
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Gán nhãn thành công");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg'));
+      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    else
+    {
+      alert("Gán nhãn thất bại");
+      const params = new URLSearchParams(window.location.search);
+      const error = decodeURIComponent(params.get('lmsg'));
+      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+    searchParams.delete("msg");
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi");
+  }
+  </script>
 
 

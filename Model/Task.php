@@ -93,15 +93,198 @@ class Task {
 
         // Bước 3: Thực hiện truy vấn INSERT
         if ($conn->query($sql) === TRUE) {
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return true;
         } else {
-            echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return false;
         }
 
         // Bước 4: Đóng kết nối
         $conn->close();
     }
+    public static function UpadteLabelOfTask_Type356($id_nguoidung,  $ketqua ,$idKQNG) 
+    {  $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+            // Kiểm tra kết nối
+            if ($conn->connect_error) {
+            die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+            }
+    
+            // Bước 2: Chuẩn bị truy vấn INSERT
+            $sql = "update ketquanhanghi
+            set ID_NguoiDung= '$id_nguoidung' , KetQua = '$ketqua'
+            where ID_KetQuaNhanGhi='$idKQNG' ";
+            if ($conn->query($sql) === TRUE) {
+                echo "<h1>Update dữ liệu thành công</h1>";
+            } else {
+                echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+                
+            }
+
+    }
+    public static function UpadteLabelOfTask_Type12($id_nguoidung,  $idNhan ,$idKQN) 
+    {
+
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+            // Kiểm tra kết nối
+            if ($conn->connect_error)
+             {
+            die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+            }
+
+            $sql="UPDATE `ketquanhan` SET `ID_Nhan`='$idNhan' ,ID_NguoiDung= '$id_nguoidung' WHERE ID_KetQuaNhan='$idKQN' ";
+            if ($conn->query($sql) === TRUE) {
+                echo "<h1>Update dữ liệu thành công</h1>";
+            } else {
+                echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+                
+            }
+
+
+
+
+    }
+
+    public static function getDataFromKetQuaNhanGhi($idKQNG)
+    
+    {
+
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+            // Kiểm tra kết nối
+            if ($conn->connect_error) {
+            die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+            }
+
+            $sql="SELECT ID_KetQuaNhanGhi, ID_NguoiDung, ID_TacVu, KetQua FROM ketquanhanghi WHERE ID_KetQuaNhanGhi='$idKQNG'";
+           
+            $result = $conn->query($sql);
+           
+            // Kiểm tra xem có dự án nào được tìm thấy hay không
+            if ($result->num_rows > 0) {
+                // Lấy thông tin dự án từ kết quả truy vấn
+                $project = $result->fetch_assoc();
+        
+                // Đóng kết nối CSDL
+                $conn->close();
+        
+                // Trả về thông tin dự án
+                return $project;
+            } else {
+                // Đóng kết nối CSDL
+                $conn->close();
+        
+                // Trả về null nếu không tìm thấy dự án
+                return null;
+            }
+
+            
+
+
+    }
+    public static function getDataFromKetQuaNhan($idKQN)
+    
+    {
+
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+            // Kiểm tra kết nối
+            if ($conn->connect_error) {
+            die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+            }
+
+            $sql="SELECT `ID_KetQuaNhan`, `ID_NguoiDung`, `ID_TacVu`, `ID_Nhan`, `TuNgu` FROM `ketquanhan`  WHERE ID_KetQuaNhan='$idKQN'";
+           
+            $result = $conn->query($sql);
+           
+            // Kiểm tra xem có dự án nào được tìm thấy hay không
+            if ($result->num_rows > 0) {
+                // Lấy thông tin dự án từ kết quả truy vấn
+                $project = $result->fetch_assoc();
+        
+                // Đóng kết nối CSDL
+                $conn->close();
+        
+                // Trả về thông tin dự án
+                return $project;
+            } else {
+                // Đóng kết nối CSDL
+                $conn->close();
+        
+                // Trả về null nếu không tìm thấy dự án
+                return null;
+            }
+
+            
+
+
+    }
+    public static function getNhanFromDuAn($idDuAn){
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+        $sql="SELECT * FROM `nhan` WHERE ID_DuAn='$idDuAn'";
+
+        $result = $conn->query($sql);
+        
+
+        // Lấy dữ liệu vào một mảng
+        $tasks = array();
+
+        //Kiem tra su ton tai cua du lieu trong result
+        if($result->num_rows >0){
+            while ($row = $result->fetch_assoc()) {
+                // Thêm hàng dữ liệu vào mảng
+                $tasks[] = $row;
+            }
+        }else{
+            return null;
+        }
+        $conn->close();//Close connection
+        return $tasks;//Tra ve mang task
+    }
+    public static function getNhanvaKQN($idDuAn)
+    {
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+            // Kiểm tra kết nối
+            if ($conn->connect_error) {
+            die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+            }
+
+            $sql="SELECT * FROM nhan n, ketquanhan kqn WHERE kqn.ID_Nhan=n.ID_Nhan and n.ID_DuAn='$idDuAn'";
+           
+            $result = $conn->query($sql);
+           
+            // Kiểm tra xem có dự án nào được tìm thấy hay không
+            if ($result->num_rows > 0) {
+                // Lấy thông tin dự án từ kết quả truy vấn
+                $project = $result->fetch_assoc();
+        
+                // Đóng kết nối CSDL
+                $conn->close();
+        
+                // Trả về thông tin dự án
+                return $project;
+            } else {
+                // Đóng kết nối CSDL
+                $conn->close();
+        
+                // Trả về null nếu không tìm thấy dự án
+                return null;
+            }
+
+
+
+
+
+    }
+
 
     public function getId_TacVu() {
         return $this->id_TacVu;
@@ -178,11 +361,53 @@ class Task {
 
         // Bước 3: Thực hiện truy vấn INSERT
         if ($conn->query($sql) === TRUE) {
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return true;
         } else {
-            echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return false;
         }
+
+        // Bước 4: Đóng kết nối
+        $conn->close();
+    }
+
+    public static function insertLabelOfTask_nhanthucthe($id_nguoidung, $id_tacvu, $id_nhan, $tungu_) {
+        // Bước 1: Kết nối đến cơ sở dữ liệu
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+        // Kiểm tra kết nối
+        if ($conn->connect_error) {
+        die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+        }
+
+
+
+
+
+        // kiem tra chuoi
+        // Truy vấn dữ liệu từ bảng TacVu
+        $query_laytacvu = "SELECT * FROM TacVu WHERE ID_TacVu = '$id_tacvu'";
+        $result = $conn->query($query_laytacvu);
+        
+        $task = $result->fetch_assoc();
+        $data_of_task = $task['TacVu'];
+        $query_dieukien = "SELECT IF(LOCATE('$tungu_', '$data_of_task') > 0, 1, 0) as is_exist";
+
+        $result_of_dieukien = $conn->query($query_dieukien);
+        $ketqua_dieukien = $result_of_dieukien->fetch_assoc();
+
+        if($ketqua_dieukien['is_exist'] == 1){
+            $sql = "INSERT INTO KetQuaNhan (ID_NguoiDung, ID_TacVu, ID_Nhan, TuNgu) VALUES ('$id_nguoidung', '$id_tacvu', '$id_nhan', '$tungu_')";
+            if ($conn->query($sql) === TRUE) {
+                return true;
+            }
+        }else{
+            return false;
+        }
+        // Bước 2: Chuẩn bị truy vấn INSERT
+
+        // Bước 3: Thực hiện truy vấn INSERT
+        
 
         // Bước 4: Đóng kết nối
         $conn->close();
