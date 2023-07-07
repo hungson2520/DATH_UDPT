@@ -289,13 +289,10 @@ public static function  WriteReSultProject_Type2($idDuAN)
     
        if ($result->num_rows > 0) {
            while ($row = $result->fetch_assoc()) {
-            $data .= "Tên Loại Dự Án : " . $row['TenLoai'] . "\n";
-            $data .= "Tên  Dự Án : " . $row['tenDuAn'] . "\n";
-            $data .= "Tác Vụ : " . $row['TacVu'] . "\n";
+            $data .=  $row['TacVu'] . "\n";
+            $data .= $row['TuNgu'] . " ";
             $data .= "Nhãn: " . $row['Nhan'] . "\n";
-            $data .= "Tên Người Thực Hiện : " . $row['Ten'] . "\n";
-            $data .= "Từ Ngữ Thực Thể: " . $row['TuNgu'] . "\n";
-            $data .= "---------------------------------------\n";
+            
                
               
            }
@@ -374,16 +371,8 @@ public static function  WriteReSultProject($idDuAN)
  
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-           
-            $data .= "Tên Người dùng: " . $row['Ten'] . "\n";
-            $data .= "Tên Dự Án: " . $row['TenDuAn'] . "\n";
-            $data .= "Tên Loại Dự Án: " . $row['TenLoai'] . "\n";
-            $data .= "Tác Vụ: " . $row['TacVu'] . "\n";
-            $data .= "Kết Quả: " . $row['ketqua'] . "\n";
-           
-           
-            $data .= "---------------------------------------\n";
-            
+            $data .= $row['TacVu'] . "\n";
+            $data .= "Nhãn: " . $row['ketqua'] . "\n";            
            
         }
     }

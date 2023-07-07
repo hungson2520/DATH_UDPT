@@ -20,7 +20,7 @@
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
 
-          <a style="transform: translateY(10px);" href="../View/Login.php"><button  style="padding: 10px 20px;background-color: white;color:#428bca;" class="btn_LOGIN">Đăng Nhập</button></a>
+          <a style="transform: translateY(10px);" href="../index.php"><button  style="padding: 10px 20px;background-color: white;color:#428bca;" class="btn_LOGIN">Đăng Nhập</button></a>
         </div>
       </ul>
     </nav>
