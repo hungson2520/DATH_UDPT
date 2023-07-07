@@ -8,9 +8,9 @@ $idDuAn = $_GET['idDuAn'];
 <?php
 require_once '../Controller/Statistic_Controller.php';
 $result = new Statistic_Controller();
-$statistic = $result->ShowStatisticProject_Controller($idDuAn);
-$sumoftask = $result->SumOfLabel_Controller($idDuAn);
-$sumoflabel = $result->SumOfTask_Controller($idDuAn);
+$statistic = $result->ShowStatisticProject_2_Controller($idDuAn);
+$sumoftask = $result->SumOfTask_Controller($idDuAn);
+$sumoflabel = $result->SumOfLabel_2_Controller($idDuAn);
 ?>
 
 <!DOCTYPE html>
@@ -35,28 +35,32 @@ $sumoflabel = $result->SumOfTask_Controller($idDuAn);
     google.charts.setOnLoadCallback(drawCharts);
 
     function drawCharts() {
+      <?php if (empty($statistic) || !isset($statistic[0]['number'])) : ?>
+                document.getElementById('chart_div').innerHTML = "Chưa có dữ liệu nhãn để thống kê";
+      <?php else : ?>
       var piedata = google.visualization.arrayToDataTable([
         ['Nhãn', 'Số lượng'],
         <?php foreach ($statistic as $row) : ?>
-          <?php
-          echo "['" . $row["Nhan"] . "', " . $row["number"] . "],";
-          ?>
+        <?php if (isset($row['number'])) : ?>
+              <?php echo "['" . $row['Nhan'] . "', " . $row['number'] . "],"; ?>
+        <?php endif; ?>
         <?php endforeach; ?>
       ]);
 
       var pieoptions = {
-        title: 'Biểu đồ tròn biểu diễn số lượng nhãn đã gán',
+        title: 'Biểu đồ biểu diễn số lượng nhãn trong dự án',
         titleTextStyle: {
                     fontSize: 20 // Kích thước tiêu đề
                 },
-        // width: 700,
-        // height:700,
+        width: 500,
+        height:400,
         //is3D:true,  
         pieHole: 0.3
       };
 
       var piechart = new google.visualization.PieChart(document.getElementById('pie_chart'));
       piechart.draw(piedata, pieoptions);
+      
 
       var columndata = google.visualization.arrayToDataTable([
         ['Nhãn', 'Số lượng'],
@@ -68,9 +72,12 @@ $sumoflabel = $result->SumOfTask_Controller($idDuAn);
       ]);
 
       var columnoptions = {
-        title: 'Biểu đồ cột biểu diễn số lượng nhãn đã gán',
+        title: 'Biểu đồ cột biểu diễn số lượng nhãn theo từng tác vụ',
+        vAxis: {
+                    format: '0' // Định dạng giá trị trục là số nguyên
+                },  
         titleTextStyle: {
-                    fontSize: 20 // Kích thước tiêu đề
+          fontSize: 20 // Kích thước tiêu đề
                 },
         legend: {
           position: 'bottom'
@@ -79,6 +86,7 @@ $sumoflabel = $result->SumOfTask_Controller($idDuAn);
 
       var columnchart = new google.visualization.ColumnChart(document.getElementById('column_chart'));
       columnchart.draw(columndata, columnoptions);
+      <?php endif; ?>
     }
   </script>
 
@@ -137,7 +145,8 @@ $sumoflabel = $result->SumOfTask_Controller($idDuAn);
 
   <div class="container">
     <div class="row">
-      <div id="column_chart"  class="col-8 rounded shadow bg-white" style="height: 500px"></div>
+      <div id="chart_div" class="fs-20"></div>
+      <div id="column_chart"  class="col-7 rounded shadow bg-white" style="height: 500px"></div>
       <div style="width: 26px;"></div>
       <div class="col rounded shadow bg-white" id="pie_chart" style="height: 500px"></div>
     </div>

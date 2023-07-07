@@ -43,6 +43,7 @@ public static function ShowStatisticProject($idDuAN)
     return $ListLabel;
 }
 }
+
 public static function ShowStatisticProject_2($idDuAN) 
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
@@ -54,11 +55,7 @@ public static function ShowStatisticProject_2($idDuAN)
 
     // Bước 2: Chuẩn bị truy vấn SELECT
     // LOẠI DỰ ÁN 1 2 4
-    $sql = "SELECT n.Nhan, count(*) as number 
-            FROM ketquanhanghi kq, tacvu t, nhan n, duan d 
-            WHERE kq.ID_TacVu = t.ID_TacVu and t.ID_DuAn = d.ID_DuAn 
-                    AND kq.ID_Nhan = n.ID_Nhan AND t.ID_DuAn = '$idDuAN'
-            GROUP BY n.Nhan;";
+    $sql = "SELECT kq.KetQua as Nhan, count(*) as number FROM ketquanhanghi kq, tacvu t, duan d WHERE kq.ID_TacVu = t.ID_TacVu and t.ID_DuAn = d.ID_DuAn AND d.ID_DuAn = '$idDuAN' GROUP by kq.KetQua;";
 
     // Bước 3: Thực hiện truy vấn INSERT
     if ($conn->query($sql) === TRUE) {
@@ -80,6 +77,7 @@ public static function ShowStatisticProject_2($idDuAN)
     return $ListLabel;
 }
 }
+
 public static function SumOfTask($idDuAN) 
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
@@ -117,6 +115,33 @@ public static function SumOfLabel($idDuAN)
             FROM ketquanhan kq, tacvu t, nhan n, duan d 
             WHERE kq.ID_TacVu = t.ID_TacVu and t.ID_DuAn = d.ID_DuAn 
             AND kq.ID_Nhan = n.ID_Nhan AND t.ID_DuAn = '$idDuAN'";
+    
+    // Bước 4: Lấy dữ liệu từ kết quả truy vấn
+    $result = $conn->query($sql);
+    if($result)
+    {  
+        if ($result->num_rows > 0) {
+            $numoflabel = $result->fetch_assoc();
+        }
+    }
+    return $numoflabel;
+}
+
+public static function SumOfLabel_2($idDuAN) 
+{
+    // Bước 1: Kết nối đến cơ sở dữ liệu
+    $connection = new DatabaseConnection();
+    $pw = $connection->getPassword();
+    $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);}
+
+    // Bước 2: Chuẩn bị truy vấn SELECT
+    // LOẠI DỰ ÁN 1 2 4
+    $sql = "SELECT kq.KetQua, count(*) as number 
+            FROM ketquanhanghi kq, tacvu t, duan d 
+            WHERE kq.ID_TacVu = t.ID_TacVu and t.ID_DuAn = d.ID_DuAn AND d.ID_DuAn = 3 
+            GROUP by kq.KetQua;";
     
     // Bước 4: Lấy dữ liệu từ kết quả truy vấn
     $result = $conn->query($sql);
