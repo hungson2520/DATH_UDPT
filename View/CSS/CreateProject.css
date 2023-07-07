@@ -217,3 +217,12 @@ button .btn_delete:hover {
 .taskLinks a:hover {
   background-color: #3276b1;
 }
+
+.nav_ul_left > li {
+  transform: translateY(20px);
+  color: white;
+}
+.nav_ul_right > li {
+  transform: translateY(20px);
+  color: white;
+}

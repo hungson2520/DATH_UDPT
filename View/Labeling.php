@@ -115,6 +115,10 @@ if ($role == 3) {
     <li class="type2">Loại 2</li>
   </ul>
 </div> -->
+        
+
+    
+        
         <div class="NavContent_right_search">
           <div class="NavContent_right_search_top">
          <i class="fa-solid fa-magnifying-glass"></i>Search

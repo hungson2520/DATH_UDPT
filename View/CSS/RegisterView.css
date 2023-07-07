@@ -27,3 +27,11 @@ input[type="submit"] {
   border: none;
   cursor: pointer;
 }
+.nav_ul_left > li {
+  transform: translateY(20px);
+  color: white;
+}
+.nav_ul_right > li {
+  transform: translateY(20px);
+  color: white;
+}
