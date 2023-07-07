@@ -31,6 +31,7 @@
         <input class="user" type="text" placeholder="Username" name="username" required />
 
         <input
+        class="pass"
           type="password"
           placeholder="Password"
           name="password"
@@ -44,6 +45,7 @@
 </html>
 
 <script>
+<<<<<<< Updated upstream
 const params = new URLSearchParams(window.location.search);
 if (params.has('error')) {
   const error = decodeURIComponent(params.get('error'));
@@ -55,3 +57,25 @@ if (params.has('error')) {
 
 
 </script>
+=======
+
+  // Mục đích của dòng này là để show thông báo lỗi ra
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error'))
+     {
+      // Lấy giá trị biến error từ URL và giải mã URL
+      const error = decodeURIComponent(params.get('error'));
+      // Hiển thị thông báo lỗi
+      alert("Thông Tin Đăng Nhập Không Chính Xác!");
+      params.delete('error');
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+      
+    }
+  }
+
+
+</script>
+
+>>>>>>> Stashed changes

@@ -44,6 +44,29 @@ class TaskController {
         $tasks = $this->taskModel->getNhanTacVu($id_tacvu);
         return $tasks;
     }
+
+
+    public function getDataFromKetQuaNhanGhi_Controller($idKQNG){
+        $task1= $this->taskModel->getDataFromKetQuaNhanGhi($idKQNG);
+   
+        
+        return $task1;
+    }
+    public  function getDataFromKetQuaNhan_Controller($idKQN)
+    { 
+        $task1= $this->taskModel->getDataFromKetQuaNhan($idKQN);
+   
+        
+        return $task1;
+        
+    }
+    public  function getNhanvaKQN_Controller($idDuAn){
+
+        $task= $this->taskModel->getNhanvaKQN($idDuAn);
+        return $task;
+    }
+
+    
 }
 
 if (isset($_POST['labeling']))
@@ -106,9 +129,41 @@ if (isset($_POST['labeling_3']))
 
 
 
-// Khởi tạo đối tượng của Controller
-// $taskController = new TaskController();
+if (isset($_POST['labeling_update_1']))
+ {
+    // Lấy giá trị từ form
+    $data = $_POST['input2'];
+    $id_nguoidung = $_POST['idnguoidung'];
+    $idKQNG = $_POST['idKQNG'];
+    
+    echo "vô update labeling 2 rồi nha";
+    Task::UpadteLabelOfTask_Type356($id_nguoidung,$data,$idKQNG);
+     
+  
+}
+if(isset($_POST['update_labeling_2']))
+{  $data = $_POST['label_of_task'];
+    $id_nguoidung = $_POST['idnguoidung'];
+    $id_ketquanhan = $_POST['idkqn'];
 
-// // Gọi phương thức lấy tất cả các tasks
-// $taskController->getAllTasks();
+    Task::UpadteLabelOfTask_Type12($id_nguoidung,$data,$id_ketquanhan);
+
+}
+
+
+
+
+
+// xhr.send('data_idnguoidung=' + encodeURIComponent(data_idnguoidung)+'&data_idkqng=' + encodeURIComponent(data_idkqng)
+// +'&data_ketqua=' + encodeURIComponent(data_ketqua)
+// if(isset($_POST['data_idnguoidung'])&&isset($_POST['data_idkqng']) &&isset($_POST['data_ketqua']) )
+// {
+//     $ketqua = $_POST['data_ketqua'];
+//     $id_nguoidung = $_POST['data_idnguoidung'];
+//     $id_kqng = $_POST['data_idkqng'];
+//     echo " sửa kết quả nhãn ghi "  .$ketqua .$id_nguoidung .$id_kqng;
+//     exit();
+
+// }
+
 ?>

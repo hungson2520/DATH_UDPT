@@ -67,6 +67,7 @@ if (isset($_POST['ID_DuAn_Export']))
 
 
  }
+ // XUẤT FILE NÈ
  if(isset($_POST['data_TenFile'])&&isset($_POST['idDuAn']))
  { 
   $fileName = json_decode($_POST['data_TenFile']);
@@ -109,5 +110,10 @@ fclose($file);
 $success_xuatfile="Đã Tải xuống file thành công!";
   
   //readfile($$filenameExport);
+   
+
+  
+
+
  }
 ?>

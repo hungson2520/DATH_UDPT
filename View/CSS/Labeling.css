@@ -22,6 +22,7 @@
   margin-top: 12px;
   cursor: pointer;
   transform: translateY(5px);
+  text-align: center;
 }
 
 .navigation li a {
@@ -42,12 +43,21 @@
   transform: translateX(-130px);
   display: flex;
   flex-direction: row;
+  text-align: center;
 }
 .nav_ul_right {
   display: flex;
   flex-direction: row;
   float: right;
   transform: translateX(250px);
+}
+.nav_ul_left > li {
+  transform: translateY(20px);
+  color: white;
+}
+.nav_ul_right > li {
+  transform: translateY(20px);
+  color: white;
 }
 
 /*---------------CSS CHO NavContent-------------------------  */
