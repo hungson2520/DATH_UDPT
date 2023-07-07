@@ -23,7 +23,7 @@ $idDuAn=$_GET['idDuAn'];
           <!-- <li><i class="fa-solid fa-bars"></i></li>
           <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li> -->
           <li class="toggle-menu"><i class="fa-solid fa-bars"></i>
-         <ul style="display:block" class="sub-menu">
+         <ul style="display:none" class="sub-menu">
                <li><a href="#">Đăng xuất</a></li>
                <li><a href="#">Thống kê</a></li>
               <li><a href="#">Quản lý dự án</a></li>
@@ -50,7 +50,7 @@ $idDuAn=$_GET['idDuAn'];
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
           <li>PROJECTS</li>
          
-          <li><i class="fa-solid fa-bars"></i>
+          
         
         
           </li>
@@ -80,7 +80,7 @@ $idDuAn=$_GET['idDuAn'];
       <div class="NavContent_right">
         <div class="NavContent_right_btn">
           <button  id="exportBtn" class="export NavContent_Left_Btn" >
-            View Result 
+            Kết quả 
             <i class="fa-sharp fa-solid fa-caret-down"></i>
             
           </button>
@@ -94,19 +94,6 @@ $idDuAn=$_GET['idDuAn'];
     <li class="type2">Loại 2</li>
   </ul>
 </div> -->
-          <button
-            style="
-              width: 80px;
-              border-radius: 5px;
-              padding: 5px 10px;
-              cursor: pointer;
-            "
-          >
-            Detail
-          </button
-
-    
-        >
         <div class="NavContent_right_search">
           <div class="NavContent_right_search_top">
          <i class="fa-solid fa-magnifying-glass"></i>Search
@@ -266,13 +253,22 @@ var ID_DuAn = urlParams.get('idDuAn');
   </div>`;
     }
     else {
-        contentRight.innerHTML=`<form action="../Controller/index.php" method="POST" enctype="multipart/form-data">
+      
+        contentRight.innerHTML=`<form onsubmit="return checkFileSelection()" action="../Controller/index.php?action=all&idDuAn=<?php echo $idDuAn?>&role=<?php echo $role;?>&idnguoidung=<?php echo $idNguoiDung;?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="ID_DuAn" value="${ID_DuAn}">
-        <h2 style="margin-left:300px;margin-top:200px">Chọn một file txt <input type="file" name="file" accept="text/plain"></h2>
+        <h2 style="margin-left:300px;margin-top:200px">Chọn một file txt <input onclick="" id="fileInput" type="file" name="file" accept="text/plain"></h2>
         <br>
-        <input style="margin-left:400px"  type="submit" name="SubmitUploadFile">
+        <input disable id="fileSubmit" style="margin-left:480px;margin-top:50px;padding:10px 30px;background-color: #428bca;cursor:pointer;border-radius:5px;color:white;" value="Thêm Tác Vụ" type="submit" name="SubmitUploadFile">
     </div>
-</form>`; }
+</form>
+<style>
+  input[type="submit"]:hover {
+    opacity: 0.6;
+  }
+</style>
+
+
+`; }
 console.log("giao diện dataset",contentRight.innerHTML);
         
         var fileInput = document.querySelector('input[type="file"]');
@@ -328,7 +324,7 @@ var memberInformation = document.createElement("div");
         <?php endforeach; ?>
       </tbody>
     </table>
-    <input type="submit" value="Save" id="saveButton_phancong">
+    <input type="submit" value="Lưu" id="saveButton_phancong">
     <style>
       table {
         border-collapse: collapse;

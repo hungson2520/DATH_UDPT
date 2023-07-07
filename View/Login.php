@@ -13,22 +13,22 @@
       <ul class="nav_ul">
         <div class="nav_ul_left">
           <li><i class="fa-solid fa-bars"></i></li>
-          <li>Nhóm 1 UDPT</li>
+          <li style="width:250px;">Nhóm 1 Ứng Dụng Phân Tán</li>
         </div>
         <div class="nav_ul_right">
           <li><i class="fa-solid fa-sun"></i></li>
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
 
-          <a href="../View/RegisterView.php"><button class="btn_LOGIN">Đăng Ký</button></a>
+          <a style="transform: translateY(10px);"  href="../View/RegisterView.php"><button style="padding: 10px 20px;background-color: white;color:#428bca;" class="btn_LOGIN">Đăng Ký</button></a>
         </div>
       </ul>
     </nav>
     <div class="container">
       <form class="login-form" method="post" action="../Controller/index.php" name="login" >
-        <h2>Login</h2>
+        <h2>Đăng Nhập</h2>
 
-        <input type="text" placeholder="Username" name="username" required />
+        <input class="user" type="text" placeholder="Username" name="username" required />
 
         <input
           type="password"
@@ -37,7 +37,7 @@
           required
         />
 
-        <button type="submit" name="login">Login</button>
+        <button type="submit" name="login">Đăng Nhập</button>
       </form>
     </div>
   </body>

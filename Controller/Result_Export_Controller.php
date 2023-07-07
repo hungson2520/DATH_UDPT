@@ -105,10 +105,9 @@ fclose($file);
    header('Content-Length: ' . filesize($filenameExport));
 
 //    // Gửi nội dung tệp tin cho người dùng
-  readfile($$filenameExport);
 
-   
-
-
+$success_xuatfile="Đã Tải xuống file thành công!";
+  
+  //readfile($$filenameExport);
  }
 ?>

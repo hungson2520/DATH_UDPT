@@ -165,12 +165,12 @@ public static function ShowReSultProject($idDuAN)
     if ($conn->connect_error) {die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);}
 
     // Bước 2: Chuẩn bị truy vấn SELECT
-    // LOẠI DỰ ÁN 1 2 4
+    // LOẠI DỰ ÁN 3 5 6
     $sql = "SELECT nd.Ten, da.TenDuAn, lda.TenLoai, tv.TacVu , kqng.ketqua 
     FROM `ketquanhanghi`kqng ,`tacvu` tv , `nguoidung` nd,`loaiduan` lda,`duan` da 
     WHERE kqng.ID_tacvu=tv.ID_TacVu
     and nd.ID_NguoiDung=kqng.ID_NguoiDung and da.ID_DuAn=tv.ID_DuAn and da.ID_LoaiDuAn=lda.ID_LoaiDuAn 
-    And tv.ID_DuAN='$idDuAN' AND da.ID_LoaiDuAn IN (1, 2, 4)";
+    And tv.ID_DuAN='$idDuAN' AND da.ID_LoaiDuAn IN (3, 5, 6)";
 
 
 
@@ -202,7 +202,7 @@ public static function ShowReSultProject($idDuAN)
 }
 
 
-// xử lý loại 3 5 6
+// xử lý loại 1 2 4
 public static function ShowReSultProject_Type2($idDuAN)
 {
 
@@ -219,7 +219,7 @@ public static function ShowReSultProject_Type2($idDuAN)
 $sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu,da.tenDuAn,lda.TenLoai 
 FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da, loaiduan lda 
 WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan and tv.ID_TacVu=kqn.ID_TacVu 
-and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';
+and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 1,2,4) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';
 
 ";
  
@@ -245,7 +245,7 @@ and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.I
 
 
 } 
-
+// Viết cho loại 1 2 4
 public static function  WriteReSultProject_Type2($idDuAN)
 {
     $connection = new DatabaseConnection();
@@ -262,7 +262,7 @@ public static function  WriteReSultProject_Type2($idDuAN)
     $sql2="SELECT n.Nhan, nd.Ten ,tv.TacVu,kqn.TuNgu,da.tenDuAn,lda.TenLoai 
     FROM ketquanhan kqn ,nguoidung nd , tacvu tv , nhan n, duan da, loaiduan lda 
     WHERE kqn.ID_NguoiDung=nd.ID_NguoiDung and n.ID_Nhan=kqn.ID_Nhan and tv.ID_TacVu=kqn.ID_TacVu 
-    and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 3,5,6) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';
+    and tv.ID_DuAn=da.ID_DuAn and da.ID_LoaiDuAn IN( 1,2,4) and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN';
     
     ";
 
@@ -306,8 +306,6 @@ public static function getLoaiDuAn($ID_LoaiDuAn) {
     
     if (in_array($ID_LoaiDuAn, $allowedValues)) {
       return 1;
-    } else {
-      return 2;
     }
   }
 
@@ -338,7 +336,7 @@ public static function CheckTypeProject($idDuAn)
 
 
 
-
+// Viết kết quả cho loại dự án 3 5 6 
 public static function  WriteReSultProject($idDuAN) 
 {
     // Bước 1: Kết nối đến cơ sở dữ liệu
@@ -354,7 +352,7 @@ public static function  WriteReSultProject($idDuAN)
     $sql = "SELECT nd.Ten, da.TenDuAn, lda.TenLoai, tv.TacVu , kqng.ketqua 
     FROM `ketquanhanghi`kqng ,`tacvu` tv , `nguoidung` nd,`loaiduan` lda,`duan` da 
     WHERE kqng.ID_tacvu=tv.ID_TacVu
-    and nd.ID_NguoiDung=kqng.ID_NguoiDung and da.ID_DuAn=tv.ID_DuAn and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN' AND da.ID_LoaiDuAn IN (1, 2, 4)";
+    and nd.ID_NguoiDung=kqng.ID_NguoiDung and da.ID_DuAn=tv.ID_DuAn and da.ID_LoaiDuAn=lda.ID_LoaiDuAn And tv.ID_DuAN='$idDuAN' AND da.ID_LoaiDuAn IN (3, 5, 6)";
 
 
 

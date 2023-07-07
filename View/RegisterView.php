@@ -13,14 +13,14 @@
       <ul class="nav_ul">
         <div class="nav_ul_left">
           <li><i class="fa-solid fa-bars"></i></li>
-          <li>Nhóm 1 UDPT</li>
+          <li style="width:250px;">Nhóm 1 Ứng Dụng Phân Tán</li>
         </div>
         <div class="nav_ul_right">
           <li><i class="fa-solid fa-sun"></i></li>
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
 
-          <a href="../View/Login.php"><button class="btn_LOGIN">Đăng Nhập</button></a>
+          <a style="transform: translateY(10px);" href="../View/Login.php"><button  style="padding: 10px 20px;background-color: white;color:#428bca;" class="btn_LOGIN">Đăng Nhập</button></a>
         </div>
       </ul>
     </nav>

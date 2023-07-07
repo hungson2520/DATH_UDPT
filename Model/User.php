@@ -66,12 +66,13 @@ class User {
        
        
     } else {
-        echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
-        echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
+            return -1;
+        
     }
 
     // Bước 4: Đóng kết nối
-    $conn->close();
+    // $conn->close();
 }
 
 public static function ShowBangPhanCong()
@@ -120,7 +121,7 @@ public static function ThemVaoBangPhanCong($IdDuAn,$IdNguoiDung)
     }
 
     // Đóng kết nối
-    mysqli_close($conn);
+   
     
  
      

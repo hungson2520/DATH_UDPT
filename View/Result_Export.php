@@ -54,12 +54,11 @@ if(isset($_GET['idDuAn']))
 
           <li>ENV<i class="fa-sharp fa-solid fa-caret-down"></i></li>
           <li>PROJECTS</li>
-          <li><i class="fa-solid fa-bars"></i></li>
-          <li></li>
+         
         </div>
       </ul>
     </nav>
-    <h1 style="margin-Left:560px;color:green;">Kết quả của ID DỰ ÁN : <?php echo $idDuAn ?></h1>
+    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án : <?php echo $tenDuAn ?></h1>
 
     <?php 
     //  $res = $result1->ShowResultProject_Controller($idDuAn);
@@ -76,11 +75,12 @@ if ($type == 1) {
     <table class="table">
   <thead>
     <tr>
-      <th style="width: 20%;">Tên Người Dùng</th>
-      <th style="width: 20%;">Tên Dự Án</th>
-      <th style="width: 20%;">Tên Loại Dự Án</th>
-      <th style="width: 20%;">Tác Vụ</th>
-      <th style="width: 20%;">Kết Quả</th>
+      <th style="width: 15%;">Tên Người Dùng</th>
+      <th style="width: 15%;">Tên Dự Án</th>
+      <th style="width: 15%;">Tên Loại Dự Án</th>
+      <th style="width: 15%;">Tác Vụ</th>
+      <th style="width: 15%;">Kết Quả</th>
+      <th style="width: 15%;">Sửa Kết Quả</th>
     </tr>
   </thead>
   <tbody>
@@ -170,7 +170,7 @@ elseif ($type == 2) { ?>
 
            
 </div>
-<button id="exportBtn">Export TXT</button>
+<button id="exportBtn">Xuất kết quả</button>
 
 <div id="formContainer" style="display: none;">
   <form id="exportForm" >
@@ -230,7 +230,9 @@ setTimeout(function(){
    },500)
   
   
-    //formContainer.style.display = 'none';
+   
+
+    
    
   });
 </script>
