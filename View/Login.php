@@ -45,19 +45,6 @@
 </html>
 
 <script>
-<<<<<<< Updated upstream
-const params = new URLSearchParams(window.location.search);
-if (params.has('error')) {
-  const error = decodeURIComponent(params.get('error'));
-  alert("Thông Tin Đăng Nhập Không Chính Xác!");
-  params.delete('error'); // Xóa tham số 'error' khỏi URL
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
-  window.history.replaceState({}, '', newUrl);
-}
-
-
-</script>
-=======
 
   // Mục đích của dòng này là để show thông báo lỗi ra
   if (typeof URLSearchParams !== 'undefined' && window.location.search) {
@@ -78,4 +65,3 @@ if (params.has('error')) {
 
 </script>
 
->>>>>>> Stashed changes

@@ -68,29 +68,6 @@
       }
 
 
-<<<<<<< Updated upstream
-
-      
-
-const params = new URLSearchParams(window.location.search);
-if (params.has('error')) {
-  const error = decodeURIComponent(params.get('error'));
-  alert("Đã Tồn Tại Tài Khoản!");
-  params.delete('error'); // Xóa tham số 'error' khỏi URL
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
-  window.history.replaceState({}, '', newUrl);
-}
-const params2 = new URLSearchParams(window.location.search);
-if (params2.has('success')) {
-  const error = decodeURIComponent(params2.get('success'));
-  alert("Tạo Tài Khoản Thành Công!");
-  params.delete('success'); // Xóa tham số 'error' khỏi URL
-  const newUrl = `${window.location.pathname}?${params2.toString()}`;
-  window.history.replaceState({}, '', newUrl);
-}
-
-
-=======
        // Mục đích của dòng này là để show thông báo lỗi ra
   if (typeof URLSearchParams !== 'undefined' && window.location.search) {
     const params = new URLSearchParams(window.location.search);
@@ -135,6 +112,5 @@ if (params2.has('success')) {
       
     }
   }
->>>>>>> Stashed changes
 
     </script>

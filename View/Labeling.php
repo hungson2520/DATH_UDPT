@@ -888,35 +888,35 @@ var msg = msgValue || "";
 </script>
 
 <script>
-var url_gannhan = window.location.href;
-var searchParams = new URLSearchParams(url_gannhan);
-var msgValue = searchParams.get("lmsg"); 
-console.log(searchParams);
-
-var msg = msgValue || "";
-  if(msg!=""){
-    if(msg=="success")
+  var url_gannhan = window.location.href;
+  var searchParams = new URLSearchParams(url_gannhan);
+  var msgValue = searchParams.get("lmsg"); 
+  console.log(searchParams);
+  
+  var msg = msgValue || "";
+    if(msg!=""){
+      if(msg=="success")
+      {
+        alert("Gán nhãn thành công");
+        const params = new URLSearchParams(window.location.search);
+        const error = decodeURIComponent(params.get('lmsg'));
+        params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, '', newUrl);
+      }
+      else
+      {
+        alert("Gán nhãn thất bại");
+        const params = new URLSearchParams(window.location.search);
+        const error = decodeURIComponent(params.get('lmsg'));
+        params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, '', newUrl);
+      }
+      searchParams.delete("msg");
+    } 
+    else 
     {
-      alert("Gán nhãn thành công");
-      const params = new URLSearchParams(window.location.search);
-      const error = decodeURIComponent(params.get('lmsg'));
-      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
-      const newUrl = `${window.location.pathname}?${params.toString()}`;
-      window.history.replaceState({}, '', newUrl);
+      console.log("Không tìm thấy URL trong chuỗi.");
     }
-    else
-    {
-      alert("Gán nhãn thất bại");
-      const params = new URLSearchParams(window.location.search);
-      const error = decodeURIComponent(params.get('lmsg'));
-      params.delete('lmsg'); // Xóa tham số 'error' khỏi URL
-      const newUrl = `${window.location.pathname}?${params.toString()}`;
-      window.history.replaceState({}, '', newUrl);
-    }
-    searchParams.delete("msg");
-  } 
-  else 
-  {
-    console.log("Không tìm thấy URL trong chuỗi.");
-  }
 </script>
