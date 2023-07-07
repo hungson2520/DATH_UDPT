@@ -1,14 +1,17 @@
 <?php
-$role=3;
+
 require_once '../Controller/Result_Export_Controller.php';
+require_once '../Controller/Project_Controller.php';
 $result1= new Result_export_controller();
-if(isset($_GET['idDuAn']))
+$projectController = new ProjectController();
+if(isset($_GET['idDuAn'])&& isset($_GET['role']))
 { 
+
+  $idnguoidung =$_GET['id'];
   $idDuAn= $_GET['idDuAn'];
+  $role=$_GET['role'];
   $type=$result1->CheckTypeProject_Controller($idDuAn);
-  echo "<h1>ID DỰ ÁN </h1>" .$type;
-  echo "type là " .$type;
- 
+  
   if($type==1){
   
   $KetQua = $result1->ShowResultProject_Controller($idDuAn);
@@ -16,9 +19,15 @@ if(isset($_GET['idDuAn']))
   elseif($type==2){
   $KetQua=$result1->ShowResultProject_Type2_Controller($idDuAn);
   }
+  $duAn = $projectController->getProject($idDuAn);
+  $loaiDuan = $duAn['ID_LoaiDuAn'];
+  
+ 
 }
 
-
+// 3 5 6: gán nhãn ghi.php
+// 1 2 :gannhan.php
+//4:gannhanthucthe
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +68,13 @@ if(isset($_GET['idDuAn']))
         </div>
       </ul>
     </nav>
-    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :</h1>
+    <h1 style="margin-Left:560px;color:green;">Kết quả của dự án :<?php echo  $idDuAn ?></h1>
 
     <?php 
   
 
 if ($type == 1) {
-    // Xử lý khi có 5 cột
+    // 3 5 6
   ?>
     <div class="table-container">
     <table class="table">
@@ -88,6 +97,8 @@ if ($type == 1) {
       <td><?php echo $KQ['TenLoai']; ?></td>
       <td><?php echo $KQ['TacVu']; ?></td>
       <td><?php echo $KQ['ketqua']; ?></td>
+      <!-- <th><a class="edit" href="">Sửa</a></th> -->
+      <th><a class="edit" href="../View/GanNhanGhi.php?action=update&id=<?php echo $idDuAn?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQNG=<?php echo $KQ['ID_KetQuaNhanGhi']; ?>">Sửa</a></th>
     </tr>
 
     <?php endforeach; ?>
@@ -124,6 +135,8 @@ elseif ($type == 2) { ?>
       <th style="width: 10%;">Nhãn</th>
       <th style="width: 10%;">Tên Người Làm</th>
       <th style="width: 10%;">Từ Ngữ Thực Thể</th>
+      <th style="width: 10%;">Sửa Kết Quả</th>
+
      
      
     </tr>
@@ -137,7 +150,8 @@ elseif ($type == 2) { ?>
       <td><?php echo $KQ['TacVu']; ?></td>
       <td><?php echo $KQ['Nhan']; ?></td>
       <td><?php echo $KQ['Ten']; ?></td>
-      <td><?php echo $KQ['TuNgu']; ?></td>0
+      <td><?php echo $KQ['TuNgu']; ?></td>
+      <th><a class="edit" href="../View/GanNhan.php?action=update&id=<?php echo $idDuAn?>&idnguoidung=<?php echo $idnguoidung?>&idLoaiDuAn=<?php echo $loaiDuan ?>&idKQN=<?php echo $KQ['ID_KetQuaNhan']; ?>&idTacVu=<?php echo $KQ['ID_TacVu']; ?>">Sửa</a></th>
     </tr>
 
     <?php endforeach; ?>

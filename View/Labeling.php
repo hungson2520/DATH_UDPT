@@ -33,7 +33,7 @@ if ($role == 3) {
           <!-- <li><i class="fa-solid fa-bars"></i></li>
           <li style="width:200px;color:white">Nhóm 1: Ứng dụng Phân Tán</li> -->
           <li class="toggle-menu"><i class="fa-solid fa-bars"></i>
-          <ul style="display:block" class="sub-menu">
+          <ul style="display:none" class="sub-menu">
               <li><a href="#">Đăng xuất</a></li>
               <?php if ($disMenu) { ?>
               <li><a href="#">Quản lý dự án</a></li>
@@ -170,13 +170,16 @@ if ($role == 3) {
                         $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
 
-                              if ($loaiDuan ==1 || $loaiDuan==4 || $loaiDuan==2) {
+                            if ($loaiDuan ==1 || $loaiDuan==2) {
                         
-                             $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
-                              } else {
-                          // URL cho trang href mặc định
-                           $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung;
+                              $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
+                               } elseif ($loaiDuan ==4){
+                                 $url = "../View/GanNhanThucThe.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
                                }
+                               else {
+                           // URL cho trang href mặc định
+                             $url = "../View/GanNhanGhi.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
+                                }
                         ?>
 
                         <a href="<?php echo $url; ?>">Gán Nhãn</a>
@@ -733,7 +736,7 @@ var data_IdDuAn=JSON.stringify(idDuAn);
 
 xhr2.send('ID_DuAn_Export=' + encodeURIComponent(data_IdDuAn));
 console.log("GỬI DỮ LIỆU QUA THÀNH CÔNG RỒI NHÉ");
-window.location.href = '../View/Result_Export.php?idDuAn=<?php echo $idDuAn; ?>';
+window.location.href = '../View/Result_Export.php?idDuAn=<?php echo $idDuAn;?>&role=<?php echo $role?>&id=<?php echo $idNguoiDung?>';
 
 });
 
