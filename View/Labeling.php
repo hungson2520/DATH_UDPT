@@ -169,9 +169,7 @@ if ($role == 3) {
                         <?php
                         $duAn = $projectController->getProject($idDuAn);
                             $loaiDuan = $duAn['ID_LoaiDuAn'];
-
-                            if ($loaiDuan ==1 || $loaiDuan==2) {
-                        
+                            if ($loaiDuan ==1 || $loaiDuan==2) {                        
                               $url = "../View/GanNhan.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
                                } elseif ($loaiDuan ==4){
                                  $url = "../View/GanNhanThucThe.php?action=create&id=" . $task['ID_TacVu'] . "&idnguoidung=" . $idNguoiDung . "&idLoaiDuAn=" . $loaiDuan;
