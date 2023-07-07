@@ -8,7 +8,7 @@ if(isset($_GET['idDuAn']))
   $type=$result1->CheckTypeProject_Controller($idDuAn);
   echo "<h1>ID DỰ ÁN </h1>" .$type;
   echo "type là " .$type;
- 
+  $idnguoidung=1;
   if($type==1){
   
   $KetQua = $result1->ShowResultProject_Controller($idDuAn);

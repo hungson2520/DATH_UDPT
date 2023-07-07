@@ -59,43 +59,44 @@ $id_nguoiDung=$_GET['idnguoidung'];
             <i class="fa-solid fa-magnifying-glass"></i>Search
           </div>
           <div class="NavContent_right_search_top_left" >
-          <?php
-    if (isset($_GET["msg"])) {
-        $msg = $_GET["msg"];
-        if($msg=="success")
-        {
-          $message="Thêm dự án thành công";
-        }
-        else
-        {
-          $message="Thêm dự án thất bại";
-        }
-        echo '<div class="alert alert-warning alert-dismissible fade show alert-sm" role="alert">
-        ' . $message . '
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-        }
-        ?>
-         <?php
-    if (isset($_GET["dmsg"])) {
-        $msg = $_GET["dmsg"];
-        if($msg=="success")
-        {
-          $message="Xóa dự án thành công";
-        }
-        else
-        {
-          $message="Không thể xóa dự án đang tiến hành";
-        }
-        echo '<div class="alert alert-warning alert-dismissible fade show alert-sm" role="alert">
-        ' . $message . '
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-        }
-        ?>
+          <!-- <?php
+    // if (isset($_GET["msg"])) {
+    //     $msg = $_GET["msg"];
+    //     if($msg=="success")
+    //     {
+    //       $message="Thêm dự án thành công";
+    //     }
+    //     else
+    //     {
+    //       $message="Thêm dự án thất bại";
+    //     }
+    //     echo '<div class="alert alert-warning alert-dismissible fade show alert-sm" role="alert">
+    //     ' . $message . '
+    //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //     </div>';
+    //     }
+    //     ?>
+    //      <?php
+    // if (isset($_GET["dmsg"])) {
+    //     $msg = $_GET["dmsg"];
+    //     if($msg=="success")
+    //     {
+    //       $message="Xóa dự án thành công";
+    //     }
+    //     else
+    //     {
+    //       $message="Không thể xóa dự án đang tiến hành";
+    //     }
+    //     echo '<div class="alert alert-warning alert-dismissible fade show alert-sm" role="alert">
+    //     ' . $message . '
+    //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    //     </div>';
+    //     }
+        ?> -->
             <table class="table" >
               <thead>
                 <tr>
+                  <th> Mã dự án </th>
                   <th>Tên dự án</th>
                   <th>Mô tả</th>
                   <th >Loại dự án</th>
@@ -127,6 +128,7 @@ $id_nguoiDung=$_GET['idnguoidung'];
             <?php if (!empty($projects)): ?>
             <?php foreach ($projects as $project): ?>
                     <tr>
+                    <td><?php echo $project['ID_DuAn']; ?></td>
                         <td><?php echo $project['tenDuAn']; ?></td>
                         <td> <?php
                          if ($project['moTa'] == null) {
@@ -135,7 +137,7 @@ $id_nguoiDung=$_GET['idnguoidung'];
                         <td><?php echo $project['TenLoai']; ?></td>
                         <?php if ($role == 3): ?>
                         <td>
-                        <a href="edit.php?idDuAn=<?php echo $project["ID_DuAn"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
+                        <button class="link-dark updateButton" style="border: none;"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></button>
                         <a href="../Controller/Project_Controller.php?action=delete&idDuAn=<?php echo $project["ID_DuAn"]?>&role=<?php echo $role;?>&idnguoidung=<?php echo $id_nguoiDung;?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
                         </td>
                         <?php endif ;?>
@@ -261,7 +263,7 @@ button[type="submit"]:hover {
   }
   </style>
 
-  <form id="temporaryForm" method = "POST" class="form-container" action = "../Controller/Project_Controller.php" name="createProject">  
+  <form id="temporaryForm" method = "POST" class="form-container" action = "../Controller/Project_Controller.php?action=create" name="createProject">  
   <h2>Tạo dự án mới</h2>
 
   <div class="form-group">
@@ -342,7 +344,7 @@ if(formContainer.classList.contains('form-container')){
 }
 });
   </script>
-<!-- <script>
+<script>
 var currentURL = window.location.href;
 var searchParams = new URLSearchParams(currentURL);
 var msgValue = searchParams.get("msg"); 
@@ -352,15 +354,257 @@ var msg = msgValue || "";
     if(msg=="success")
     {
       alert("Thêm dự án thành công");
+      const params = new URLSearchParams(window.location.search);
+  const msg = decodeURIComponent(params.get('msg'));
+      params.delete('msg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
     }
     else
     {
     alert("Thêm dự án thất bại");
+    const params = new URLSearchParams(window.location.search);
+  const msg = decodeURIComponent(params.get('msg'));
+      params.delete('msg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
     }
-    searchParams.delete("msg");
   } 
   else 
   {
     console.log("Không tìm thấy URL trong chuỗi.");
   }
-</script> -->
+</script>
+
+</script>
+<script>
+var currentURL = window.location.href;
+var searchParams = new URLSearchParams(currentURL);
+var msgValue = searchParams.get("dmsg"); 
+console.log(searchParams);
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Xóa dự án thành công");
+      const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('dmsg'));
+      params.delete('dmsg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
+    }
+    else
+    {
+    alert("Không thể xóa dự án đang tiến hành");
+    const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('dmsg'));
+      params.delete('dmsg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
+    }
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi.");
+  }
+</script>
+
+</script>
+<script>
+var currentURL = window.location.href;
+var searchParams = new URLSearchParams(currentURL);
+var msgValue = searchParams.get("umsg"); 
+console.log(searchParams);
+var msg = msgValue || "";
+  if(msg!=""){
+    if(msg=="success")
+    {
+      alert("Cập nhật án thành công");
+      const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('umsg'));
+      params.delete('umsg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
+    }
+    else
+    {
+    alert("Cập nhật dự án  thất bại");
+    const params = new URLSearchParams(window.location.search);
+     const msg = decodeURIComponent(params.get('umsg'));
+      params.delete('umsg'); // Xóa tham số 'error' khỏi URL
+     const newUrl = `${window.location.pathname}?${params.toString()}`;
+     window.history.replaceState({}, '', newUrl);
+    }
+  } 
+  else 
+  {
+    console.log("Không tìm thấy URL trong chuỗi.");
+  }
+</script>
+
+<script>
+  const updateButtons = document.querySelectorAll('.updateButton');
+
+// Gán sự kiện "click" cho từng nút "Update"
+updateButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Truy cập vào các phần tử HTML trong dòng tương ứng
+    const row = button.closest('tr');
+    const projectID = row.querySelector('td:first-child').innerText;
+    const projectName = row.querySelector('td:nth-child(2)').innerText;
+    const projectDescription = row.querySelector('td:nth-child(3)').innerText;
+    const projectType = row.querySelector('td:nth-child(4)').innerText;
+    
+    
+    // Sử dụng giá trị thu thập được tùy ý
+    console.log(projectID);
+    console.log('Tên dự án:', projectName);
+    console.log('Mô tả:', projectDescription);
+    console.log('Loại dự án:', projectType);
+    const formContainer = document.createElement('div');
+  formContainer.classList.add('form-container'); // Thêm class cho div nếu cần thiết
+    const formHTML = `
+  <style>
+  .form-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #428bca;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom:15px
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+  margin-Top:10px;
+}
+#cancel_button {
+    background-color: red;
+    color: white;
+  }
+  </style>
+
+  <form id="temporaryForm" method = "POST" class="form-container" action = "../Controller/Project_Controller.php?action=update" name="updateProject">  
+  <h2>Sửa dự án</h2>
+
+  <div class="form-group">
+    <label for="projectName">Tên dự án:</label>
+    <input type="text" id="projectName" name="projectName" required>
+    <input type="hidden" name="projectID" id="projectID">
+    <input type="hidden" name="role" value="<?php echo $role ?>">
+    <input type="hidden" name="idnguoidung" value="<?php echo $id_nguoiDung ?>">
+  </div>
+
+  <div class="form-group">
+    <label for="projectType">Loại dự án:</label>
+    <select id="projectType" name="projectType1" required>
+      <option value="">-- Chọn loại dự án --</option>
+      <option value=1>Phân loại văn bản</option>
+      <option value=2>Hỏi đáp</option>
+      <option value=3>Dịch máy</option>
+      <option value=4>Gán nhãn thực thể</option>
+      <option value=5>Gán nhãn câu trả lời của cặp câu hỏi và văn bản</option>
+      <option value=6>Tìm câu hỏi đồng nghĩa</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="projectDescription">Mô tả:</label>
+    <textarea id="projectDescription" name="projectDescription1" required></textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit" name="updateProject">Sửa</button>
+    <button type="submit"  id="cancel_button"  name="cancel">Huỷ </button>
+  </div>
+</form> `; 
+  function cancelForm() {
+  //   var temporaryForm = document.getElementById("temporaryForm");
+ 
+  formContainer.classList.remove('form-container');
+  //  temporaryForm.style.display="none";
+  document.body.removeChild(formContainer);
+  console.log(" vô được hàm Cancel FORM ");
+}
+var btn_cancel;
+if(formContainer.classList.contains('form-container')){
+  setTimeout(function() {
+  btn_cancel = document.getElementById("cancel_button");
+  
+  if (btn_cancel) {
+    console.log("có btn_cancel rồi nè");
+    console.log("Nút button: ", btn_cancel);
+    btn_cancel?.addEventListener(("click"),cancelForm);
+  }}, 100);
+}
+  formContainer.innerHTML = formHTML;
+
+  // Thêm div chứa form vào trang
+  document.body.appendChild(formContainer);
+  const projectIDInput = formContainer.querySelector('#projectID');
+  const projectNameInput = formContainer.querySelector('#projectName');
+const projectTypeInput = formContainer.querySelector('#projectType');
+const projectDescriptionInput = formContainer.querySelector('#projectDescription');
+
+projectNameInput.value = projectName;
+projectDescriptionInput.value = projectDescription;
+projectIDInput.value = projectID;
+for (let i = 0; i < projectTypeInput.options.length; i++) {
+  const option = projectTypeInput.options[i];
+  // Kiểm tra nếu giá trị của tùy chọn trùng khớp với projectType
+  if (option.textContent === projectType.toString()) {
+    // Đặt tùy chọn này làm tùy chọn được chọn
+    option.selected = true;
+    break; // Kết thúc vòng lặp
+  }
+}
+
+  // Lưu ý: Bạn có thể chỉnh sửa các trường và nút trong formHTML theo yêu cầu của bạn
+
+  // Tùy chỉnh CSS cho form tạm thời nếu cần thiết
+  formContainer.style.position = 'fixed';
+  formContainer.style.top = '50%';
+  formContainer.style.left = '50%';
+  formContainer.style.transform = 'translate(-50%, -50%)';
+  formContainer.style.backgroundColor = 'white';
+  formContainer.style.padding = '20px';
+  formContainer.style.border = '1px solid gray';
+  formContainer.style.zIndex = '9999';
+
+  });
+});
+</script>
