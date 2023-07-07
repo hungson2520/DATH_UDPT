@@ -93,10 +93,9 @@ class Task {
 
         // Bước 3: Thực hiện truy vấn INSERT
         if ($conn->query($sql) === TRUE) {
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return true;
         } else {
-            echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return false;
         }
 
         // Bước 4: Đóng kết nối
@@ -178,11 +177,53 @@ class Task {
 
         // Bước 3: Thực hiện truy vấn INSERT
         if ($conn->query($sql) === TRUE) {
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return true;
         } else {
-            echo "Lỗi trong quá trình thêm dữ liệu: " . $conn->error;
-            echo "<h1>Thêm Dữ Liệu Thành Công</h1>";
+            return false;
         }
+
+        // Bước 4: Đóng kết nối
+        $conn->close();
+    }
+
+    public static function insertLabelOfTask_nhanthucthe($id_nguoidung, $id_tacvu, $id_nhan, $tungu_) {
+        // Bước 1: Kết nối đến cơ sở dữ liệu
+        $connection = new DatabaseConnection();
+        $pw = $connection->getPassword();
+        $conn= mysqli_connect("localhost","root", $pw ,"N01_GanNhan");
+        // Kiểm tra kết nối
+        if ($conn->connect_error) {
+        die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+        }
+
+
+
+
+
+        // kiem tra chuoi
+        // Truy vấn dữ liệu từ bảng TacVu
+        $query_laytacvu = "SELECT * FROM TacVu WHERE ID_TacVu = '$id_tacvu'";
+        $result = $conn->query($query_laytacvu);
+        
+        $task = $result->fetch_assoc();
+        $data_of_task = $task['TacVu'];
+        $query_dieukien = "SELECT IF(LOCATE('$tungu_', '$data_of_task') > 0, 1, 0) as is_exist";
+
+        $result_of_dieukien = $conn->query($query_dieukien);
+        $ketqua_dieukien = $result_of_dieukien->fetch_assoc();
+
+        if($ketqua_dieukien['is_exist'] == 1){
+            $sql = "INSERT INTO KetQuaNhan (ID_NguoiDung, ID_TacVu, ID_Nhan, TuNgu) VALUES ('$id_nguoidung', '$id_tacvu', '$id_nhan', '$tungu_')";
+            if ($conn->query($sql) === TRUE) {
+                return true;
+            }
+        }else{
+            return false;
+        }
+        // Bước 2: Chuẩn bị truy vấn INSERT
+
+        // Bước 3: Thực hiện truy vấn INSERT
+        
 
         // Bước 4: Đóng kết nối
         $conn->close();

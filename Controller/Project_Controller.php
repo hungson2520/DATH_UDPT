@@ -30,21 +30,21 @@ class ProjectController {
 
 if (isset($_GET['action'])) {
   // Tham số 'role' tồn tại trong URL
-  $action=$_GET['action'];
-if($action=="delete")
-{
-$role = $_GET["role"];
-$idnguoidung = $_GET["idnguoidung"];
-if (isset($_GET['idDuAn'])) {
-    // Tham số 'role' tồn tại trong URL
-    $idDuAn = $_GET['idDuAn'];
-if (Project::delete($idDuAn)) {
-    header("Location: ../View/CreateProject.php?role=$role&idnguoidung=$idnguoidung&dmsg=success"); 
-} else {
-    header("Location: ../View/CreateProject.php?role=$role&idnguoidung=$idnguoidung&dmsg=fail");
-}
-}
-}
+    $action=$_GET['action'];
+    if($action=="delete")
+    {  
+        $role = $_GET["role"];
+        $idnguoidung = $_GET["idnguoidung"];
+        if (isset($_GET['idDuAn'])) {
+            // Tham số 'role' tồn tại trong URL
+            $idDuAn = $_GET['idDuAn'];
+            if (Project::delete($idDuAn)) {
+                header("Location: ../View/CreateProject.php?role=$role&idnguoidung=$idnguoidung&dmsg=success"); 
+            } else {
+                header("Location: ../View/CreateProject.php?role=$role&idnguoidung=$idnguoidung&dmsg=fail");
+            }
+        }
+    }
 }
 
 // if (isset($_POST['ID_DuAn_Export']))

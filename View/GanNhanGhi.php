@@ -1,5 +1,7 @@
 <?php
 $idNguoiDung=$_GET['idnguoidung'];
+$idDuAn=$_GET['idDuAn'];
+$role=$_GET['role'];
 $idLoaiDuAn=$_GET['idLoaiDuAn'];
 ?>
 <!DOCTYPE html>
@@ -56,6 +58,10 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
     
     <input type="hidden" name="idtacvu" value="<?php echo $idtacvu ?>">
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
+    <input type="hidden" name="idDuAn" value="<?php echo $idDuAn ?>">
+    <input type="hidden" name="idLoaiDuAn" value="<?php echo $idLoaiDuAn ?>">
+    <input type="hidden" name="role" value="<?php echo $role ?>">
+
     <div class="input-container">
         <label for="input1">Tác vụ</label>
         <textarea name = "input2" type="text" rows="5" style="width: 640px; height: 90px" readonly><?php echo $task['TacVu'] ?></textarea>

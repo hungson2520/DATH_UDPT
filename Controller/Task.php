@@ -47,13 +47,20 @@ class TaskController {
 }
 
 if (isset($_POST['labeling']))
- {
+{
     // Lấy giá trị từ form
     $data = $_POST['input2'];
     $id_nguoidung = $_POST['idnguoidung'];
     $id_tacvu = $_POST['idtacvu'];
+    $id_duan=$_POST['idDuAn'];
+    $role=$_POST['role'];
+    $loaiduan=$_POST['idLoaiDuAn'];
     
-    Task::insertLabelOfTask($id_nguoidung,$id_tacvu,$data);
+    if(Task::insertLabelOfTask($id_nguoidung,$id_tacvu,$data)){
+        header("Location: ../View/Labeling.php?action=all&idnguoidung=$id_nguoidung&idDuAn=$id_duan&role=$role&lmsg=success");
+    }else{
+        header("Location: ../View/Labeling.php?action=all&idnguoidung=$id_nguoidung&idDuAn=$id_duan&role=$role&lmsg=fail");
+    }
     //header('Location:../View/Login.php');   
   
 }else
@@ -64,8 +71,35 @@ if (isset($_POST['labeling_2']))
     $data = $_POST['label_of_task'];
     $id_nguoidung = $_POST['idnguoidung'];
     $id_tacvu = $_POST['idtacvu'];
+    $id_duan=$_POST['idDuAn'];
+    $role=$_POST['role'];
+    $loaiduan=$_POST['idLoaiDuAn'];
     
-    Task::insertLabelOfTask_2($id_nguoidung,$id_tacvu,$data);
+    if(Task::insertLabelOfTask_2($id_nguoidung,$id_tacvu,$data)){
+        header("Location: ../View/Labeling.php?action=all&idnguoidung=$id_nguoidung&idDuAn=$id_duan&role=$role&lmsg=success");
+    }else{
+        header("Location: ../View/Labeling.php?action=all&idnguoidung=$id_nguoidung&idDuAn=$id_duan&role=$role&lmsg=fail");
+    }
+    //header('Location:../View/Login.php');   
+  
+}
+
+if (isset($_POST['labeling_3']))
+ {
+    // Lấy giá trị từ form
+    $data = $_POST['label_of_task'];
+    $id_nguoidung = $_POST['idnguoidung'];
+    $id_tacvu = $_POST['idtacvu'];
+    $id_duan=$_POST['idDuAn'];
+    $role=$_POST['role'];
+    $loaiduan=$_POST['idLoaiDuAn'];
+    $tungu=$_POST['input2'];
+    
+    if(Task::insertLabelOfTask_nhanthucthe($id_nguoidung,$id_tacvu,$data,$tungu)){
+        header("Location: ../View/Labeling.php?action=all&idnguoidung=$id_nguoidung&idDuAn=$id_duan&role=$role&lmsg=success");
+    }else{
+        header("Location: ../View/Labeling.php?action=all&idnguoidung=$id_nguoidung&idDuAn=$id_duan&role=$role&lmsg=fail");
+    }
     //header('Location:../View/Login.php');   
   
 }

@@ -1,5 +1,7 @@
 <?php
 $idNguoiDung=$_GET['idnguoidung'];
+$idDuAn=$_GET['idDuAn'];
+$role=$_GET['role'];
 $idLoaiDuAn=$_GET['idLoaiDuAn'];
 ?>
 <!DOCTYPE html>
@@ -49,6 +51,9 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
     
     <input type="hidden" name="idtacvu" value="<?php echo $idtacvu ?>">
     <input type="hidden" name="idnguoidung" value="<?php echo $idnguoidung ?>">
+    <input type="hidden" name="idDuAn" value="<?php echo $idDuAn ?>">
+    <input type="hidden" name="idLoaiDuAn" value="<?php echo $idLoaiDuAn ?>">
+    <input type="hidden" name="role" value="<?php echo $role ?>">
 
     <div class="input-container">
         <label for="input1">Tác vụ</label>
@@ -79,3 +84,4 @@ $idLoaiDuAn=$_GET['idLoaiDuAn'];
   </form>
 </body>
 </html>
+
